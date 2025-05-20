@@ -2,11 +2,19 @@
 // src/components/Navbar.astro
 import { SITE_MENU } from "../config/constants";
 import MobileMenu from "./MobileMenu.astro";
+
+interface Props {
+    classname: string;
+}
+
+const { classname } = Astro.props;
 ---
 
-<nav class="absolute top-0 left-0 w-full z-40 py-2 bg-black/20">
-    <div class="max-w-7xl mx-auto flex justify-between items-center px-4">
-        <img src="/images/logo.png" alt="Logo" class="w-12 h-fit" />
+<nav class={`${classname} w-full z-40 py-2 bg-primary`}>
+    <div
+        class="max-w-7xl mx-auto flex justify-between items-center px-4 relative"
+    >
+        <img src="/images/logo.png" alt="Logo" class="w-36 h-fit" />
 
         <!-- Menú Desktop (oculto en mobile) -->
         <ul
@@ -14,15 +22,23 @@ import MobileMenu from "./MobileMenu.astro";
         >
             {
                 SITE_MENU.map((item) => (
-                    <li class="relative group">
+                    <li
+                        class="relative"
+                        id={`menu-item-${item.text.toLowerCase().replace(/\s+/g, "-")}`}
+                    >
                         <a
                             href={item.link}
-                            class="block px-4 py-2 hover:bg-white/20 rounded transition-colors"
+                            class=" px-4 py-2 hover:bg-white/20 rounded transition-colors flex items-center menu-item"
+                            onclick={
+                                item.submenu
+                                    ? "event.preventDefault();toggleSlideMenu(this)"
+                                    : ""
+                            }
                         >
                             {item.text}
                             {item.submenu && (
                                 <svg
-                                    class="w-4 h-4 ml-1 inline"
+                                    class="w-4 h-4 ml-1 transition-transform duration-200"
                                     fill="none"
                                     stroke="currentColor"
                                     viewBox="0 0 24 24"
@@ -37,21 +53,6 @@ import MobileMenu from "./MobileMenu.astro";
                                 </svg>
                             )}
                         </a>
-
-                        {item.submenu && (
-                            <ul class="absolute left-0 top-full bg-white text-gray-800 shadow-lg rounded-md min-w-[200px] hidden group-hover:block">
-                                {item.submenu.map((subitem) => (
-                                    <li>
-                                        <a
-                                            href={subitem.link}
-                                            class="block px-4 py-2 hover:bg-gray-200 whitespace-nowrap rounded-md"
-                                        >
-                                            {subitem.text}
-                                        </a>
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
                     </li>
                 ))
             }
@@ -60,4 +61,128 @@ import MobileMenu from "./MobileMenu.astro";
         <!-- Componente MobileMenu -->
         <MobileMenu />
     </div>
+
+    <!-- Submenú deslizante (fuera del contenedor principal) -->
+    {
+        SITE_MENU.map(
+            (item) =>
+                item.submenu && (
+                    <div
+                        id={`submenu-${item.text.toLowerCase().replace(/\s+/g, "-")}`}
+                        class="hidden w-full absolute left-0 bg-white shadow-lg overflow-hidden transition-all duration-300 ease-in-out transform -translate-y-full"
+                        style="height: 0;"
+                    >
+                        <div class="max-w-7xl mx-auto px-4 py-4 grid grid-cols-4 gap-6">
+                            {item.submenu.map((subitem) => (
+                                <a
+                                    href={subitem.link}
+                                    class="block px-4 py-3 hover:bg-gray-100 rounded transition-colors text-gray-800 hover:text-blue-600"
+                                >
+                                    <h3 class="font-bold text-lg mb-1">
+                                        {subitem.text}
+                                    </h3>
+                                    <p class="text-sm text-gray-600">
+                                        Descripción del servicio...
+                                    </p>
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+                ),
+        )
+    }
 </nav>
+
+<script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Variable para llevar el seguimiento del menú abierto
+        let currentOpenMenu = null;
+
+        // Función para mostrar/ocultar menús deslizantes
+        window.toggleSlideMenu = (element) => {
+            const parentLi = element.closest("li");
+            const menuId = parentLi.id.replace("menu-item-", "submenu-");
+            const submenu = document.getElementById(menuId);
+            const arrow = parentLi.querySelector("svg");
+
+            // Si hay un menú abierto y es diferente al actual, lo cerramos
+            if (currentOpenMenu && currentOpenMenu !== submenu) {
+                closeMenu(currentOpenMenu);
+            }
+
+            // Alternar el menú actual
+            if (submenu.classList.contains("hidden")) {
+                openMenu(submenu, arrow);
+                currentOpenMenu = submenu;
+            } else {
+                closeMenu(submenu, arrow);
+                currentOpenMenu = null;
+            }
+        };
+
+        // Función para abrir menú con animación
+        function openMenu(menu, arrow) {
+            menu.classList.remove("hidden");
+            // Forzar reflow para que la animación funcione
+            void menu.offsetHeight;
+            menu.style.height = "auto";
+            const height = menu.scrollHeight;
+            menu.style.height = "0";
+
+            setTimeout(() => {
+                menu.style.height = `${height}px`;
+                menu.classList.remove("-translate-y-full");
+                if (arrow) arrow.classList.add("rotate-180");
+            }, 10);
+        }
+
+        // Función para cerrar menú con animación
+        function closeMenu(menu, arrow) {
+            menu.style.height = `${menu.scrollHeight}px`;
+
+            // Forzar reflow
+            void menu.offsetHeight;
+
+            menu.style.height = "0";
+            menu.classList.add("-translate-y-full");
+            if (arrow) arrow.classList.remove("rotate-180");
+
+            // Esperar a que termine la animación para ocultar
+            setTimeout(() => {
+                menu.classList.add("hidden");
+            }, 300);
+        }
+
+        // Cerrar menú al hacer click fuera
+        document.addEventListener("click", (e) => {
+            if (
+                !e.target.closest(".menu-item") &&
+                !e.target.closest('[id^="submenu-"')
+            ) {
+                if (currentOpenMenu) {
+                    const arrow = document.querySelector(
+                        `#${currentOpenMenu.id.replace("submenu-", "menu-item-")} svg`,
+                    );
+                    closeMenu(currentOpenMenu, arrow);
+                    currentOpenMenu = null;
+                }
+            }
+        });
+    });
+</script>
+
+<style is:global>
+    /* Rotación de flecha */
+    .rotate-180 {
+        transform: rotate(180deg);
+    }
+
+    /* Transición suave para el submenú */
+    [id^="submenu-"] {
+        will-change: transform, height;
+        box-shadow:
+            0 4px 6px -1px rgba(0, 0, 0, 0.1),
+            0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        z-index: 30;
+    }
+</style>

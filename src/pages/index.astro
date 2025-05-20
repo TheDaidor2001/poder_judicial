@@ -6,7 +6,7 @@ import RightArrow from "../components/icons/rightArrow.astro";
 ---
 
 <MainLayout>
-	<Navbar />
+	<Navbar classname="absolute top-0 left-0" />
 
 	<section class="relative">
 		<img
@@ -34,7 +34,7 @@ import RightArrow from "../components/icons/rightArrow.astro";
 					class="mt-10 flex flex-col sm:flex-row justify-center gap-x-5 gap-y-5"
 				>
 					<button
-						class="bg-blue-600 px-3 py-2 rounded-md text-sm md:text-lg cursor-pointer hover:scale-105 transition-transform"
+						class="bg-primary px-3 py-2 rounded-md text-sm md:text-lg cursor-pointer hover:scale-105 transition-transform"
 						>Más Información</button
 					>
 					<button
@@ -57,36 +57,36 @@ import RightArrow from "../components/icons/rightArrow.astro";
 			class="flex justify-center items-center gap-x-10 gap-y-5 mt-10 mx-5 md:mx-0 flex-wrap"
 		>
 			<a href="/">
-				<img src="/images/logo.png" alt="logo" class="w-16 h-fit" />
+				<img src="/images/logo.png" alt="logo" class="w-32 h-fit" />
 			</a>
 			<a href="/">
-				<img src="/images/logo.png" alt="logo" class="w-16 h-fit" />
+				<img src="/images/logo.png" alt="logo" class="w-32 h-fit" />
 			</a>
 			<a href="/">
-				<img src="/images/logo.png" alt="logo" class="w-16 h-fit" />
+				<img src="/images/logo.png" alt="logo" class="w-32 h-fit" />
 			</a>
 			<a href="/">
-				<img src="/images/logo.png" alt="logo" class="w-16 h-fit" />
+				<img src="/images/logo.png" alt="logo" class="w-32 h-fit" />
 			</a>
 			<a href="/">
-				<img src="/images/logo.png" alt="logo" class="w-16 h-fit" />
+				<img src="/images/logo.png" alt="logo" class="w-32 h-fit" />
 			</a>
 			<a href="/">
-				<img src="/images/logo.png" alt="logo" class="w-16 h-fit" />
+				<img src="/images/logo.png" alt="logo" class="w-32 h-fit" />
 			</a>
 			<a href="/">
-				<img src="/images/logo.png" alt="logo" class="w-16 h-fit" />
+				<img src="/images/logo.png" alt="logo" class="w-32 h-fit" />
 			</a>
 		</div>
 	</section>
-	<section class="bg-blue-600 flex flex-col lg:flex-row my-10">
+	<section class="bg-primary flex flex-col lg:flex-row my-10">
 		<img
 			src="https://placehold.co/800x500"
 			alt="prueba"
 			class="w-full lg:w-1/2"
 		/>
 		<div class="flex flex-col justify-center p-10">
-			<h5 class="text-blue-300 text-lg md:text-xl mb-3">
+			<h5 class="text-secondary text-lg md:text-xl mb-3">
 				Su Socio en el Ámbito Legal
 			</h5>
 			<h3 class="text-white text-3xl md:text-5xl mb-7">
@@ -100,7 +100,7 @@ import RightArrow from "../components/icons/rightArrow.astro";
 
 			<a
 				href="/"
-				class="text-white border border-white px-5 py-2 w-fit mt-10 rounded-md text-lg hover:bg-white hover:text-black transition-colors"
+				class="text-secondary border border-secondatext-secondary px-5 py-2 w-fit mt-10 rounded-md text-lg hover:bg-secondary hover:text-white transition-colors"
 				>Asesoría jurídica</a
 			>
 		</div>
@@ -114,7 +114,7 @@ import RightArrow from "../components/icons/rightArrow.astro";
 				<p class="text-gray-600">16 de mayo, 2024</p>
 				<a href="/">
 					<h3
-						class="text-gray-950 text-4xl lg:text-5xl font-semibold hover:text-blue-600 transition-colors"
+						class="text-gray-950 text-4xl lg:text-5xl font-semibold hover:text-primary transition-colors"
 					>
 						Innovamos en soluciones legales
 					</h3>
@@ -126,7 +126,7 @@ import RightArrow from "../components/icons/rightArrow.astro";
 				</p>
 				<a
 					href="/"
-					class="mt-5 inline-flex text-white text-sm lg:text-lg justify-center items-center gap-x-2 bg-blue-600 px-3 py-1 rounded-md hover:scale-105 transition-transform"
+					class="mt-5 inline-flex text-white text-sm lg:text-lg justify-center items-center gap-x-2 bg-primary px-3 py-1 rounded-md hover:scale-105 transition-transform"
 				>
 					<span> Leer más </span>
 					<RightArrow classname="size-5 mt-1" />
@@ -137,7 +137,7 @@ import RightArrow from "../components/icons/rightArrow.astro";
 					<p class="text-gray-600">9 de mayo, 2024</p>
 					<a href="/">
 						<h3
-							class="text-gray-950 text-2xl font-semibold hover:text-blue-600 transition-colors"
+							class="text-gray-950 text-2xl font-semibold hover:text-primary transition-colors"
 						>
 							Impulsando la justicia a través de la tecnología
 						</h3>
@@ -149,7 +149,7 @@ import RightArrow from "../components/icons/rightArrow.astro";
 					</p>
 					<a
 						href="/"
-						class="mt-3 inline-flex text-white text-sm justify-center items-center gap-x-2 bg-blue-600 px-3 py-1 rounded-md hover:scale-105 transition-transform"
+						class="mt-3 inline-flex text-white text-sm justify-center items-center gap-x-2 bg-primary px-3 py-1 rounded-md hover:scale-105 transition-transform"
 					>
 						<span> Leer más </span>
 						<RightArrow classname="size-5 mt-1" />
@@ -159,7 +159,7 @@ import RightArrow from "../components/icons/rightArrow.astro";
 					<p class="text-gray-600">2 de mayo, 2024</p>
 					<a href="/">
 						<h3
-							class="text-gray-950 text-2xl font-semibold hover:text-blue-600 transition-colors"
+							class="text-gray-950 text-2xl font-semibold hover:text-primary transition-colors"
 						>
 							Tendencias legales que debe conocer
 						</h3>
@@ -170,7 +170,7 @@ import RightArrow from "../components/icons/rightArrow.astro";
 					</p>
 					<a
 						href="/"
-						class="mt-3 inline-flex text-white text-sm justify-center items-center gap-x-2 bg-blue-600 px-3 py-1 rounded-md hover:scale-105 transition-transform"
+						class="mt-3 inline-flex text-white text-sm justify-center items-center gap-x-2 bg-primary px-3 py-1 rounded-md hover:scale-105 transition-transform"
 					>
 						<span> Leer más </span>
 						<RightArrow classname="size-5 mt-1" />
