@@ -21,7 +21,7 @@ import { SITE_MENU } from "../config/constants";
 <!-- Menú Mobile -->
 <div
     id="mobile-menu"
-    class="lg:hidden fixed inset-0 bg-black/90 z-50 transition-all duration-300 ease-in-out opacity-0 invisible"
+    class="lg:hidden fixed inset-0 bg-primary z-50 transition-all duration-300 ease-in-out opacity-0 invisible"
 >
     <div class="container mx-auto px-4 py-8 h-full flex flex-col">
         <!-- Botón de cerrar -->
@@ -52,17 +52,27 @@ import { SITE_MENU } from "../config/constants";
                 SITE_MENU.map((item) => (
                     <li class="border-b border-white/20 pb-4">
                         <div class="flex items-center justify-between">
-                            <a
-                                href={item.link}
-                                class="text-white text-2xl font-medium py-2 hover:text-blue-300 transition-colors"
-                            >
-                                {item.text}
-                            </a>
+                            {item.submenu ? (
+                                <button
+                                    class="text-white text-2xl font-medium py-2 hover:text-blue-300 transition-colors flex-grow text-left submenu-main-button"
+                                    onclick="toggleSubmenu(this)"
+                                >
+                                    {item.text}
+                                </button>
+                            ) : (
+                                <a
+                                    href={item.link}
+                                    class="text-white text-2xl font-medium py-2 hover:text-blue-300 transition-colors"
+                                >
+                                    {item.text}
+                                </a>
+                            )}
 
                             {item.submenu && (
                                 <button
                                     class="submenu-toggle text-white p-2 focus:outline-none"
                                     aria-label="Abrir submenú"
+                                    onclick="toggleSubmenu(this)"
                                 >
                                     <svg
                                         class="w-6 h-6 transform transition-transform duration-300"
@@ -102,70 +112,74 @@ import { SITE_MENU } from "../config/constants";
     </div>
 </div>
 
-<script>
+<script is:inline>
     document.addEventListener("DOMContentLoaded", () => {
         const menuButton = document.getElementById("mobile-menu-button");
         const closeButton = document.getElementById("close-menu-button");
         const mobileMenu = document.getElementById("mobile-menu");
-        const submenuToggles = document.querySelectorAll(".submenu-toggle");
 
         // Toggle menu principal
         const toggleMenu = () => {
-            mobileMenu!.classList.toggle("opacity-0");
-            mobileMenu!.classList.toggle("invisible");
-            mobileMenu!.classList.toggle("opacity-100");
-            mobileMenu!.classList.toggle("visible");
+            mobileMenu.classList.toggle("opacity-0");
+            mobileMenu.classList.toggle("invisible");
+            mobileMenu.classList.toggle("opacity-100");
+            mobileMenu.classList.toggle("visible");
 
             // Bloquear scroll del body cuando el menú está abierto
-            document.body.style.overflow = mobileMenu!.classList.contains(
+            document.body.style.overflow = mobileMenu.classList.contains(
                 "opacity-100",
             )
                 ? "hidden"
                 : "";
         };
 
-        menuButton!.addEventListener("click", toggleMenu);
-        closeButton!.addEventListener("click", toggleMenu);
+        menuButton.addEventListener("click", toggleMenu);
+        closeButton.addEventListener("click", toggleMenu);
 
-        // Toggle submenús
-        submenuToggles.forEach((toggle) => {
-            toggle.addEventListener("click", (e) => {
-                e.preventDefault();
-                e.stopPropagation();
+        // Función global para toggle de submenús
+        window.toggleSubmenu = (element) => {
+            // Obtener el elemento li padre
+            const parentLi = element.closest("li");
+            // Obtener el submenú dentro de este li
+            const submenu = parentLi.querySelector(".submenu");
+            // Obtener todos los elementos relacionados
+            const arrow = parentLi.querySelector(".submenu-toggle svg");
+            const mainButton = parentLi.querySelector(".submenu-main-button");
 
-                // Obtener el elemento li padre
-                const parentLi = toggle.closest("li");
-                // Obtener el submenú dentro de este li
-                const submenu = parentLi!.querySelector(".submenu");
-                // Obtener la flecha
-                const arrow = toggle.querySelector("svg");
+            // Alternar visibilidad del submenú
+            submenu.classList.toggle("hidden");
 
-                // Toggle de clase para mostrar/ocultar el submenú
-                submenu!.classList.toggle("hidden");
-
-                // Rotar la flecha
-                if (submenu!.classList.contains("hidden")) {
-                    arrow!.classList.remove("rotate-180");
+            // Rotar la flecha
+            if (arrow) {
+                if (submenu.classList.contains("hidden")) {
+                    arrow.classList.remove("rotate-180");
                 } else {
-                    arrow!.classList.add("rotate-180");
+                    arrow.classList.add("rotate-180");
                 }
-            });
-        });
+            }
+        };
 
-        // Cerrar menú principal al hacer clic en un enlace de nivel superior (que no tenga submenú)
-        mobileMenu!.querySelectorAll("a:not(.submenu a)").forEach((link) => {
-            link.addEventListener("click", () => {
-                const parentDiv = link.closest("div");
-                const submenuToggle =
-                    parentDiv?.querySelector(".submenu-toggle");
-
-                // Si no tiene un botón de submenu al lado, cerrar el menú principal
-                if (!submenuToggle) {
-                    mobileMenu!.classList.add("opacity-0", "invisible");
-                    mobileMenu!.classList.remove("opacity-100", "visible");
-                    document.body.style.overflow = "";
-                }
-            });
+        // Cerrar menú principal al hacer clic en enlaces sin submenú
+        mobileMenu.querySelectorAll("a").forEach((link) => {
+            if (!link.closest(".submenu")) {
+                link.addEventListener("click", () => {
+                    if (!link.parentElement.querySelector(".submenu-toggle")) {
+                        toggleMenu();
+                    }
+                });
+            }
         });
     });
 </script>
+
+<style is:global>
+    /* Rotación de flecha */
+    .rotate-180 {
+        transform: rotate(180deg);
+    }
+
+    /* Transición para submenús */
+    .submenu {
+        transition: all 0.3s ease;
+    }
+</style>
