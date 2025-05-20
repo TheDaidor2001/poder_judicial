@@ -11,10 +11,10 @@ interface Props {
 const { classname, text = false } = Astro.props;
 ---
 
-<nav class={`${classname} w-full z-40 py-2 bg-primary`}>
+<nav class={`${classname} w-full z-40 py-2 bg-primary relative`}>
     <div class="px-5 mx-auto flex justify-between items-center relative">
         <div class="flex items-center gap-x-5">
-            <img src="/images/logo.png" alt="Logo" class="w-20 md:w-24 h-fit" />
+            <img src="/images/logo.png" alt="Logo" class="w-16 md:w-24 h-fit" />
             <div class="text-white space-y-2">
                 <p class="text-lg md:text-2xl uppercase">Palacio de Justicia</p>
                 <div class="w-full h-[0.1px] bg-white/60"></div>
@@ -34,7 +34,7 @@ const { classname, text = false } = Astro.props;
                     >
                         <a
                             href={item.link}
-                            class=" px-4 py-2 hover:bg-white/20 rounded transition-colors flex items-center menu-item"
+                            class="px-4 py-2 hover:bg-white/20 rounded transition-colors flex items-center menu-item"
                             onclick={
                                 item.submenu
                                     ? "event.preventDefault();toggleSlideMenu(this)"
@@ -68,35 +68,37 @@ const { classname, text = false } = Astro.props;
         <MobileMenu />
     </div>
 
-    <!-- Submenú deslizante (fuera del contenedor principal) -->
-    {
-        SITE_MENU.map(
-            (item) =>
-                item.submenu && (
-                    <div
-                        id={`submenu-${item.text.toLowerCase().replace(/\s+/g, "-")}`}
-                        class="hidden w-full absolute left-0 bg-white shadow-lg overflow-hidden transition-all duration-300 ease-in-out transform -translate-y-full"
-                        style="height: 0;"
-                    >
-                        <div class="max-w-7xl mx-auto px-4 py-4 grid grid-cols-4 gap-6">
-                            {item.submenu.map((subitem) => (
-                                <a
-                                    href={subitem.link}
-                                    class="block px-4 py-3 hover:bg-gray-100 rounded transition-colors text-gray-800 hover:text-primary"
-                                >
-                                    <h3 class="font-bold text-lg mb-1">
-                                        {subitem.text}
-                                    </h3>
-                                    <p class="text-sm text-gray-600">
-                                        Descripción del servicio...
-                                    </p>
-                                </a>
-                            ))}
+    <!-- Contenedor para submenús - justo debajo del nav principal -->
+    <div class="submenu-container absolute w-full left-0">
+        {
+            SITE_MENU.map(
+                (item) =>
+                    item.submenu && (
+                        <div
+                            id={`submenu-${item.text.toLowerCase().replace(/\s+/g, "-")}`}
+                            class="hidden w-full bg-white shadow-lg overflow-hidden transition-all duration-300 ease-in-out origin-top"
+                            style="height: 0; opacity: 0;"
+                        >
+                            <div class="max-w-7xl mx-auto px-4 py-4 grid grid-cols-4 gap-6">
+                                {item.submenu.map((subitem) => (
+                                    <a
+                                        href={subitem.link}
+                                        class="block px-4 py-3 hover:bg-gray-100 rounded transition-colors text-gray-800 hover:text-primary"
+                                    >
+                                        <h3 class="font-bold text-lg mb-1">
+                                            {subitem.text}
+                                        </h3>
+                                        <p class="text-sm text-gray-600">
+                                            Descripción del servicio...
+                                        </p>
+                                    </a>
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                ),
-        )
-    }
+                    ),
+            )
+        }
+    </div>
 </nav>
 
 <script is:inline>
@@ -137,7 +139,7 @@ const { classname, text = false } = Astro.props;
 
             setTimeout(() => {
                 menu.style.height = `${height}px`;
-                menu.classList.remove("-translate-y-full");
+                menu.style.opacity = "1";
                 if (arrow) arrow.classList.add("rotate-180");
             }, 10);
         }
@@ -150,7 +152,7 @@ const { classname, text = false } = Astro.props;
             void menu.offsetHeight;
 
             menu.style.height = "0";
-            menu.classList.add("-translate-y-full");
+            menu.style.opacity = "0";
             if (arrow) arrow.classList.remove("rotate-180");
 
             // Esperar a que termine la animación para ocultar
@@ -185,10 +187,19 @@ const { classname, text = false } = Astro.props;
 
     /* Transición suave para el submenú */
     [id^="submenu-"] {
-        will-change: transform, height;
+        will-change: height, opacity;
         box-shadow:
             0 4px 6px -1px rgba(0, 0, 0, 0.1),
             0 2px 4px -1px rgba(0, 0, 0, 0.06);
         z-index: 30;
+        transition:
+            height 0.3s ease-in-out,
+            opacity 0.3s ease-in-out;
+    }
+
+    /* Aseguramos que el submenu-container esté justo debajo del nav */
+    .submenu-container {
+        top: 100%;
+        z-index: 20;
     }
 </style>
