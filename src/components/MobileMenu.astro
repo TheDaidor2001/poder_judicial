@@ -1,0 +1,171 @@
+---
+// src/components/MobileMenu.astro
+import { SITE_MENU } from "../config/constants";
+---
+
+<!-- Botón Hamburguesa -->
+<button
+    id="mobile-menu-button"
+    class="lg:hidden text-white focus:outline-none"
+    aria-label="Menú principal"
+>
+    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"></path>
+    </svg>
+</button>
+
+<!-- Menú Mobile -->
+<div
+    id="mobile-menu"
+    class="lg:hidden fixed inset-0 bg-black/90 z-50 transition-all duration-300 ease-in-out opacity-0 invisible"
+>
+    <div class="container mx-auto px-4 py-8 h-full flex flex-col">
+        <!-- Botón de cerrar -->
+        <div class="flex justify-end">
+            <button
+                id="close-menu-button"
+                class="text-white p-2 focus:outline-none"
+                aria-label="Cerrar menú"
+            >
+                <svg
+                    class="w-8 h-8"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Lista de menú -->
+        <ul class="mt-12 space-y-6">
+            {
+                SITE_MENU.map((item) => (
+                    <li class="border-b border-white/20 pb-4">
+                        <div class="flex items-center justify-between">
+                            <a
+                                href={item.link}
+                                class="text-white text-2xl font-medium py-2 hover:text-blue-300 transition-colors"
+                            >
+                                {item.text}
+                            </a>
+
+                            {item.submenu && (
+                                <button
+                                    class="submenu-toggle text-white p-2 focus:outline-none"
+                                    aria-label="Abrir submenú"
+                                >
+                                    <svg
+                                        class="w-6 h-6 transform transition-transform duration-300"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M19 9l-7 7-7-7"
+                                        />
+                                    </svg>
+                                </button>
+                            )}
+                        </div>
+
+                        {item.submenu && (
+                            <ul class="ml-4 mt-2 space-y-2 submenu hidden">
+                                {item.submenu.map((subitem) => (
+                                    <li>
+                                        <a
+                                            href={subitem.link}
+                                            class="block text-white/80 py-1 hover:text-blue-300 transition-colors"
+                                        >
+                                            {subitem.text}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const menuButton = document.getElementById("mobile-menu-button");
+        const closeButton = document.getElementById("close-menu-button");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const submenuToggles = document.querySelectorAll(".submenu-toggle");
+
+        // Toggle menu principal
+        const toggleMenu = () => {
+            mobileMenu!.classList.toggle("opacity-0");
+            mobileMenu!.classList.toggle("invisible");
+            mobileMenu!.classList.toggle("opacity-100");
+            mobileMenu!.classList.toggle("visible");
+
+            // Bloquear scroll del body cuando el menú está abierto
+            document.body.style.overflow = mobileMenu!.classList.contains(
+                "opacity-100",
+            )
+                ? "hidden"
+                : "";
+        };
+
+        menuButton!.addEventListener("click", toggleMenu);
+        closeButton!.addEventListener("click", toggleMenu);
+
+        // Toggle submenús
+        submenuToggles.forEach((toggle) => {
+            toggle.addEventListener("click", (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                // Obtener el elemento li padre
+                const parentLi = toggle.closest("li");
+                // Obtener el submenú dentro de este li
+                const submenu = parentLi!.querySelector(".submenu");
+                // Obtener la flecha
+                const arrow = toggle.querySelector("svg");
+
+                // Toggle de clase para mostrar/ocultar el submenú
+                submenu!.classList.toggle("hidden");
+
+                // Rotar la flecha
+                if (submenu!.classList.contains("hidden")) {
+                    arrow!.classList.remove("rotate-180");
+                } else {
+                    arrow!.classList.add("rotate-180");
+                }
+            });
+        });
+
+        // Cerrar menú principal al hacer clic en un enlace de nivel superior (que no tenga submenú)
+        mobileMenu!.querySelectorAll("a:not(.submenu a)").forEach((link) => {
+            link.addEventListener("click", () => {
+                const parentDiv = link.closest("div");
+                const submenuToggle =
+                    parentDiv?.querySelector(".submenu-toggle");
+
+                // Si no tiene un botón de submenu al lado, cerrar el menú principal
+                if (!submenuToggle) {
+                    mobileMenu!.classList.add("opacity-0", "invisible");
+                    mobileMenu!.classList.remove("opacity-100", "visible");
+                    document.body.style.overflow = "";
+                }
+            });
+        });
+    });
+</script>
