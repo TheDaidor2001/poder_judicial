@@ -5,16 +5,22 @@ import MobileMenu from "./MobileMenu.astro";
 
 interface Props {
     classname: string;
+    text?: boolean;
 }
 
-const { classname } = Astro.props;
+const { classname, text = false } = Astro.props;
 ---
 
 <nav class={`${classname} w-full z-40 py-2 bg-primary`}>
-    <div
-        class="max-w-7xl mx-auto flex justify-between items-center px-4 relative"
-    >
-        <img src="/images/logo.png" alt="Logo" class="w-36 h-fit" />
+    <div class="px-5 mx-auto flex justify-between items-center relative">
+        <div class="flex items-center gap-x-5">
+            <img src="/images/logo.png" alt="Logo" class="w-20 md:w-24 h-fit" />
+            <div class="text-white space-y-2">
+                <p class="text-lg md:text-2xl uppercase">Palacio de Justicia</p>
+                <div class="w-full h-[0.1px] bg-white/60"></div>
+                <p>Guinea Ecuatorial</p>
+            </div>
+        </div>
 
         <!-- Menú Desktop (oculto en mobile) -->
         <ul
