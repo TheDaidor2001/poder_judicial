@@ -1,4 +1,5 @@
 ---
+import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 
 interface props {
@@ -19,6 +20,7 @@ const { title = "Poder Judicial de Guinea Ecuatorial" } = Astro.props;
     <body>
         <main class="relative text-gray-900">
             <slot />
+            <Footer />
         </main>
     </body>
 </html>

@@ -1,3 +1,5 @@
+export { FOOTER_LINKS } from "./footerLinks";
+
 // src/config/constants.js
 export const SITE_MENU = [
     {
@@ -19,11 +21,11 @@ export const SITE_MENU = [
     },
     {
         text: "BIBLIOTECA JUDICIAL",
-        link: "/historia",
+        link: "/biblioteca",
         submenu: [
-            { text: "Diccionarios Jurídicos", link: "/historia/diccionarios_juridicos" },
-            { text: "Tratados y Manuales", link: "/historia/tratados_manuales" },
-            { text: "Códigos Legales", link: "/historia/codigos_legales" }
+            { text: "Diccionarios Jurídicos", link: "/biblioteca" },
+            { text: "Tratados y Manuales", link: "/biblioteca/tratados_manuales" },
+            { text: "Códigos Legales", link: "/biblioteca/codigos_legales" }
         ]
     },
     {
@@ -35,3 +37,5 @@ export const SITE_MENU = [
         link: "/contacto"
     }
 ];
+
+

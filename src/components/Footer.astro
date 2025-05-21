@@ -1,0 +1,28 @@
+---
+import { FOOTER_LINKS } from "../config/constants";
+---
+
+<footer class="bg-primary w-full py-5 px-5 lg:px-0">
+    <img
+        src="/images/logo.png"
+        alt="Logo del palacio de justicia de Guinea Ecuatorial"
+        class="w-16 h-fit mx-auto"
+    />
+
+    <ul
+        class="flex justify-center items-center flex-wrap text-white gap-5 mt-5"
+    >
+        {
+            FOOTER_LINKS.map((item) => (
+                <li class="border-r border-white pr-5 last:border-r-0 text-sm hover:text-secondary transition-colors">
+                    <a href={item.url}>{item.title}</a>
+                </li>
+            ))
+        }
+    </ul>
+    <p class="text-center mt-10 text-white text-sm">
+        Copyright © <span class="font-semibold">
+            Palacio de Justicia de Guinea Ecuatorial
+        </span>
+    </p>
+</footer>
