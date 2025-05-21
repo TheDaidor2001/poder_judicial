@@ -1,4 +1,6 @@
 ---
+import MiniArrowRigth from "../icons/miniArrowRigth.astro";
+
 interface Props {
     date: string;
     title: string;
@@ -9,17 +11,17 @@ interface Props {
 const { date, description, title } = Astro.props;
 ---
 
-<article class="py-5 border-b border-gray-300 last:border-0">
+<article class="py-5 border-b border-gray-300 last:border-0 flex flex-col">
     <span class="text-sm text-gray-600">{date}</span>
     <a
         href={`/noticias/esto_es_una_noticia`}
-        class="hover:text-secondary transition-colors"
+        class="hover:text-secondary transition-colors inline-flex items-center gap-x-1"
     >
-        <h3 class="mt-2 text-lg font-semibold">
+        <h3 class="mt-2 text-md font-semibold">
             {title}
         </h3>
     </a>
-    <h5 class="text-gray-700 text-sm">
+    <h5 class="text-gray-700 text-sm mt-2">
         {description}
     </h5>
 </article>
