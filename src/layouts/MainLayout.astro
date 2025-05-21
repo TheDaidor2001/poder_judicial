@@ -17,10 +17,10 @@ const { title = "Poder Judicial de Guinea Ecuatorial" } = Astro.props;
         <meta name="generator" content={Astro.generator} />
         <title>{title}</title>
     </head>
-    <body>
-        <main class="relative text-gray-900">
+    <body class="min-h-screen flex flex-col">
+        <main class="flex-grow">
             <slot />
-            <Footer />
         </main>
+        <Footer />
     </body>
 </html>

@@ -1,0 +1,25 @@
+---
+interface Props {
+    date: string;
+    title: string;
+    description: string;
+    url?: string;
+}
+
+const { date, description, title } = Astro.props;
+---
+
+<article class="py-5 border-b border-gray-300 last:border-0">
+    <span class="text-sm text-gray-600">{date}</span>
+    <a
+        href={`/noticias/esto_es_una_noticia`}
+        class="hover:text-secondary transition-colors"
+    >
+        <h3 class="mt-2 text-lg font-semibold">
+            {title}
+        </h3>
+    </a>
+    <h5 class="text-gray-700 text-sm">
+        {description}
+    </h5>
+</article>
