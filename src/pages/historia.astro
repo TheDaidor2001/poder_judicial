@@ -1,17 +1,262 @@
 ---
+import HistoryCard from "../components/historia/historyCard.astro";
+import Gabel from "../components/icons/gabel.astro";
+import Judged from "../components/icons/judged.astro";
+import Scale from "../components/icons/scale.astro";
 import Navbar from "../components/Navbar.astro";
 import MainLayout from "../layouts/MainLayout.astro";
 ---
 
 <MainLayout title="Palacio de Justicia de Guinea Ecuatorial | Historia">
     <Navbar />
-    <h1
-        class="text-center text-6xl w-1/2 mx-auto text-pretty mt-20 font-semibold"
+    <section
+        class="h-fit flex flex-col items-center justify-center mx-5 md:mx-0"
     >
-        Orígenes y Fundación del Palacio de Justicia
-    </h1>
-    <p class="text-center mt-5 text-gray-700 text-xl w-1/2 mx-auto">
-        Descubre los cimientos de la Corte Suprema y su papel en la
-        administración de justicia desde sus inicios.
-    </p>
+        <h1
+            class="text-center text-3xl md:text-5xl lg:text-6xl w-full lg:w-1/2 mx-auto text-pretty mt-20 font-semibold uppercase"
+        >
+            Orígenes y Fundación del Palacio de Justicia
+        </h1>
+        <p
+            class="text-center mt-5 text-gray-700 text-md md:text-xl w-full lg:w-1/2 mx-auto"
+        >
+            Descubre los cimientos de la Corte Suprema y su papel en la
+            administración de justicia desde sus inicios.
+        </p>
+    </section>
+
+    <section
+        class="grid grid-cols-1 lg:grid-cols-2 mt-40 max-w-7xl mx-5 xl:mx-auto py-10 gap-10"
+    >
+        <div class="order-2 lg:order-1">
+            <h3 class="text-secondary text-md lg:text-lg">
+                Evolución del sistema Judicial
+            </h3>
+            <h5 class="text-3xl md:text-5xl font-semibold">
+                Desarrollo a lo largo del tiempo
+            </h5>
+            <p class="text-gray-900 text-md md:text-lg mt-2">
+                Explora el progreso del sistema judicial y descubre cómo la
+                justicia ecuatoguineana ha avanzado hacia mayores estándares de
+                equidad y eficiencia.
+            </p>
+
+            <p class="mt-5 text-gray-600 text-sm md:text-base">
+                Conoce las transformaciones clave que han moldeado al palacio de
+                justicia y su impacto en la sociedad a través de los años.
+            </p>
+            <div class="mt-10 space-y-5">
+                <HistoryCard
+                    title="Independencia Judicial"
+                    subtitle="Autonomía reforzada para jueces, garantizando decisiones imparciales basadas en la ley y mayor confianza institucional."
+                >
+                    <Judged classname="size-12 md:size-10 text-secondary" />
+                </HistoryCard>
+                <HistoryCard
+                    title="Acceso a la Justicia"
+                    subtitle="Medidas para eliminar barreras, asegurando igualdad de oportunidades ante los tribunales, sin discriminación."
+                >
+                    <Gabel classname="size-12 md:size-10 text-secondary" />
+                </HistoryCard>
+                <HistoryCard
+                    title="Transparencia e Inclusión"
+                    subtitle="Compromiso con una justicia cercana, participativa y auditable, fortaleciendo la credibilidad del sistema judicial."
+                >
+                    <Scale classname="size-12 md:size-10 text-secondary" />
+                </HistoryCard>
+            </div>
+
+            <div class="mt-12">
+                <h5 class="text-xl md:text-2xl font-semibold">
+                    Un sistema judicial para todos
+                </h5>
+                <p class="text-gray-700 text-sm md:text-base mt-1">
+                    Comprometidos con la transparencia y la accesibilidad en la
+                    administración de justicia para la sociedad.
+                </p>
+            </div>
+        </div>
+        <div class="relative order-1 lg:order-2">
+            <img
+                src="https://placehold.co/600x400"
+                alt=""
+                class="w-full rounded sticky top-10"
+            />
+        </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto mt-20 px-5 xl:px-0 pb-20">
+        <h3 class="text-3xl md:text-4xl lg:text-5xl font-semibold">
+            Momentos Significativos en la Historia del palacio de Justicia
+        </h3>
+        <p class="text-md md:text-xl mt-2 text-gray-700">
+            Eventos y decisiones que han marcado la trayectoria de la Corte
+            Suprema.
+        </p>
+        <div
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 mt-10"
+            id="gallery"
+        >
+            <img
+                src="https://placehold.co/300x300"
+                alt="Momento histórico 1"
+                class="rounded-md mx-auto cursor-pointer hover:opacity-80 transition-opacity duration-200"
+                data-modal-img
+            />
+            <img
+                src="https://placehold.co/300x300"
+                alt="Momento histórico 2"
+                class="rounded-md mx-auto cursor-pointer hover:opacity-80 transition-opacity duration-200"
+                data-modal-img
+            />
+            <img
+                src="https://placehold.co/300x300"
+                alt="Momento histórico 3"
+                class="rounded-md mx-auto cursor-pointer hover:opacity-80 transition-opacity duration-200"
+                data-modal-img
+            />
+            <img
+                src="https://placehold.co/300x300"
+                alt="Momento histórico 4"
+                class="rounded-md mx-auto cursor-pointer hover:opacity-80 transition-opacity duration-200"
+                data-modal-img
+            />
+            <img
+                src="https://placehold.co/300x300"
+                alt="Momento histórico 5"
+                class="rounded-md mx-auto cursor-pointer hover:opacity-80 transition-opacity duration-200"
+                data-modal-img
+            />
+            <img
+                src="https://placehold.co/300x300"
+                alt="Momento histórico 6"
+                class="rounded-md mx-auto cursor-pointer hover:opacity-80 transition-opacity duration-200"
+                data-modal-img
+            />
+            <img
+                src="https://placehold.co/300x300"
+                alt="Momento histórico 7"
+                class="rounded-md mx-auto cursor-pointer hover:opacity-80 transition-opacity duration-200"
+                data-modal-img
+            />
+            <img
+                src="https://placehold.co/300x300"
+                alt="Momento histórico 8"
+                class="rounded-md mx-auto cursor-pointer hover:opacity-80 transition-opacity duration-200"
+                data-modal-img
+            />
+            <img
+                src="https://placehold.co/300x300"
+                alt="Momento histórico 9"
+                class="rounded-md mx-auto cursor-pointer hover:opacity-80 transition-opacity duration-200"
+                data-modal-img
+            />
+            <img
+                src="https://placehold.co/300x300"
+                alt="Momento histórico 10"
+                class="rounded-md mx-auto cursor-pointer hover:opacity-80 transition-opacity duration-200"
+                data-modal-img
+            />
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div
+        id="imageModal"
+        class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 opacity-0 invisible transition-all duration-300 ease-in-out"
+    >
+        <div
+            class="relative max-w-4xl max-h-full w-full h-full flex items-center justify-center"
+        >
+            <!-- Botón de cerrar -->
+            <button
+                id="closeModal"
+                class="absolute top-4 right-4 z-10 text-white hover:text-gray-300 transition-colors duration-200"
+                aria-label="Cerrar modal"
+            >
+                <svg
+                    class="w-8 h-8"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+
+            <!-- Imagen del modal -->
+            <img
+                id="modalImage"
+                src=""
+                alt=""
+                class="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+            />
+        </div>
+    </div>
 </MainLayout>
+
+<script>
+    // Obtener elementos del DOM
+    const modal = document.getElementById(
+        "imageModal",
+    ) as HTMLDivElement | null;
+    const modalImage = document.getElementById(
+        "modalImage",
+    ) as HTMLImageElement | null;
+    const closeButton = document.getElementById(
+        "closeModal",
+    ) as HTMLButtonElement | null;
+    const galleryImages = document.querySelectorAll(
+        "[data-modal-img]",
+    ) as NodeListOf<HTMLImageElement>;
+
+    // Verificar que los elementos existen
+    if (!modal || !modalImage || !closeButton) {
+        console.error("Elementos del modal no encontrados");
+        throw new Error("Elementos del modal no encontrados");
+    }
+
+    // Función para abrir el modal
+    function openModal(imageSrc: string, imageAlt: string): void {
+        modalImage!.src = imageSrc;
+        modalImage!.alt = imageAlt;
+        modal!.classList.remove("opacity-0", "invisible");
+        modal!.classList.add("opacity-100", "visible");
+        document.body.style.overflow = "hidden"; // Prevenir scroll del body
+    }
+
+    // Función para cerrar el modal
+    function closeModal(): void {
+        modal!.classList.add("opacity-0", "invisible");
+        modal!.classList.remove("opacity-100", "visible");
+        document.body.style.overflow = "auto"; // Restaurar scroll del body
+    }
+
+    // Event listeners para las imágenes de la galería
+    galleryImages.forEach((img: HTMLImageElement) => {
+        img.addEventListener("click", () => {
+            openModal(img.src, img.alt);
+        });
+    });
+
+    // Event listener para cerrar con el botón X
+    closeButton.addEventListener("click", closeModal);
+
+    // Event listener para cerrar haciendo click en el fondo
+    modal.addEventListener("click", (e: MouseEvent) => {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+
+    // Event listener para cerrar con la tecla Escape
+    document.addEventListener("keydown", (e: KeyboardEvent) => {
+        if (e.key === "Escape" && modal.classList.contains("opacity-100")) {
+            closeModal();
+        }
+    });
+</script>
