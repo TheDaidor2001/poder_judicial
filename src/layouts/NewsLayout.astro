@@ -22,10 +22,12 @@ const { title = "Poder Judicial de Guinea Ecuatorial | Noticias Judiciales" } =
     <body class="min-h-screen flex flex-col">
         <Navbar />
         <main
-            class="flex flex-col xl:flex-row gap-10 relative mt-10 px-5 max-w-7xl mx-auto"
+            class="grid grid-cols-1 xl:grid-cols-4 gap-10 relative mt-10 px-5 max-w-7xl mx-auto"
         >
             <slot />
-            <div class="w-full space-y-5 mt-10 xl:mt-0 mb-20 sticky top-0">
+            <div
+                class="w-full space-y-5 xl:mt-0 mb-20 pt-10 xl:sticky xl:top-4 xl:self-start"
+            >
                 <a
                     href="/historia"
                     class="flex flex-row group w-full overflow-hidden"
@@ -43,7 +45,10 @@ const { title = "Poder Judicial de Guinea Ecuatorial | Noticias Judiciales" } =
                         </p>
                     </div>
                 </a>
-                <a href="/contacto" class="flex flex-row group w-full">
+                <a
+                    href="/contacto"
+                    class="flex flex-row group w-full overflow-hidden"
+                >
                     <img
                         src="https://placehold.co/100x200"
                         alt=""
