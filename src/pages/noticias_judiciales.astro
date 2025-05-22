@@ -1,103 +1,65 @@
 ---
 import Navbar from "../components/Navbar.astro";
 import CardNoticia from "../components/noticias/CardNoticia.astro";
-import MainLayout from "../layouts/MainLayout.astro";
+
+import NewsLayout from "../layouts/NewsLayout.astro";
 ---
 
-<MainLayout title="Palacio de Justicia de Guinea Ecuatorial | Historia">
-    <Navbar />
-    <section class="max-w-7xl mx-auto mb-20 px-5 pt-10 mb:px-0">
-        <h1 class="text-4xl font-semibold mt-5 text-primary">
-            Noticias Judiciales
-        </h1>
+<NewsLayout title="Palacio de Justicia de Guinea Ecuatorial | Historia">
+    <section class="max-w-7xl mx-auto mb-20">
+        <h1 class="text-4xl font-semibold text-primary">Noticias Judiciales</h1>
         <p class="mt-2 text-gray-600 text-lg">
             Las últimas noticias relacionadas con el palacio de justicia
         </p>
 
-        <div class="grid grid-cols-1 xl:grid-cols-4 gap-x-5 relative mt-10">
-            <div class="xl:col-span-3">
-                <div class="border border-gray-300 px-6 rounded">
-                    <CardNoticia
-                        date="martes, 20 de mayo de 2025"
-                        title="El Tribunal Supremo da la razón a la Empresa Municipal de la Vivienda de Madrid y los gastos de la comunidad deben ser asumidos por los arrendatarios"
-                        description="En los dos casos ahora resueltos, demandaron a la EMVS un total de 27 particulares, que reclamaban la devolución de un total de 66.000 euros."
-                    />
-                    <CardNoticia
-                        date="viernes, 25 de abril de 2025"
-                        title="La juez decreta el ingreso en prisión del detenido en Francia por el asesinato de un agricultor en Ribaforada (Navarra) en diciembre de 2023"
-                        description="De los tres asesinatos que se le imputan, uno en Tudela el 22 de noviembre de 2023 y otro en la provincia de Lleida el 5 de enero de 2024, el perpetrado el 21 de diciembre de 2023 en Ribaforada es por el cual la magistrada dictó la orden europea de detención, que propició el arresto del investigado a finales del pasado marzo en la localidad francesa de Béziers. La titular del Juzgado de Instrucción nº 3 de Tudela considera que existe riesgo de fuga y de reiteración delictiva"
-                    />
-                    <CardNoticia
-                        date="viernes, 25 de abril de 2025"
-                        title="El TSXG confirma la condena de siete años de cárcel impuesta a un acusado de provocar un incendio en el edificio en el que residía"
-                        description="La Sala de lo Civil y Penal avala la sentencia de la Audiencia Provincial de Ourense que lo consideró autor de un delito de incendio con peligro para la vida e integridad física de las personas"
-                    />
-                    <CardNoticia
-                        date="viernes, 25 de abril de 2025"
-                        title="La Audiencia de Madrid acuerda el sobreseimiento provisional de la causa del ‘caso Malinche’"
-                        description="Los magistrados entienden que los investigados, a los que se les estima parcialmente el recurso, “no han tratado de introducir a los ciudadanos mexicanos de forma clandestina”"
-                    />
-                    <CardNoticia
-                        date="viernes, 25 de abril de 2025"
-                        title="La Audiencia de Pontevedra condena a tres años y medio de cárcel e inhabilita 13 años y medio al alcalde de Agolada por precintar la depuradora de una empresa"
-                        description="El tribunal lo considera autor de un delito de falsedad en documento oficial y otro de prevaricación"
-                    />
-                </div>
+        <div class="xl:col-span-3 mt-10">
+            <div class="border border-gray-300 px-6 rounded">
+                <CardNoticia
+                    date="martes, 20 de mayo de 2025"
+                    title="El Tribunal Supremo da la razón a la Empresa Municipal de la Vivienda de Madrid y los gastos de la comunidad deben ser asumidos por los arrendatarios"
+                    description="En los dos casos ahora resueltos, demandaron a la EMVS un total de 27 particulares, que reclamaban la devolución de un total de 66.000 euros."
+                />
+                <CardNoticia
+                    date="viernes, 25 de abril de 2025"
+                    title="La juez decreta el ingreso en prisión del detenido en Francia por el asesinato de un agricultor en Ribaforada (Navarra) en diciembre de 2023"
+                    description="De los tres asesinatos que se le imputan, uno en Tudela el 22 de noviembre de 2023 y otro en la provincia de Lleida el 5 de enero de 2024, el perpetrado el 21 de diciembre de 2023 en Ribaforada es por el cual la magistrada dictó la orden europea de detención, que propició el arresto del investigado a finales del pasado marzo en la localidad francesa de Béziers. La titular del Juzgado de Instrucción nº 3 de Tudela considera que existe riesgo de fuga y de reiteración delictiva"
+                />
+                <CardNoticia
+                    date="viernes, 25 de abril de 2025"
+                    title="El TSXG confirma la condena de siete años de cárcel impuesta a un acusado de provocar un incendio en el edificio en el que residía"
+                    description="La Sala de lo Civil y Penal avala la sentencia de la Audiencia Provincial de Ourense que lo consideró autor de un delito de incendio con peligro para la vida e integridad física de las personas"
+                />
+                <CardNoticia
+                    date="viernes, 25 de abril de 2025"
+                    title="La Audiencia de Madrid acuerda el sobreseimiento provisional de la causa del ‘caso Malinche’"
+                    description="Los magistrados entienden que los investigados, a los que se les estima parcialmente el recurso, “no han tratado de introducir a los ciudadanos mexicanos de forma clandestina”"
+                />
+                <CardNoticia
+                    date="viernes, 25 de abril de 2025"
+                    title="La Audiencia de Pontevedra condena a tres años y medio de cárcel e inhabilita 13 años y medio al alcalde de Agolada por precintar la depuradora de una empresa"
+                    description="El tribunal lo considera autor de un delito de falsedad en documento oficial y otro de prevaricación"
+                />
+            </div>
 
-                <footer
-                    class="mt-10 bg-primary/10 flex justify-center items-center gap-x-5 md:gap-x-10 py-3 rounded px-5 md:px-0"
+            <footer
+                class="mt-10 bg-primary/10 flex justify-center items-center gap-x-5 md:gap-x-10 py-3 rounded px-5 md:px-0"
+            >
+                <button
+                    class="bg-secondary px-3 py-1 rounded cursor-pointer text-sm md:text-md text-white hover:scale-105 transition-transform"
+                    >Previo</button
                 >
-                    <button
-                        class="bg-secondary px-3 py-1 rounded cursor-pointer text-sm md:text-md text-white hover:scale-105 transition-transform"
-                        >Previo</button
+                <div class="text-sm md:text-md">
+                    <span>Página</span>
+                    <span class="bg-secondary px-2 py-1 rounded mx-2 text-white"
+                        >1</span
                     >
-                    <div class="text-sm md:text-md">
-                        <span>Página</span>
-                        <span
-                            class="bg-secondary px-2 py-1 rounded mx-2 text-white"
-                            >1</span
-                        >
-                        <span>de 10</span>
-                    </div>
-                    <button
-                        class="bg-secondary px-3 py-1 rounded cursor-pointer text-sm md:text-md text-white hover:scale-105 transition-transform"
-                        >Siguiente</button
-                    >
-                </footer>
-            </div>
-            <div class="w-full space-y-5 flex flex-col mt-10 xl:mt-0">
-                <a
-                    href="/historia"
-                    class="flex flex-row group w-full overflow-hidden"
+                    <span>de 10</span>
+                </div>
+                <button
+                    class="bg-secondary px-3 py-1 rounded cursor-pointer text-sm md:text-md text-white hover:scale-105 transition-transform"
+                    >Siguiente</button
                 >
-                    <img
-                        src="https://placehold.co/100x200"
-                        alt=""
-                        class="w-36 h-20 xl:w-24 xl:h-full object-cover"
-                    />
-                    <div class="p-3 md:p-5 bg-primary w-full">
-                        <p
-                            class="text-lg md:text-xl text-white group-hover:text-secondary transition-colors"
-                        >
-                            Conoce nuestra historia
-                        </p>
-                    </div>
-                </a>
-                <a href="/contacto" class="flex flex-row group w-full">
-                    <img
-                        src="https://placehold.co/100x200"
-                        alt=""
-                        class="w-36 h-20 xl:w-24 xl:h-full object-cover"
-                    />
-                    <div class="p-3 md:p-5 bg-primary w-full">
-                        <p
-                            class="text-lg md:text-xl text-white group-hover:text-secondary transition-colors"
-                        >
-                            Contáctanos para sugerencias y ayudas
-                        </p>
-                    </div>
-                </a>
-            </div>
+            </footer>
         </div>
     </section>
-</MainLayout>
+</NewsLayout>

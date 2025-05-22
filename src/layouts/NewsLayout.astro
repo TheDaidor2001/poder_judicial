@@ -1,0 +1,64 @@
+---
+import Footer from "../components/Footer.astro";
+import Navbar from "../components/Navbar.astro";
+import "../styles/global.css";
+
+interface props {
+    title: string;
+}
+
+const { title = "Poder Judicial de Guinea Ecuatorial | Noticias Judiciales" } =
+    Astro.props;
+---
+
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{title}</title>
+    </head>
+    <body class="min-h-screen flex flex-col">
+        <Navbar />
+        <main
+            class="flex flex-col xl:flex-row gap-10 relative mt-10 px-5 max-w-7xl mx-auto"
+        >
+            <slot />
+            <div class="w-full space-y-5 mt-10 xl:mt-0 mb-20 sticky top-0">
+                <a
+                    href="/historia"
+                    class="flex flex-row group w-full overflow-hidden"
+                >
+                    <img
+                        src="https://placehold.co/100x200"
+                        alt=""
+                        class="w-36 h-20 xl:w-24 xl:h-full object-cover"
+                    />
+                    <div class="p-3 md:p-5 bg-primary w-full">
+                        <p
+                            class="text-lg md:text-xl text-white group-hover:text-secondary transition-colors"
+                        >
+                            Conoce nuestra historia
+                        </p>
+                    </div>
+                </a>
+                <a href="/contacto" class="flex flex-row group w-full">
+                    <img
+                        src="https://placehold.co/100x200"
+                        alt=""
+                        class="w-36 h-20 xl:w-24 xl:h-full object-cover"
+                    />
+                    <div class="p-3 md:p-5 bg-primary w-full">
+                        <p
+                            class="text-lg md:text-xl text-white group-hover:text-secondary transition-colors"
+                        >
+                            Contáctanos para sugerencias y ayudas
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </main>
+        <Footer />
+    </body>
+</html>
