@@ -15,7 +15,7 @@ export const SITE_MENU = [
         link: "/asesoria-juridica",
         submenu: [
             { text: "ASESORAMENTO LEGAL", link: "/asesoria-juridica" },
-            { text: "CSI", link: "/asesoria-juridica/csi" },
+            { text: "CSJ", link: "/asesoria-juridica/csi" },
             { text: "CSPJ", link: "/asesoria-juridica/cspj" }
         ]
     },
