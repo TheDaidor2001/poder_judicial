@@ -13,19 +13,20 @@ export const SITE_MENU = [
     {
         text: "ASESORIA JURIDICA",
         link: "/asesoria-juridica",
+    },
+    {
+        text: "ORGANIGRAMA",
         submenu: [
-            { text: "ASESORAMENTO LEGAL", link: "/asesoria-juridica" },
-            { text: "CSJ", link: "/asesoria-juridica/csi" },
-            { text: "CSPJ", link: "/asesoria-juridica/cspj" }
+            { text: "CSJ", link: "/asesoria-juridica/csi", description: "Consejo Judicial" },
+            { text: "CSPJ", link: "/asesoria-juridica/cspj", description: "Consejo Judicial Superior" }
         ]
     },
     {
         text: "BIBLIOTECA JUDICIAL",
-        link: "/biblioteca",
         submenu: [
-            { text: "Diccionarios Jurídicos", link: "/biblioteca" },
-            { text: "Tratados y Manuales", link: "/biblioteca/tratados_manuales" },
-            { text: "Códigos Legales", link: "/biblioteca/codigos_legales" }
+            { text: "Diccionarios Jurídicos", link: "/biblioteca", description: "" },
+            { text: "Tratados y Manuales", link: "/biblioteca/tratados_manuales", description: "" },
+            { text: "Códigos Legales", link: "/biblioteca/codigos_legales", description: "" }
         ]
     },
     {

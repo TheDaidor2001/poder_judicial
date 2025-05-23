@@ -18,7 +18,7 @@ const { classname, text = false } = Astro.props;
             <div class="text-white space-y-2">
                 <p class="text-lg md:text-2xl uppercase">Palacio de Justicia</p>
                 <div class="w-full h-[0.1px] bg-white/60"></div>
-                <p>Guinea Ecuatorial</p>
+                <p>República de Guinea Ecuatorial</p>
             </div>
         </div>
 
@@ -27,7 +27,7 @@ const { classname, text = false } = Astro.props;
             {
                 SITE_MENU.map((item) => (
                     <li
-                        class="relative"
+                        class="relative cursor-pointer"
                         id={`menu-item-${item.text.toLowerCase().replace(/\s+/g, "-")}`}
                     >
                         <a
@@ -87,7 +87,7 @@ const { classname, text = false } = Astro.props;
                                             {subitem.text}
                                         </h3>
                                         <p class="text-sm text-gray-600">
-                                            Descripción del servicio...
+                                            {subitem.description}
                                         </p>
                                     </a>
                                 ))}
