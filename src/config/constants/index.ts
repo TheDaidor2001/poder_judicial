@@ -24,9 +24,21 @@ export const SITE_MENU = [
     {
         text: "BIBLIOTECA JUDICIAL",
         submenu: [
-            { text: "Diccionarios Jurídicos", link: "/biblioteca", description: "" },
-            { text: "Tratados y Manuales", link: "/biblioteca/tratados_manuales", description: "" },
-            { text: "Códigos Legales", link: "/biblioteca/codigos_legales", description: "" }
+            {
+                text: "Diccionarios Jurídicos",
+                link: "/biblioteca",
+                description: "Definiciones legales clave"
+            },
+            {
+                text: "Tratados y Manuales",
+                link: "/biblioteca/tratados_manuales",
+                description: "Doctrina legal especializada"
+            },
+            {
+                text: "Códigos Legales",
+                link: "/biblioteca/codigos_legales",
+                description: "Leyes organizadas por materia"
+            }
         ]
     },
     {
