@@ -1,6 +1,26 @@
 @import "tailwindcss";
 
+@import '@fontsource-variable/roboto';
+@import '@fontsource-variable/roboto-condensed';
+
+
+
 @theme {
     --color-secondary: oklch(0.681 0.162 75.834);
     --color-primary: oklch(0.282 0.091 267.935)
+}
+
+/* Definir fuentes globales */
+@layer base {
+    html {
+        font-family: 'Roboto Variable', sans-serif;
+        /* Fuente principal para todo el texto */
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Roboto Condensed Variable', serif;
+        /* Fuente para títulos */
+        font-weight: 700;
+        /* Peso para títulos */
+    }
 }
