@@ -17,8 +17,8 @@ export const SITE_MENU = [
     {
         text: "ORGANIGRAMA",
         submenu: [
-            { text: "CSJ", link: "/asesoria-juridica/csi", description: "Consejo Judicial" },
-            { text: "CSPJ", link: "/asesoria-juridica/cspj", description: "Consejo Judicial Superior" }
+            { text: "CSJ", link: "/asesoria_juridica/csi", description: "Consejo Judicial" },
+            { text: "CSPJ", link: "/asesoria_juridica/cspj", description: "Consejo Judicial Superior" }
         ]
     },
     {
@@ -26,7 +26,7 @@ export const SITE_MENU = [
         submenu: [
             {
                 text: "Diccionarios Jurídicos",
-                link: "/biblioteca",
+                link: "/biblioteca/diccionario_juridico",
                 description: "Definiciones legales clave"
             },
             {

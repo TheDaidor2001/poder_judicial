@@ -1,0 +1,338 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import {
+    diccionarioTerminos,
+    type DiccionarioTerminos,
+} from "../../config/constants/terminos";
+
+// Obtener todas las letras disponibles
+const letrasDisponibles: string[] = [
+    ...new Set(
+        Object.keys(diccionarioTerminos).map((termino: string) =>
+            termino.charAt(0).toUpperCase(),
+        ),
+    ),
+].sort();
+---
+
+<MainLayout title="Poder Judicial de Guinea Ecuatorial | Diccionario Jurídico">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header -->
+        <header class="text-center mb-12 pb-8 border-b-2 border-gray-200">
+            <h1
+                class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4"
+            >
+                Diccionario de Términos Jurídicos
+            </h1>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                Consulta el significado de los términos jurídicos más utilizados
+                en el ámbito legal de Guinea Ecuatorial
+            </p>
+        </header>
+
+        <!-- Navegación por letras -->
+        <nav
+            class="flex flex-wrap gap-2 justify-center mb-8 p-6 bg-gray-50 rounded-xl border border-gray-200"
+            id="letrasNav"
+        >
+            {
+                letrasDisponibles.map((letra) => (
+                    <button
+                        class="letra-btn px-4 py-3 bg-white border-2 border-gray-300 rounded-lg font-semibold text-gray-700 hover:bg-blue-500 hover:text-white hover:border-blue-500 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200 min-w-[45px] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                        data-letra={letra}
+                        onclick={`mostrarTerminos('${letra}')`}
+                    >
+                        {letra}
+                    </button>
+                ))
+            }
+        </nav>
+
+        <!-- Buscador -->
+        <div class="relative max-w-lg mx-auto mb-12">
+            <input
+                type="text"
+                id="buscador"
+                placeholder="Buscar término jurídico..."
+                class="w-full px-4 py-4 pr-12 border-2 border-gray-300 rounded-xl text-base focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200"
+            />
+            <button
+                class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-blue-500 p-2 transition-colors duration-200"
+                onclick="buscarTermino()"
+            >
+                <svg
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Contenido de términos -->
+        <main class="min-h-[400px]" id="terminosContainer">
+            <div class="text-center py-16 text-gray-500">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4">
+                    Selecciona una letra para ver los términos
+                </h2>
+                <p class="text-lg">
+                    Utiliza la navegación superior o el buscador para encontrar
+                    términos jurídicos
+                </p>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        import {
+            diccionarioTerminos,
+            type DiccionarioTerminos,
+            type TerminoEntry,
+        } from "../../config/constants/terminos";
+
+        // Interfaces para tipado
+        interface EstadoAplicacion {
+            terminosActuales: DiccionarioTerminos;
+            letraActiva: string;
+        }
+
+        // Variables globales tipadas
+        let estado: EstadoAplicacion = {
+            terminosActuales: {},
+            letraActiva: "",
+        };
+
+        // Función para obtener elemento del DOM de forma segura
+        function obtenerElemento<T extends HTMLElement>(id: string): T {
+            const elemento = document.getElementById(id) as T | null;
+            if (!elemento) {
+                throw new Error(`Elemento con ID '${id}' no encontrado`);
+            }
+            return elemento;
+        }
+
+        // Función para obtener elementos del DOM de forma segura
+        function obtenerElementos<T extends Element>(
+            selector: string,
+        ): NodeListOf<T> {
+            return document.querySelectorAll<T>(selector);
+        }
+
+        // Función para actualizar clases de botones
+        function actualizarClasesBoton(
+            boton: HTMLButtonElement,
+            esActivo: boolean,
+        ): void {
+            if (esActivo) {
+                boton.classList.remove(
+                    "bg-white",
+                    "text-gray-700",
+                    "border-gray-300",
+                );
+                boton.classList.add(
+                    "bg-blue-600",
+                    "text-white",
+                    "border-blue-600",
+                );
+            } else {
+                boton.classList.remove(
+                    "bg-blue-600",
+                    "text-white",
+                    "border-blue-600",
+                );
+                boton.classList.add(
+                    "bg-white",
+                    "text-gray-700",
+                    "border-gray-300",
+                );
+            }
+        }
+
+        // Función para generar HTML de términos
+        function generarHtmlTerminos(
+            terminos: TerminoEntry[],
+            titulo: string,
+        ): string {
+            return `
+        <div class="mb-12">
+          <h2 class="text-4xl font-bold text-gray-900 mb-6 pb-2 border-b-4 border-blue-500 inline-block">
+            ${titulo}
+          </h2>
+          <div class="space-y-4">
+            ${terminos
+                .map(
+                    ([termino, definicion]) => `
+              <div class="bg-white border border-gray-200 rounded-xl p-6 hover:border-blue-300 hover:shadow-lg transition-all duration-200">
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">${termino}</h3>
+                <p class="text-gray-600 leading-relaxed">${definicion}</p>
+              </div>
+            `,
+                )
+                .join("")}
+          </div>
+        </div>
+      `;
+        }
+
+        // Función para mostrar mensaje cuando no hay resultados
+        function mostrarMensajeVacio(titulo: string, mensaje: string): void {
+            const container = obtenerElemento<HTMLElement>("terminosContainer");
+            container.innerHTML = `
+        <div class="text-center py-16 text-gray-500">
+          <h2 class="text-2xl font-semibold text-gray-700 mb-4">
+            ${titulo}
+          </h2>
+          <p class="text-lg">${mensaje}</p>
+        </div>
+      `;
+        }
+
+        // Función para mostrar términos de una letra
+        function mostrarTerminos(letra: string): void {
+            try {
+                const container =
+                    obtenerElemento<HTMLElement>("terminosContainer");
+                const buttons =
+                    obtenerElementos<HTMLButtonElement>(".letra-btn");
+
+                // Actualizar botón activo
+                buttons.forEach((btn) => {
+                    const esActivo = btn.dataset.letra === letra;
+                    actualizarClasesBoton(btn, esActivo);
+                });
+
+                // Filtrar términos por letra
+                const terminosLetra: TerminoEntry[] = Object.entries(
+                    diccionarioTerminos,
+                )
+                    .filter(
+                        ([termino]) =>
+                            termino.charAt(0).toUpperCase() === letra,
+                    )
+                    .sort(([a], [b]) => a.localeCompare(b));
+
+                if (terminosLetra.length === 0) {
+                    mostrarMensajeVacio(
+                        `No hay términos disponibles para la letra "${letra}"`,
+                        "Selecciona otra letra para ver más términos",
+                    );
+                    return;
+                }
+
+                // Generar y mostrar HTML
+                container.innerHTML = generarHtmlTerminos(terminosLetra, letra);
+                estado.letraActiva = letra;
+            } catch (error) {
+                console.error("Error al mostrar términos:", error);
+                mostrarMensajeVacio(
+                    "Error",
+                    "Ha ocurrido un error al cargar los términos",
+                );
+            }
+        }
+
+        // Función para buscar términos
+        function buscarTermino(): void {
+            try {
+                const buscadorInput =
+                    obtenerElemento<HTMLInputElement>("buscador");
+                const query: string = buscadorInput.value.toLowerCase().trim();
+                const container =
+                    obtenerElemento<HTMLElement>("terminosContainer");
+
+                if (!query) {
+                    mostrarMensajeVacio(
+                        "Selecciona una letra para ver los términos",
+                        "Utiliza la navegación superior o el buscador para encontrar términos jurídicos",
+                    );
+
+                    // Limpiar botones activos
+                    const buttons =
+                        obtenerElementos<HTMLButtonElement>(".letra-btn");
+                    buttons.forEach((btn) => actualizarClasesBoton(btn, false));
+                    return;
+                }
+
+                // Buscar términos que coincidan
+                const resultados: TerminoEntry[] = Object.entries(
+                    diccionarioTerminos,
+                )
+                    .filter(
+                        ([termino, definicion]) =>
+                            termino.toLowerCase().includes(query) ||
+                            definicion.toLowerCase().includes(query),
+                    )
+                    .sort(([a], [b]) => a.localeCompare(b));
+
+                if (resultados.length === 0) {
+                    mostrarMensajeVacio(
+                        "No se encontraron resultados",
+                        `No hay términos que coincidan con "${query}"`,
+                    );
+                    return;
+                }
+
+                // Mostrar resultados
+                container.innerHTML = generarHtmlTerminos(
+                    resultados,
+                    `Resultados para "${query}" (${resultados.length})`,
+                );
+
+                // Limpiar botones activos
+                const buttons =
+                    obtenerElementos<HTMLButtonElement>(".letra-btn");
+                buttons.forEach((btn) => actualizarClasesBoton(btn, false));
+            } catch (error) {
+                console.error("Error al buscar términos:", error);
+                mostrarMensajeVacio(
+                    "Error",
+                    "Ha ocurrido un error durante la búsqueda",
+                );
+            }
+        }
+
+        // Event listeners con tipado
+        document.addEventListener("DOMContentLoaded", (): void => {
+            try {
+                // Búsqueda en tiempo real
+                const buscador = obtenerElemento<HTMLInputElement>("buscador");
+                let timeoutId: number;
+
+                buscador.addEventListener("input", (): void => {
+                    clearTimeout(timeoutId);
+                    timeoutId = window.setTimeout(buscarTermino, 300);
+                });
+
+                // Enter en buscador
+                buscador.addEventListener(
+                    "keypress",
+                    (e: KeyboardEvent): void => {
+                        if (e.key === "Enter") {
+                            buscarTermino();
+                        }
+                    },
+                );
+            } catch (error) {
+                console.error("Error al inicializar event listeners:", error);
+            }
+        });
+
+        // Declarar funciones globales para el window object
+        declare global {
+            interface Window {
+                mostrarTerminos: (letra: string) => void;
+                buscarTermino: () => void;
+            }
+        }
+
+        // Hacer funciones globales
+        window.mostrarTerminos = mostrarTerminos;
+        window.buscarTermino = buscarTermino;
+    </script>
+</MainLayout>

@@ -15,15 +15,15 @@ export const FOOTER_LINKS = [
     },
     {
         title: 'CSI',
-        url: '/asesoria-juridica/csi'
+        url: '/asesoria_juridica/csi'
     },
     {
         title: 'CSPJ',
-        url: '/asesoria-juridica/cspj'
+        url: '/asesoria_juridica/cspj'
     },
     {
         title: 'Diccionarios Juridicos',
-        url: '/biblioteca'
+        url: '/biblioteca/diccionario_juridico'
     },
     {
         title: 'Tratados y Manuales',
