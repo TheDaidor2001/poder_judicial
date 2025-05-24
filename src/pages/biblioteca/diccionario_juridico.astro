@@ -88,78 +88,70 @@ const letrasDisponibles: string[] = [
             </div>
         </main>
     </div>
+</MainLayout>
+<script>
+    import {
+        diccionarioTerminos,
+        type DiccionarioTerminos,
+        type TerminoEntry,
+    } from "../../config/constants/terminos";
 
-    <script>
-        import {
-            diccionarioTerminos,
-            type DiccionarioTerminos,
-            type TerminoEntry,
-        } from "../../config/constants/terminos";
+    // Interfaces para tipado
+    interface EstadoAplicacion {
+        terminosActuales: DiccionarioTerminos;
+        letraActiva: string;
+    }
 
-        // Interfaces para tipado
-        interface EstadoAplicacion {
-            terminosActuales: DiccionarioTerminos;
-            letraActiva: string;
+    // Variables globales tipadas
+    let estado: EstadoAplicacion = {
+        terminosActuales: {},
+        letraActiva: "",
+    };
+
+    // Función para obtener elemento del DOM de forma segura
+    function obtenerElemento<T extends HTMLElement>(id: string): T {
+        const elemento = document.getElementById(id) as T | null;
+        if (!elemento) {
+            throw new Error(`Elemento con ID '${id}' no encontrado`);
         }
+        return elemento;
+    }
 
-        // Variables globales tipadas
-        let estado: EstadoAplicacion = {
-            terminosActuales: {},
-            letraActiva: "",
-        };
+    // Función para obtener elementos del DOM de forma segura
+    function obtenerElementos<T extends Element>(
+        selector: string,
+    ): NodeListOf<T> {
+        return document.querySelectorAll<T>(selector);
+    }
 
-        // Función para obtener elemento del DOM de forma segura
-        function obtenerElemento<T extends HTMLElement>(id: string): T {
-            const elemento = document.getElementById(id) as T | null;
-            if (!elemento) {
-                throw new Error(`Elemento con ID '${id}' no encontrado`);
-            }
-            return elemento;
+    // Función para actualizar clases de botones
+    function actualizarClasesBoton(
+        boton: HTMLButtonElement,
+        esActivo: boolean,
+    ): void {
+        if (esActivo) {
+            boton.classList.remove(
+                "bg-white",
+                "text-gray-700",
+                "border-gray-300",
+            );
+            boton.classList.add("bg-blue-600", "text-white", "border-blue-600");
+        } else {
+            boton.classList.remove(
+                "bg-blue-600",
+                "text-white",
+                "border-blue-600",
+            );
+            boton.classList.add("bg-white", "text-gray-700", "border-gray-300");
         }
+    }
 
-        // Función para obtener elementos del DOM de forma segura
-        function obtenerElementos<T extends Element>(
-            selector: string,
-        ): NodeListOf<T> {
-            return document.querySelectorAll<T>(selector);
-        }
-
-        // Función para actualizar clases de botones
-        function actualizarClasesBoton(
-            boton: HTMLButtonElement,
-            esActivo: boolean,
-        ): void {
-            if (esActivo) {
-                boton.classList.remove(
-                    "bg-white",
-                    "text-gray-700",
-                    "border-gray-300",
-                );
-                boton.classList.add(
-                    "bg-blue-600",
-                    "text-white",
-                    "border-blue-600",
-                );
-            } else {
-                boton.classList.remove(
-                    "bg-blue-600",
-                    "text-white",
-                    "border-blue-600",
-                );
-                boton.classList.add(
-                    "bg-white",
-                    "text-gray-700",
-                    "border-gray-300",
-                );
-            }
-        }
-
-        // Función para generar HTML de términos
-        function generarHtmlTerminos(
-            terminos: TerminoEntry[],
-            titulo: string,
-        ): string {
-            return `
+    // Función para generar HTML de términos
+    function generarHtmlTerminos(
+        terminos: TerminoEntry[],
+        titulo: string,
+    ): string {
+        return `
         <div class="mb-12">
           <h2 class="text-4xl font-bold text-gray-900 mb-6 pb-2 border-b-4 border-blue-500 inline-block">
             ${titulo}
@@ -178,12 +170,12 @@ const letrasDisponibles: string[] = [
           </div>
         </div>
       `;
-        }
+    }
 
-        // Función para mostrar mensaje cuando no hay resultados
-        function mostrarMensajeVacio(titulo: string, mensaje: string): void {
-            const container = obtenerElemento<HTMLElement>("terminosContainer");
-            container.innerHTML = `
+    // Función para mostrar mensaje cuando no hay resultados
+    function mostrarMensajeVacio(titulo: string, mensaje: string): void {
+        const container = obtenerElemento<HTMLElement>("terminosContainer");
+        container.innerHTML = `
         <div class="text-center py-16 text-gray-500">
           <h2 class="text-2xl font-semibold text-gray-700 mb-4">
             ${titulo}
@@ -191,148 +183,138 @@ const letrasDisponibles: string[] = [
           <p class="text-lg">${mensaje}</p>
         </div>
       `;
-        }
+    }
 
-        // Función para mostrar términos de una letra
-        function mostrarTerminos(letra: string): void {
-            try {
-                const container =
-                    obtenerElemento<HTMLElement>("terminosContainer");
-                const buttons =
-                    obtenerElementos<HTMLButtonElement>(".letra-btn");
+    // Función para mostrar términos de una letra
+    function mostrarTerminos(letra: string): void {
+        try {
+            const container = obtenerElemento<HTMLElement>("terminosContainer");
+            const buttons = obtenerElementos<HTMLButtonElement>(".letra-btn");
 
-                // Actualizar botón activo
-                buttons.forEach((btn) => {
-                    const esActivo = btn.dataset.letra === letra;
-                    actualizarClasesBoton(btn, esActivo);
-                });
+            // Actualizar botón activo
+            buttons.forEach((btn) => {
+                const esActivo = btn.dataset.letra === letra;
+                actualizarClasesBoton(btn, esActivo);
+            });
 
-                // Filtrar términos por letra
-                const terminosLetra: TerminoEntry[] = Object.entries(
-                    diccionarioTerminos,
+            // Filtrar términos por letra
+            const terminosLetra: TerminoEntry[] = Object.entries(
+                diccionarioTerminos,
+            )
+                .filter(
+                    ([termino]) => termino.charAt(0).toUpperCase() === letra,
                 )
-                    .filter(
-                        ([termino]) =>
-                            termino.charAt(0).toUpperCase() === letra,
-                    )
-                    .sort(([a], [b]) => a.localeCompare(b));
+                .sort(([a], [b]) => a.localeCompare(b));
 
-                if (terminosLetra.length === 0) {
-                    mostrarMensajeVacio(
-                        `No hay términos disponibles para la letra "${letra}"`,
-                        "Selecciona otra letra para ver más términos",
-                    );
-                    return;
-                }
-
-                // Generar y mostrar HTML
-                container.innerHTML = generarHtmlTerminos(terminosLetra, letra);
-                estado.letraActiva = letra;
-            } catch (error) {
-                console.error("Error al mostrar términos:", error);
+            if (terminosLetra.length === 0) {
                 mostrarMensajeVacio(
-                    "Error",
-                    "Ha ocurrido un error al cargar los términos",
+                    `No hay términos disponibles para la letra "${letra}"`,
+                    "Selecciona otra letra para ver más términos",
                 );
+                return;
             }
+
+            // Generar y mostrar HTML
+            container.innerHTML = generarHtmlTerminos(terminosLetra, letra);
+            estado.letraActiva = letra;
+        } catch (error) {
+            console.error("Error al mostrar términos:", error);
+            mostrarMensajeVacio(
+                "Error",
+                "Ha ocurrido un error al cargar los términos",
+            );
         }
+    }
 
-        // Función para buscar términos
-        function buscarTermino(): void {
-            try {
-                const buscadorInput =
-                    obtenerElemento<HTMLInputElement>("buscador");
-                const query: string = buscadorInput.value.toLowerCase().trim();
-                const container =
-                    obtenerElemento<HTMLElement>("terminosContainer");
+    // Función para buscar términos
+    function buscarTermino(): void {
+        try {
+            const buscadorInput = obtenerElemento<HTMLInputElement>("buscador");
+            const query: string = buscadorInput.value.toLowerCase().trim();
+            const container = obtenerElemento<HTMLElement>("terminosContainer");
 
-                if (!query) {
-                    mostrarMensajeVacio(
-                        "Selecciona una letra para ver los términos",
-                        "Utiliza la navegación superior o el buscador para encontrar términos jurídicos",
-                    );
-
-                    // Limpiar botones activos
-                    const buttons =
-                        obtenerElementos<HTMLButtonElement>(".letra-btn");
-                    buttons.forEach((btn) => actualizarClasesBoton(btn, false));
-                    return;
-                }
-
-                // Buscar términos que coincidan
-                const resultados: TerminoEntry[] = Object.entries(
-                    diccionarioTerminos,
-                )
-                    .filter(
-                        ([termino, definicion]) =>
-                            termino.toLowerCase().includes(query) ||
-                            definicion.toLowerCase().includes(query),
-                    )
-                    .sort(([a], [b]) => a.localeCompare(b));
-
-                if (resultados.length === 0) {
-                    mostrarMensajeVacio(
-                        "No se encontraron resultados",
-                        `No hay términos que coincidan con "${query}"`,
-                    );
-                    return;
-                }
-
-                // Mostrar resultados
-                container.innerHTML = generarHtmlTerminos(
-                    resultados,
-                    `Resultados para "${query}" (${resultados.length})`,
+            if (!query) {
+                mostrarMensajeVacio(
+                    "Selecciona una letra para ver los términos",
+                    "Utiliza la navegación superior o el buscador para encontrar términos jurídicos",
                 );
 
                 // Limpiar botones activos
                 const buttons =
                     obtenerElementos<HTMLButtonElement>(".letra-btn");
                 buttons.forEach((btn) => actualizarClasesBoton(btn, false));
-            } catch (error) {
-                console.error("Error al buscar términos:", error);
+                return;
+            }
+
+            // Buscar términos que coincidan
+            const resultados: TerminoEntry[] = Object.entries(
+                diccionarioTerminos,
+            )
+                .filter(
+                    ([termino, definicion]) =>
+                        termino.toLowerCase().includes(query) ||
+                        definicion.toLowerCase().includes(query),
+                )
+                .sort(([a], [b]) => a.localeCompare(b));
+
+            if (resultados.length === 0) {
                 mostrarMensajeVacio(
-                    "Error",
-                    "Ha ocurrido un error durante la búsqueda",
+                    "No se encontraron resultados",
+                    `No hay términos que coincidan con "${query}"`,
                 );
+                return;
             }
+
+            // Mostrar resultados
+            container.innerHTML = generarHtmlTerminos(
+                resultados,
+                `Resultados para "${query}" (${resultados.length})`,
+            );
+
+            // Limpiar botones activos
+            const buttons = obtenerElementos<HTMLButtonElement>(".letra-btn");
+            buttons.forEach((btn) => actualizarClasesBoton(btn, false));
+        } catch (error) {
+            console.error("Error al buscar términos:", error);
+            mostrarMensajeVacio(
+                "Error",
+                "Ha ocurrido un error durante la búsqueda",
+            );
         }
+    }
 
-        // Event listeners con tipado
-        document.addEventListener("DOMContentLoaded", (): void => {
-            try {
-                // Búsqueda en tiempo real
-                const buscador = obtenerElemento<HTMLInputElement>("buscador");
-                let timeoutId: number;
+    // Event listeners con tipado
+    document.addEventListener("DOMContentLoaded", (): void => {
+        try {
+            // Búsqueda en tiempo real
+            const buscador = obtenerElemento<HTMLInputElement>("buscador");
+            let timeoutId: number;
 
-                buscador.addEventListener("input", (): void => {
-                    clearTimeout(timeoutId);
-                    timeoutId = window.setTimeout(buscarTermino, 300);
-                });
+            buscador.addEventListener("input", (): void => {
+                clearTimeout(timeoutId);
+                timeoutId = window.setTimeout(buscarTermino, 300);
+            });
 
-                // Enter en buscador
-                buscador.addEventListener(
-                    "keypress",
-                    (e: KeyboardEvent): void => {
-                        if (e.key === "Enter") {
-                            buscarTermino();
-                        }
-                    },
-                );
-            } catch (error) {
-                console.error("Error al inicializar event listeners:", error);
-            }
-        });
-
-        // Declarar funciones globales para el window object
-        declare global {
-            interface Window {
-                mostrarTerminos: (letra: string) => void;
-                buscarTermino: () => void;
-            }
+            // Enter en buscador
+            buscador.addEventListener("keypress", (e: KeyboardEvent): void => {
+                if (e.key === "Enter") {
+                    buscarTermino();
+                }
+            });
+        } catch (error) {
+            console.error("Error al inicializar event listeners:", error);
         }
+    });
 
-        // Hacer funciones globales
-        window.mostrarTerminos = mostrarTerminos;
-        window.buscarTermino = buscarTermino;
-    </script>
-</MainLayout>
+    // Declarar funciones globales para el window object
+    declare global {
+        interface Window {
+            mostrarTerminos: (letra: string) => void;
+            buscarTermino: () => void;
+        }
+    }
+
+    // Hacer funciones globales
+    window.mostrarTerminos = mostrarTerminos;
+    window.buscarTermino = buscarTermino;
+</script>
