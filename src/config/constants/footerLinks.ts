@@ -15,11 +15,11 @@ export const FOOTER_LINKS = [
     },
     {
         title: 'CSI',
-        url: '/asesoria_juridica/csi'
+        url: '/organigrama/csj'
     },
     {
         title: 'CSPJ',
-        url: '/asesoria_juridica/cspj'
+        url: '/organigrama/cspj'
     },
     {
         title: 'Diccionarios Juridicos',

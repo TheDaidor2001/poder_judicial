@@ -17,8 +17,8 @@ export const SITE_MENU = [
     {
         text: "ORGANIGRAMA",
         submenu: [
-            { text: "CSJ", link: "/asesoria_juridica/csi", description: "Consejo Judicial" },
-            { text: "CSPJ", link: "/asesoria_juridica/cspj", description: "Consejo Judicial Superior" }
+            { text: "CSJ", link: "/organigrama/csj", description: "Consejo Judicial" },
+            { text: "CSPJ", link: "/organigrama/cspj", description: "Consejo Judicial Superior" }
         ]
     },
     {
