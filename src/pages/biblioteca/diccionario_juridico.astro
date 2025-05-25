@@ -237,16 +237,38 @@ const letrasDisponibles: string[] = [
 
     // Función para buscar términos
     function buscarTermino(): void {
+        console.log("🔍 Función buscarTermino ejecutada");
         try {
             const buscadorInput = obtenerElemento<HTMLInputElement>("buscador");
             const query: string = buscadorInput.value.toLowerCase().trim();
             const container = obtenerElemento<HTMLElement>("terminosContainer");
+
+            console.log("📝 Query de búsqueda:", query);
+            console.log(
+                "📊 Diccionario disponible:",
+                Object.keys(diccionarioTerminos).length,
+                "términos",
+            );
+
+            // Verificar que el diccionario esté disponible
+            if (
+                !diccionarioTerminos ||
+                Object.keys(diccionarioTerminos).length === 0
+            ) {
+                console.error("❌ El diccionario está vacío o no disponible");
+                mostrarMensajeVacio(
+                    "Error de datos",
+                    "El diccionario de términos no está disponible",
+                );
+                return;
+            }
 
             // Limpiar botones activos cuando se busca
             const buttons = obtenerElementos<HTMLButtonElement>(".letra-btn");
             buttons.forEach((btn) => actualizarClasesBoton(btn, false));
 
             if (!query) {
+                console.log("⚠️ Query vacía, mostrando mensaje inicial");
                 mostrarMensajeVacio(
                     "Selecciona una letra para ver los términos",
                     "Utiliza la navegación superior o el buscador para encontrar términos jurídicos",
@@ -265,7 +287,10 @@ const letrasDisponibles: string[] = [
                 )
                 .sort(([a], [b]) => a.localeCompare(b));
 
+            console.log("🎯 Resultados encontrados:", resultados.length);
+
             if (resultados.length === 0) {
+                console.log("❌ No se encontraron resultados para:", query);
                 mostrarMensajeVacio(
                     "No se encontraron resultados",
                     `No hay términos que coincidan con "${query}"`,
@@ -274,12 +299,13 @@ const letrasDisponibles: string[] = [
             }
 
             // Mostrar resultados
+            console.log("✅ Mostrando resultados para:", query);
             container.innerHTML = generarHtmlTerminos(
                 resultados,
                 `Resultados para "${query}" (${resultados.length})`,
             );
         } catch (error) {
-            console.error("Error al buscar términos:", error);
+            console.error("💥 Error al buscar términos:", error);
             mostrarMensajeVacio(
                 "Error",
                 "Ha ocurrido un error durante la búsqueda",
@@ -289,25 +315,52 @@ const letrasDisponibles: string[] = [
 
     // Event listeners con tipado
     document.addEventListener("DOMContentLoaded", (): void => {
+        console.log("🚀 DOM cargado, inicializando eventos");
         try {
+            // Verificar que el diccionario esté cargado
+            console.log("📚 Estado del diccionario:", {
+                disponible: !!diccionarioTerminos,
+                cantidadTerminos: Object.keys(diccionarioTerminos || {}).length,
+            });
+
             // Búsqueda en tiempo real
             const buscador = obtenerElemento<HTMLInputElement>("buscador");
             let timeoutId: number;
 
+            console.log("🔧 Configurando event listeners del buscador");
+
             buscador.addEventListener("input", (): void => {
+                console.log("⌨️ Input detectado, iniciando búsqueda en 300ms");
                 clearTimeout(timeoutId);
-                timeoutId = window.setTimeout(buscarTermino, 300);
+                timeoutId = window.setTimeout(() => {
+                    console.log("⏰ Timeout completado, ejecutando búsqueda");
+                    buscarTermino();
+                }, 300);
             });
 
             // Enter en buscador
             buscador.addEventListener("keypress", (e: KeyboardEvent): void => {
                 if (e.key === "Enter") {
+                    console.log(
+                        "⏎ Enter presionado, ejecutando búsqueda inmediata",
+                    );
                     e.preventDefault();
+                    clearTimeout(timeoutId);
                     buscarTermino();
                 }
             });
+
+            console.log("✅ Event listeners inicializados correctamente");
+
+            // Verificar que las funciones globales estén disponibles
+            setTimeout(() => {
+                console.log("🌐 Verificando funciones globales:", {
+                    mostrarTerminos: typeof window.mostrarTerminos,
+                    buscarTermino: typeof window.buscarTermino,
+                });
+            }, 100);
         } catch (error) {
-            console.error("Error al inicializar event listeners:", error);
+            console.error("💥 Error al inicializar event listeners:", error);
         }
     });
 
