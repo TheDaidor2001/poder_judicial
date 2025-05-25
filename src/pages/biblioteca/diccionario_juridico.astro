@@ -40,7 +40,7 @@ const letrasDisponibles: string[] = [
                     <button
                         class="letra-btn px-4 py-3 bg-white border-2 border-gray-300 rounded-lg font-semibold text-gray-700 hover:bg-secondary hover:text-white hover:border-secondary hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200 min-w-[45px] focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2"
                         data-letra={letra}
-                        onclick={`mostrarTerminos('${letra}')`}
+                        type="button"
                     >
                         {letra}
                     </button>
@@ -58,7 +58,7 @@ const letrasDisponibles: string[] = [
             />
             <button
                 class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-secondary p-2 transition-colors duration-200"
-                onclick="buscarTermino()"
+                id="botonBuscar"
             >
                 <svg
                     class="w-5 h-5"
@@ -243,19 +243,11 @@ const letrasDisponibles: string[] = [
             const query: string = buscadorInput.value.toLowerCase().trim();
             const container = obtenerElemento<HTMLElement>("terminosContainer");
 
-            console.log("📝 Query de búsqueda:", query);
-            console.log(
-                "📊 Diccionario disponible:",
-                Object.keys(diccionarioTerminos).length,
-                "términos",
-            );
-
             // Verificar que el diccionario esté disponible
             if (
                 !diccionarioTerminos ||
                 Object.keys(diccionarioTerminos).length === 0
             ) {
-                console.error("❌ El diccionario está vacío o no disponible");
                 mostrarMensajeVacio(
                     "Error de datos",
                     "El diccionario de términos no está disponible",
@@ -268,7 +260,6 @@ const letrasDisponibles: string[] = [
             buttons.forEach((btn) => actualizarClasesBoton(btn, false));
 
             if (!query) {
-                console.log("⚠️ Query vacía, mostrando mensaje inicial");
                 mostrarMensajeVacio(
                     "Selecciona una letra para ver los términos",
                     "Utiliza la navegación superior o el buscador para encontrar términos jurídicos",
@@ -287,10 +278,7 @@ const letrasDisponibles: string[] = [
                 )
                 .sort(([a], [b]) => a.localeCompare(b));
 
-            console.log("🎯 Resultados encontrados:", resultados.length);
-
             if (resultados.length === 0) {
-                console.log("❌ No se encontraron resultados para:", query);
                 mostrarMensajeVacio(
                     "No se encontraron resultados",
                     `No hay términos que coincidan con "${query}"`,
@@ -299,13 +287,12 @@ const letrasDisponibles: string[] = [
             }
 
             // Mostrar resultados
-            console.log("✅ Mostrando resultados para:", query);
+
             container.innerHTML = generarHtmlTerminos(
                 resultados,
                 `Resultados para "${query}" (${resultados.length})`,
             );
         } catch (error) {
-            console.error("💥 Error al buscar términos:", error);
             mostrarMensajeVacio(
                 "Error",
                 "Ha ocurrido un error durante la búsqueda",
@@ -317,23 +304,16 @@ const letrasDisponibles: string[] = [
     document.addEventListener("DOMContentLoaded", (): void => {
         console.log("🚀 DOM cargado, inicializando eventos");
         try {
-            // Verificar que el diccionario esté cargado
-            console.log("📚 Estado del diccionario:", {
-                disponible: !!diccionarioTerminos,
-                cantidadTerminos: Object.keys(diccionarioTerminos || {}).length,
-            });
-
-            // Búsqueda en tiempo real
+            // Configurar buscador
             const buscador = obtenerElemento<HTMLInputElement>("buscador");
+            const botonBuscar =
+                obtenerElemento<HTMLButtonElement>("botonBuscar");
             let timeoutId: number;
 
-            console.log("🔧 Configurando event listeners del buscador");
-
+            // Búsqueda en tiempo real
             buscador.addEventListener("input", (): void => {
-                console.log("⌨️ Input detectado, iniciando búsqueda en 300ms");
                 clearTimeout(timeoutId);
                 timeoutId = window.setTimeout(() => {
-                    console.log("⏰ Timeout completado, ejecutando búsqueda");
                     buscarTermino();
                 }, 300);
             });
@@ -341,38 +321,37 @@ const letrasDisponibles: string[] = [
             // Enter en buscador
             buscador.addEventListener("keypress", (e: KeyboardEvent): void => {
                 if (e.key === "Enter") {
-                    console.log(
-                        "⏎ Enter presionado, ejecutando búsqueda inmediata",
-                    );
                     e.preventDefault();
                     clearTimeout(timeoutId);
                     buscarTermino();
                 }
             });
 
-            console.log("✅ Event listeners inicializados correctamente");
+            // Click en botón de búsqueda
+            botonBuscar.addEventListener("click", (e: Event): void => {
+                e.preventDefault();
 
-            // Verificar que las funciones globales estén disponibles
-            setTimeout(() => {
-                console.log("🌐 Verificando funciones globales:", {
-                    mostrarTerminos: typeof window.mostrarTerminos,
-                    buscarTermino: typeof window.buscarTermino,
+                buscarTermino();
+            });
+
+            // Configurar botones de letras
+            const botonesLetras =
+                obtenerElementos<HTMLButtonElement>(".letra-btn");
+            botonesLetras.forEach((boton) => {
+                boton.addEventListener("click", (e: Event): void => {
+                    e.preventDefault();
+                    const letra = boton.dataset.letra;
+                    if (letra) {
+                        console.log("🔤 Letra clickeada:", letra);
+                        mostrarTerminos(letra);
+                    }
                 });
-            }, 100);
+            });
         } catch (error) {
             console.error("💥 Error al inicializar event listeners:", error);
         }
     });
 
-    // Declarar funciones globales para el window object
-    declare global {
-        interface Window {
-            mostrarTerminos: (letra: string) => void;
-            buscarTermino: () => void;
-        }
-    }
-
-    // Hacer funciones globales
-    window.mostrarTerminos = mostrarTerminos;
-    window.buscarTermino = buscarTermino;
+    // Ya no necesitamos declarar funciones globales
+    // Las manejamos directamente con event listeners
 </script>
