@@ -101,21 +101,19 @@ const letrasDisponibles: string[] = [
     interface EstadoAplicacion {
         terminosActuales: DiccionarioTerminos;
         letraActiva: string;
+        inicializado: boolean;
     }
 
     // Variables globales tipadas
     let estado: EstadoAplicacion = {
         terminosActuales: {},
         letraActiva: "",
+        inicializado: false,
     };
 
     // Función para obtener elemento del DOM de forma segura
-    function obtenerElemento<T extends HTMLElement>(id: string): T {
-        const elemento = document.getElementById(id) as T | null;
-        if (!elemento) {
-            throw new Error(`Elemento con ID '${id}' no encontrado`);
-        }
-        return elemento;
+    function obtenerElemento<T extends HTMLElement>(id: string): T | null {
+        return document.getElementById(id) as T | null;
     }
 
     // Función para obtener elementos del DOM de forma segura
@@ -125,7 +123,7 @@ const letrasDisponibles: string[] = [
         return document.querySelectorAll<T>(selector);
     }
 
-    // Función para actualizar clases de botones
+    // Función para actualizar clases de botón
     function actualizarClasesBoton(
         boton: HTMLButtonElement,
         esActivo: boolean,
@@ -180,6 +178,8 @@ const letrasDisponibles: string[] = [
     // Función para mostrar mensaje cuando no hay resultados
     function mostrarMensajeVacio(titulo: string, mensaje: string): void {
         const container = obtenerElemento<HTMLElement>("terminosContainer");
+        if (!container) return;
+
         container.innerHTML = `
         <div class="text-center py-16 text-gray-500">
           <h2 class="text-2xl font-semibold text-gray-700 mb-4">
@@ -196,9 +196,13 @@ const letrasDisponibles: string[] = [
             const container = obtenerElemento<HTMLElement>("terminosContainer");
             const buttons = obtenerElementos<HTMLButtonElement>(".letra-btn");
 
+            if (!container) return;
+
             // Limpiar el input de búsqueda cuando se selecciona una letra
             const buscador = obtenerElemento<HTMLInputElement>("buscador");
-            buscador.value = "";
+            if (buscador) {
+                buscador.value = "";
+            }
 
             // Actualizar botón activo
             buttons.forEach((btn) => {
@@ -237,11 +241,13 @@ const letrasDisponibles: string[] = [
 
     // Función para buscar términos
     function buscarTermino(): void {
-        console.log("🔍 Función buscarTermino ejecutada");
         try {
             const buscadorInput = obtenerElemento<HTMLInputElement>("buscador");
-            const query: string = buscadorInput.value.toLowerCase().trim();
             const container = obtenerElemento<HTMLElement>("terminosContainer");
+
+            if (!buscadorInput || !container) return;
+
+            const query: string = buscadorInput.value.toLowerCase().trim();
 
             // Verificar que el diccionario esté disponible
             if (
@@ -287,7 +293,6 @@ const letrasDisponibles: string[] = [
             }
 
             // Mostrar resultados
-
             container.innerHTML = generarHtmlTerminos(
                 resultados,
                 `Resultados para "${query}" (${resultados.length})`,
@@ -300,14 +305,49 @@ const letrasDisponibles: string[] = [
         }
     }
 
-    // Event listeners con tipado
-    document.addEventListener("DOMContentLoaded", (): void => {
-        console.log("🚀 DOM cargado, inicializando eventos");
+    // Función para limpiar event listeners previos
+    function limpiarEventListeners(): void {
+        const buscador = obtenerElemento<HTMLInputElement>("buscador");
+        const botonBuscar = obtenerElemento<HTMLButtonElement>("botonBuscar");
+        const botonesLetras = obtenerElementos<HTMLButtonElement>(".letra-btn");
+
+        // Clonar elementos para eliminar todos los event listeners
+        if (buscador) {
+            const nuevoBuscador = buscador.cloneNode(true) as HTMLInputElement;
+            buscador.parentNode?.replaceChild(nuevoBuscador, buscador);
+        }
+
+        if (botonBuscar) {
+            const nuevoBotonBuscar = botonBuscar.cloneNode(
+                true,
+            ) as HTMLButtonElement;
+            botonBuscar.parentNode?.replaceChild(nuevoBotonBuscar, botonBuscar);
+        }
+
+        botonesLetras.forEach((boton) => {
+            const nuevoBoton = boton.cloneNode(true) as HTMLButtonElement;
+            boton.parentNode?.replaceChild(nuevoBoton, boton);
+        });
+    }
+
+    // Función principal de inicialización
+    function inicializarDiccionario(): void {
+        // Verificar si ya está inicializado para evitar duplicados
+        if (estado.inicializado) {
+            limpiarEventListeners();
+        }
+
         try {
             // Configurar buscador
             const buscador = obtenerElemento<HTMLInputElement>("buscador");
             const botonBuscar =
                 obtenerElemento<HTMLButtonElement>("botonBuscar");
+
+            if (!buscador || !botonBuscar) {
+                console.error("❌ Elementos del buscador no encontrados");
+                return;
+            }
+
             let timeoutId: number;
 
             // Búsqueda en tiempo real
@@ -330,28 +370,41 @@ const letrasDisponibles: string[] = [
             // Click en botón de búsqueda
             botonBuscar.addEventListener("click", (e: Event): void => {
                 e.preventDefault();
-
                 buscarTermino();
             });
 
             // Configurar botones de letras
             const botonesLetras =
                 obtenerElementos<HTMLButtonElement>(".letra-btn");
+
             botonesLetras.forEach((boton) => {
                 boton.addEventListener("click", (e: Event): void => {
                     e.preventDefault();
                     const letra = boton.dataset.letra;
                     if (letra) {
-                        console.log("🔤 Letra clickeada:", letra);
                         mostrarTerminos(letra);
                     }
                 });
             });
+
+            estado.inicializado = true;
         } catch (error) {
             console.error("💥 Error al inicializar event listeners:", error);
         }
-    });
+    }
 
-    // Ya no necesitamos declarar funciones globales
-    // Las manejamos directamente con event listeners
+    // Event listeners para diferentes eventos de navegación
+    document.addEventListener("DOMContentLoaded", inicializarDiccionario);
+    document.addEventListener("astro:page-load", inicializarDiccionario);
+
+    // Para navegación del lado del cliente en Astro
+    document.addEventListener("astro:after-swap", inicializarDiccionario);
+
+    // Alternativa adicional para casos edge
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", inicializarDiccionario);
+    } else {
+        // El DOM ya está cargado
+        inicializarDiccionario();
+    }
 </script>
