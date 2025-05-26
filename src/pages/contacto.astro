@@ -284,192 +284,96 @@ import MainLayout from "../layouts/MainLayout.astro";
     }
 </style>
 
-<script>
+<script is:inline>
     document.addEventListener("DOMContentLoaded", function () {
-        const form = document.getElementById("contactForm") as HTMLFormElement;
+        const form = document.getElementById("contactForm");
 
         if (!form) {
             console.error("Formulario no encontrado");
             return;
         }
 
-        // Elementos del formulario
-        const nombreInput = document.getElementById(
-            "nombre",
-        ) as HTMLInputElement;
-        const emailInput = document.getElementById("email") as HTMLInputElement;
-        const asuntoSelect = document.getElementById(
-            "asunto",
-        ) as HTMLSelectElement;
-        const mensajeTextarea = document.getElementById(
-            "mensaje",
-        ) as HTMLTextAreaElement;
-
         // Función para validar email
-        function isValidEmail(email: string): boolean {
+        function isValidEmail(email) {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             return emailRegex.test(email);
         }
 
-        // Función para mostrar error en un campo
-        function showFieldError(element: HTMLElement, message: string) {
-            element.classList.add("field-error");
-            element.classList.remove("field-success");
-
-            const errorSpan = element.parentElement?.querySelector(
-                ".error-message",
-            ) as HTMLElement;
-            if (errorSpan) {
+        // Función para mostrar/ocultar errores
+        function toggleError(element, show, message = "") {
+            const errorSpan = element.nextElementSibling;
+            if (errorSpan && errorSpan.classList.contains("error-message")) {
                 errorSpan.textContent = message;
-                errorSpan.classList.remove("hidden");
+                errorSpan.classList.toggle("hidden", !show);
+                element.classList.toggle("border-red-500", show);
             }
         }
 
-        // Función para mostrar éxito en un campo
-        function showFieldSuccess(element: HTMLElement) {
-            element.classList.remove("field-error");
-            element.classList.add("field-success");
-
-            const errorSpan = element.parentElement?.querySelector(
-                ".error-message",
-            ) as HTMLElement;
-            if (errorSpan) {
-                errorSpan.classList.add("hidden");
-            }
-        }
-
-        // Función para limpiar estado del campo
-        function clearFieldState(element: HTMLElement) {
-            element.classList.remove("field-error", "field-success");
-
-            const errorSpan = element.parentElement?.querySelector(
-                ".error-message",
-            ) as HTMLElement;
-            if (errorSpan) {
-                errorSpan.classList.add("hidden");
-            }
-        }
-
-        // Función para validar un campo individual
-        function validateField(
-            element: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement,
-        ): boolean {
-            const value = element.value.trim();
-
-            // El mensaje no es obligatorio
-            if (element.id === "mensaje") {
-                clearFieldState(element);
-                return true;
-            }
-
-            // Validar campos obligatorios
-            if (!value) {
-                showFieldError(element, "Este campo es obligatorio");
-                return false;
-            }
-
-            // Validación específica para email
-            if (element.id === "email" && !isValidEmail(value)) {
-                showFieldError(element, "Ingrese un email válido");
-                return false;
-            }
-
-            // Si todo está bien
-            showFieldSuccess(element);
-            return true;
-        }
-
-        // Validación en tiempo real mientras escriben
-        [nombreInput, emailInput, asuntoSelect].forEach((element) => {
-            element.addEventListener("blur", () => validateField(element));
-            element.addEventListener("input", () => {
-                if (element.classList.contains("field-error")) {
-                    validateField(element);
+        // Validación en tiempo real
+        form.querySelectorAll("input, select").forEach((input) => {
+            input.addEventListener("blur", function () {
+                if (this.required && !this.value.trim()) {
+                    toggleError(this, true, "Este campo es obligatorio");
+                } else if (this.type === "email" && !isValidEmail(this.value)) {
+                    toggleError(this, true, "Ingrese un email válido");
+                } else {
+                    toggleError(this, false);
                 }
             });
         });
 
-        // Validación al enviar el formulario
-        form.addEventListener("submit", async (e) => {
+        // Manejo del envío
+        form.addEventListener("submit", async function (e) {
             e.preventDefault();
 
-            const submitButton = form.querySelector(
-                'button[type="submit"]',
-            ) as HTMLButtonElement;
+            // Validación final antes de enviar
+            let isValid = true;
+            form.querySelectorAll("input[required], select[required]").forEach(
+                (field) => {
+                    if (!field.value.trim()) {
+                        toggleError(field, true, "Este campo es obligatorio");
+                        isValid = false;
+                    } else if (
+                        field.type === "email" &&
+                        !isValidEmail(field.value)
+                    ) {
+                        toggleError(field, true, "Ingrese un email válido");
+                        isValid = false;
+                    }
+                },
+            );
+
+            if (!isValid) return;
+
+            const submitButton = form.querySelector('button[type="submit"]');
             const originalText = submitButton.textContent;
-
-            // Crear elemento para mensajes si no existe
-            let messageDiv = document.getElementById(
-                "form-message",
-            ) as HTMLDivElement;
-            if (!messageDiv) {
-                messageDiv = document.createElement("div");
-                messageDiv.id = "form-message";
-                messageDiv.className = "p-4 mb-4 rounded-lg";
-                form.insertBefore(messageDiv, submitButton);
-            }
-
-            // Limpiar mensaje anterior
-            messageDiv.textContent = "";
-            messageDiv.className = "p-4 mb-4 rounded-lg";
-
-            // Validar todos los campos obligatorios
-            const isNombreValid = validateField(nombreInput);
-            const isEmailValid = validateField(emailInput);
-            const isAsuntoValid = validateField(asuntoSelect);
-
-            // Si algún campo no es válido, no enviar
-            if (!isNombreValid || !isEmailValid || !isAsuntoValid) {
-                messageDiv.textContent =
-                    "Corrija los errores marcados antes de continuar";
-                messageDiv.classList.add("bg-red-100", "text-red-700");
-                return;
-            }
-
-            // Estado de carga
             submitButton.disabled = true;
             submitButton.textContent = "Enviando...";
 
             try {
                 const formData = new FormData(form);
-
                 const response = await fetch("/api/sendEmail.json", {
                     method: "POST",
+                    headers: {
+                        Accept: "application/json",
+                    },
                     body: formData,
                 });
 
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
+                const result = await response.json();
 
-                const data = await response.json();
-
-                if (data.success) {
-                    messageDiv.textContent = data.message;
-                    messageDiv.classList.add("bg-green-100", "text-green-700");
+                if (response.ok) {
+                    // Mostrar mensaje de éxito
+                    alert("Mensaje enviado con éxito");
                     form.reset();
-
-                    // Limpiar estados visuales de los campos
-                    [
-                        nombreInput,
-                        emailInput,
-                        asuntoSelect,
-                        mensajeTextarea,
-                    ].forEach((element) => {
-                        clearFieldState(element);
-                    });
                 } else {
-                    messageDiv.textContent =
-                        data.message || "Error al enviar el mensaje";
-                    messageDiv.classList.add("bg-red-100", "text-red-700");
+                    throw new Error(
+                        result.message || "Error al enviar el formulario",
+                    );
                 }
             } catch (error) {
                 console.error("Error:", error);
-                messageDiv.textContent =
-                    error instanceof Error
-                        ? error.message
-                        : "Error de conexión";
-                messageDiv.classList.add("bg-red-100", "text-red-700");
+                alert(error.message);
             } finally {
                 submitButton.disabled = false;
                 submitButton.textContent = originalText;
