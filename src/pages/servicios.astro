@@ -104,61 +104,49 @@ import RightArrow from "../components/icons/rightArrow.astro";
             ))}
         </div>
     </section>
-
-
-    <!-- Script para manejar los modales -->
-    <script is:inline>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Función para manejar la navegación de Astro
-            const setupModals = () => {
-                // Abrir modal
-                document.querySelectorAll('.modal-trigger').forEach(button => {
-                    button.addEventListener('click', function() {
-                        const modalId = this.getAttribute('data-modal-id');
-                        const modal = document.getElementById(modalId);
-                        if (modal) {
-                            modal.classList.remove('hidden');
-                            document.body.style.overflow = 'hidden'; // Bloquear scroll
-                        }
-                    });
-                });
-
-                // Cerrar modal
-                document.querySelectorAll('.modal-close').forEach(button => {
-                    button.addEventListener('click', function() {
-                        const modalId = this.getAttribute('data-modal-id');
-                        const modal = document.getElementById(modalId);
-                        if (modal) {
-                            modal.classList.add('hidden');
-                            document.body.style.overflow = ''; // Restaurar scroll
-                        }
-                    });
-                });
-
-                // Cerrar al hacer click fuera del contenido
-                document.querySelectorAll('[id^="modal-"]').forEach(modal => {
-                    modal.addEventListener('click', function(e) {
-                        if (e.target === this) {
-                            this.classList.add('hidden');
-                            document.body.style.overflow = '';
-                        }
-                    });
-                });
-            };
-
-            // Configurar modales inicialmente
-            setupModals();
-
-            // Astro View Transitions (para navegación entre páginas)
-            if (document.startViewTransition) {
-                document.addEventListener('astro:after-swap', setupModals);
-            }
-
-            // Manejar el evento de navegación tradicional
-            window.addEventListener('popstate', setupModals);
-        });
-    </script>
 </MainLayout>
+
+<script is:inline>
+    // Función única para manejar TODOS los modales
+    function handleModalEvents(e) {
+        // Abrir modal
+        if (e.target.closest('.modal-trigger')) {
+            const button = e.target.closest('.modal-trigger');
+            const modalId = button.getAttribute('data-modal-id');
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+                e.preventDefault();
+            }
+        }
+
+        // Cerrar modal (botón X o click fuera)
+        if (e.target.closest('.modal-close') || e.target.matches('[id^="modal-"]')) {
+            const modal = e.target.closest('[id^="modal-"]') || 
+                         document.getElementById(e.target.closest('.modal-close').getAttribute('data-modal-id'));
+            if (modal) {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+                e.preventDefault();
+            }
+        }
+    }
+
+    // Configuración inicial
+    document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('click', handleModalEvents);
+    });
+
+    // Reiniciar después de transiciones de Astro
+    document.addEventListener('astro:after-swap', () => {
+        // Cerrar todos los modales abiertos durante la transición
+        document.querySelectorAll('[id^="modal-"]').forEach(modal => {
+            modal.classList.add('hidden');
+        });
+        document.body.style.overflow = '';
+    });
+</script>
 
 <style>
     /* Estilos anteriores se mantienen igual */
