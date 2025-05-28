@@ -1,6 +1,7 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
 import {servicios} from '../config/constants/servicios'
+import RightArrow from "../components/icons/rightArrow.astro";
 ---
 
 <MainLayout title="Poder Judicial de Guinea Ecuatorial | Servicios">
@@ -38,10 +39,11 @@ import {servicios} from '../config/constants/servicios'
                         <!-- Botón con data attribute -->
                         <div class="mt-auto">
                             <button 
-                                class="w-full bg-secondary hover:scale-105 text-white py-2 px-4 rounded-md transition-transform cursor-pointer modal-trigger"
+                                class="w-full hover:underline text-secondary  rounded-md transition-transform cursor-pointer modal-trigger text-left flex items-center gap-x-2"
                                 data-modal-id={`modal-${servicio.id}`}
                             >
-                                Ver tasas judiciales
+                                <span>Ver tasas judiciales</span>
+                                <RightArrow  classname="text-secondary size-5"/>
                             </button>
                         </div>
                     </div>
