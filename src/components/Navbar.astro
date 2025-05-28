@@ -11,19 +11,29 @@ interface Props {
 const { classname, text = false } = Astro.props;
 ---
 
-<nav class={`${classname} w-full z-40 py-5 bg-primary relative`}>
-    <div class="px-5 mx-auto flex justify-between items-center relative">
-        <div class="flex items-center gap-x-5">
-            <img src="/images/logo.png" alt="Logo" class="w-16 md:w-20 h-fit" />
-            <div class="text-white space-y-2">
-                <p class="text-lg md:text-xl uppercase">Palacio de Justicia</p>
-                <div class="w-full h-[0.1px] bg-white/60"></div>
-                <p class="text-md">República de Guinea Ecuatorial</p>
+<nav class={`${classname} w-full z-40 bg-primary relative `}>
+    <div class="mx-auto flex flex-row xl:flex-col justify-between relative">
+        <div class="flex items-center justify-between py-5">
+            <div class="flex gap-x-5 items-center px-5">
+                <img
+                    src="/images/logo.png"
+                    alt="Logo"
+                    class="w-16 md:w-16 h-fit"
+                />
+                <div class="text-white space-y-2">
+                    <p class="text-md md:text-lg uppercase">
+                        Palacio de Justicia
+                    </p>
+                    <div class="w-full h-[0.1px] bg-white/60"></div>
+                    <p class="text-md">República de Guinea Ecuatorial</p>
+                </div>
             </div>
         </div>
 
         <!-- Menú Desktop (oculto en mobile) -->
-        <ul class="hidden xl:flex justify-center items-center text-white">
+        <ul
+            class="hidden xl:flex items-center text-primary py-3 px-5 bg-white shadow-2xl"
+        >
             {
                 SITE_MENU.map((item) => (
                     <li
@@ -32,7 +42,7 @@ const { classname, text = false } = Astro.props;
                     >
                         <a
                             href={item.link}
-                            class="px-4 py-2 hover:bg-white/20 rounded transition-colors flex items-center menu-item"
+                            class="px-4 py-2 hover:bg-primary/10 rounded transition-colors flex items-center menu-item"
                             onclick={
                                 item.submenu
                                     ? "event.preventDefault();toggleSlideMenu(this)"

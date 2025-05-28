@@ -30,6 +30,10 @@ export const FOOTER_LINKS = [
         url: '/biblioteca/tratados_manuales'
     },
     {
+        title: 'Servicios',
+        url: '/servicios'
+    },
+    {
         title: 'Códigos Legales',
         url: '/biblioteca/codigos_legales'
     },

@@ -42,6 +42,10 @@ export const SITE_MENU = [
         ]
     },
     {
+        text: "SERVICIOS",
+        link: "/servicios"
+    },
+    {
         text: "NOTICIAS JUDICIALES",
         link: "/noticias_judiciales"
     },
