@@ -1,10 +1,6 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
-
 import {servicios} from '../config/constants/servicios'
-
-// Datos de servicios (puedes mover esto a un archivo JSON después)
-
 ---
 
 <MainLayout title="Poder Judicial de Guinea Ecuatorial | Servicios">
@@ -21,53 +17,85 @@ import {servicios} from '../config/constants/servicios'
     </section>
 
     <!-- Servicios List -->
-    <section class="max-w-7xl mx-auto px-5 pb-20 ">
-        <div class="grid gap-12">
+    <section class="max-w-7xl mx-auto px-5 pb-20">
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {servicios.map((servicio) => (
                 <article 
                     id={`servicio-${servicio.id}`}
-                    class="bg-white rounded-xl shadow-md overflow-hidden transition-all hover:shadow-lg"
+                    class="bg-white rounded-xl shadow-md overflow-hidden transition-all hover:shadow-lg flex flex-col h-full"
                 >
-                    <div class="pt-8 px-2 md:p-8">
-                        <h2 class="text-lg sm:text-2xl font-bold text-gray-800 mb-4">
-                            {servicio.nombre}
-                        </h2>
-                        <p class="text-gray-600 mb-6">
-                            {servicio.descripcion}
-                        </p>
+                    <div class="p-6 flex flex-col h-full">
+                        <!-- Contenedor de texto con altura fija -->
+                        <div class="min-h-[120px]  flex flex-col">
+                            <h2 class="text-lg sm:text-xl font-bold text-gray-800 mb-2 line-clamp-2 h-[3em] flex items-start">
+                                {servicio.nombre}
+                            </h2>
+                            <p class="text-gray-600 text-sm line-clamp-3 h-[4.5em] flex items-start">
+                                {servicio.descripcion}
+                            </p>
+                        </div>
                         
-                        <!-- Tabla de Tasas -->
-                        <div class="overflow-x-scroll md:overflow-x-auto">
-                            <table class="min-w-full divide-y divide-gray-200">
-                                <thead class="bg-gray-50">
-                                    <tr>
-                                        <th class="px-2 md:px-6 py-3 text-left text-sm md:text-md font-medium text-gray-500 uppercase tracking-wider">
-                                            Rango
-                                        </th>
-                                        <th class="px-2 md:px-6 py-3 text-left text-sm md:text-md font-medium text-gray-500 uppercase tracking-wider">
-                                            Tasa de Expedición (FCFA)
-                                        </th>
-                                        <th class="px-2 md:px-6 py-3 text-left text-sm md:text-md font-medium text-gray-500 uppercase tracking-wider">
-                                            Tasa de Renovación (FCFA)
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-white divide-y divide-gray-200">
-                                    {servicio.tasas.map((tasa, index) => (
-                                        <tr class={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                {tasa.rango}
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                {tasa.expedicion.toLocaleString()}
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                {tasa.renovacion ? tasa.renovacion.toLocaleString() : '-'}
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                        <!-- Botón con data attribute -->
+                        <div class="mt-auto">
+                            <button 
+                                class="w-full bg-secondary hover:scale-105 text-white py-2 px-4 rounded-md transition-transform cursor-pointer modal-trigger"
+                                data-modal-id={`modal-${servicio.id}`}
+                            >
+                                Ver tasas judiciales
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Modal -->
+                    <div id={`modal-${servicio.id}`} class="hidden fixed inset-0 bg-black/60 bg-opacity-50 z-50 flex items-center justify-center p-4">
+                        <div class="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+                            <div class="p-6">
+                                <div class="flex justify-between items-center mb-4">
+                                    <h3 class="text-xl font-bold text-gray-800">{servicio.nombre}</h3>
+                                    <button 
+                                        class="text-gray-500 hover:text-gray-700 modal-close"
+                                        data-modal-id={`modal-${servicio.id}`}
+                                    >
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                
+                                <!-- Tabla de Tasas -->
+                                <div class="overflow-x-auto">
+                                    <table class="min-w-full divide-y divide-gray-200">
+                                        <thead class="bg-gray-50">
+                                            <tr>
+                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    Rango
+                                                </th>
+                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    Tasa de Expedición (FCFA)
+                                                </th>
+                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    Tasa de Renovación (FCFA)
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="bg-white divide-y divide-gray-200">
+                                            {servicio.tasas.map((tasa, index) => (
+                                                <tr class={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                        {tasa.rango}
+                                                    </td>
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                        {tasa.expedicion.toLocaleString()}
+                                                    </td>
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                        {tasa.renovacion ? tasa.renovacion.toLocaleString() : '-'}
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </article>
@@ -75,63 +103,105 @@ import {servicios} from '../config/constants/servicios'
         </div>
     </section>
 
-    <!-- Información Adicional -->
-    <section class="bg-gray-50 py-12 ">
-        <div class="max-w-7xl mx-auto px-5 mb-10">
-            <div class="text-center mb-8">
-                <h2 class="text-2xl font-bold text-gray-800">
-                    Otros Servicios Judiciales
-                </h2>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {[
-                    "Protesto de letra de cambio y poderes",
-                    "Inscripciones de pensiones y rentas vitalicias",
-                    "Sociedades: Constitución",
-                    "Fianzas",
-                    "Hipotecas-constitución",
-                    "Pignoraciones cacao y café",
-                    "Inversión cacao y café",
-                    "Constitución de sociedades mercantiles",
-                    "Registro de propiedad",
-                    "Legalización de actas de reuniones",
-                    "Registro de empresas, sociedades"
-                ].map((servicio) => (
-                    <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
-                        <h3 class="font-medium text-lg text-gray-800">
-                            {servicio}
-                        </h3>
-                        <p class="mt-2 text-gray-600 text-sm">
-                            Consulte las tasas en nuestras oficinas
-                        </p>
-                    </div>
-                ))}
-            </div>
-        </div>
-    </section>
+
+    <!-- Script para manejar los modales -->
+    <script is:inline>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Función para manejar la navegación de Astro
+            const setupModals = () => {
+                // Abrir modal
+                document.querySelectorAll('.modal-trigger').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const modalId = this.getAttribute('data-modal-id');
+                        const modal = document.getElementById(modalId);
+                        if (modal) {
+                            modal.classList.remove('hidden');
+                            document.body.style.overflow = 'hidden'; // Bloquear scroll
+                        }
+                    });
+                });
+
+                // Cerrar modal
+                document.querySelectorAll('.modal-close').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const modalId = this.getAttribute('data-modal-id');
+                        const modal = document.getElementById(modalId);
+                        if (modal) {
+                            modal.classList.add('hidden');
+                            document.body.style.overflow = ''; // Restaurar scroll
+                        }
+                    });
+                });
+
+                // Cerrar al hacer click fuera del contenido
+                document.querySelectorAll('[id^="modal-"]').forEach(modal => {
+                    modal.addEventListener('click', function(e) {
+                        if (e.target === this) {
+                            this.classList.add('hidden');
+                            document.body.style.overflow = '';
+                        }
+                    });
+                });
+            };
+
+            // Configurar modales inicialmente
+            setupModals();
+
+            // Astro View Transitions (para navegación entre páginas)
+            if (document.startViewTransition) {
+                document.addEventListener('astro:after-swap', setupModals);
+            }
+
+            // Manejar el evento de navegación tradicional
+            window.addEventListener('popstate', setupModals);
+        });
+    </script>
 </MainLayout>
 
 <style>
-        /* Animaciones suaves para las tablas */
-        table {
-            transition: all 0.3s ease;
-        }
-        
-        tr {
-            transition: background-color 0.2s ease;
-        }
-        tr:hover {
-            background-color: #f3f4f6; /* Equivalente a bg-gray-100 */
-        }
-        
-        /* Estilo para el enlace activo */
-        [id^="servicio-"]:target {
-            outline: 2px solid #3b82f6; /* Equivalente a ring-2 ring-blue-500 */
-            animation: highlight 2s ease;
-        }
-        
-        @keyframes highlight {
-            0% { background-color: #eff6ff; } /* Equivalente a bg-blue-50 */
-            100% { background-color: #ffffff; } /* Equivalente a bg-white */
-        }
-    </style>
+    /* Estilos anteriores se mantienen igual */
+    [class^="line-clamp-"] {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    
+    .line-clamp-2 {
+        -webkit-line-clamp: 2;
+    }
+    
+    .line-clamp-3 {
+        -webkit-line-clamp: 3;
+    }
+    
+    .h-[3em] {
+        height: 3em;
+    }
+    
+    .h-[4.5em] {
+        height: 4.5em;
+    }
+    
+    .grid > article, .grid > div {
+        height: 100%;
+    }
+    
+    [id^="modal-"] > div {
+        animation: modalFadeIn 0.3s ease-out;
+    }
+    
+    @keyframes modalFadeIn {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    [id^="servicio-"]:target {
+        outline: 2px solid #3b82f6;
+        animation: highlight 2s ease;
+    }
+    
+    @keyframes highlight {
+        0% { background-color: #eff6ff; }
+        100% { background-color: #ffffff; }
+    }
+</style>

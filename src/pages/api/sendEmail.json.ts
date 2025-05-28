@@ -1,131 +1,95 @@
-// src/pages/api/contacto.ts
 import type { APIRoute } from "astro";
 import { Resend } from 'resend';
 import { createEmailTemplate } from "../../utils/emailTemplate";
+import { Buffer } from 'buffer';
 
 const resend = new Resend(import.meta.env.RESEND_API_KEY);
 
 export const POST: APIRoute = async ({ request }) => {
     try {
-        // Verificar que la API key esté configurada
+        // Verificar API key
         if (!import.meta.env.RESEND_API_KEY) {
-            console.error('RESEND_API_KEY no está configurada');
-            return new Response(
-                JSON.stringify({
-                    success: false,
-                    message: 'Error de configuración del servidor'
-                }),
-                {
-                    status: 500,
-                    headers: { 'Content-Type': 'application/json' }
-                }
-            );
+            throw new Error('RESEND_API_KEY no está configurada');
         }
 
-        // Obtener los datos del formulario
+        // Obtener datos del formulario
         const formData = await request.formData();
 
-        // Extraer los valores
+        // Extraer valores
         const nombre = formData.get('nombre')?.toString() || '';
+        const dip = formData.get('dip')?.toString() || '';
+        const telefono = formData.get('telefono')?.toString() || '';
         const email = formData.get('email')?.toString() || '';
         const asunto = formData.get('asunto')?.toString() || '';
         const mensaje = formData.get('mensaje')?.toString() || '';
+        const archivo = formData.get('archivo') as File | null;
 
-        // Validación básica
-        if (!nombre || !email || !asunto || !mensaje) {
-            return new Response(
-                JSON.stringify({
-                    success: false,
-                    message: 'Todos los campos son requeridos'
-                }),
-                {
-                    status: 400,
-                    headers: { 'Content-Type': 'application/json' }
-                }
-            );
+        // Validaciones básicas
+        if (!nombre || !dip || !telefono || !email || !asunto || !mensaje) {
+            throw new Error('Todos los campos obligatorios son requeridos');
         }
 
-        // Validación de email
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            return new Response(
-                JSON.stringify({
-                    success: false,
-                    message: 'El formato del email no es válido'
-                }),
-                {
-                    status: 400,
-                    headers: { 'Content-Type': 'application/json' }
-                }
-            );
+        // Validar formato de email
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            throw new Error('El formato del email no es válido');
         }
 
-        // Configuración del email
-        const emailConfig = {
-            // IMPORTANTE: Usar un dominio verificado en Resend
-            from: 'onboarding@resend.dev', // Usa este por defecto o tu dominio verificado
-            to: [import.meta.env.EMAIL_DESTINO || 'tu-email@ejemplo.com'],
-            replyTo: email,
-            subject: `Nuevo mensaje de contacto: ${asunto}`,
-            html: createEmailTemplate({ nombre, asunto, email, mensaje }),
-        };
+        // Validar tamaño de archivo (máximo 5MB)
+        if (archivo && archivo.size > 5 * 1024 * 1024) {
+            throw new Error('El archivo adjunto no puede exceder los 5MB');
+        }
 
-        console.log('Enviando email con configuración:', {
-            from: emailConfig.from,
-            to: emailConfig.to,
-            subject: emailConfig.subject
+        // Procesar archivo adjunto si existe
+        let attachment = null;
+        if (archivo && archivo.size > 0) {
+            const fileBuffer = Buffer.from(await archivo.arrayBuffer());
+            attachment = {
+                filename: archivo.name,
+                content: fileBuffer,
+                contentType: archivo.type
+            };
+        }
+
+        // Crear contenido del email
+        const emailHtml = createEmailTemplate({
+            nombre,
+            dip,
+            telefono,
+            email,
+            asunto,
+            mensaje,
+            tieneAdjunto: !!attachment
         });
 
-        // Enviar el email usando Resend
-        const { data, error } = await resend.emails.send(emailConfig);
+        // Configurar y enviar email
+        const { data, error } = await resend.emails.send({
+            from: 'contacto@tudominio.com', // Usa tu dominio verificado
+            to: [import.meta.env.EMAIL_DESTINO || 'tu-email@ejemplo.com'],
+            replyTo: email,
+            subject: `Contacto Poder Judicial: ${asunto}`,
+            html: emailHtml,
+            attachments: attachment ? [attachment] : undefined
+        });
 
-        if (error) {
-            console.error('Error de Resend:', error);
+        if (error) throw error;
 
-            // Manejar errores específicos de Resend
-            if (error.message?.includes('Invalid from address')) {
-                return new Response(
-                    JSON.stringify({
-                        success: false,
-                        message: 'Error de configuración del dominio de envío'
-                    }),
-                    {
-                        status: 500,
-                        headers: { 'Content-Type': 'application/json' }
-                    }
-                );
-            }
-
-            throw new Error(error.message || 'Error desconocido de Resend');
-        }
-
-        console.log('Email enviado exitosamente:', data);
-
-        return new Response(
-            JSON.stringify({
-                success: true,
-                message: '¡Mensaje enviado correctamente! Te responderemos pronto.',
-                data: data
-            }),
-            {
-                status: 200,
-                headers: { 'Content-Type': 'application/json' }
-            }
-        );
+        return new Response(JSON.stringify({
+            success: true,
+            message: 'Mensaje enviado correctamente'
+        }), {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' }
+        });
 
     } catch (error) {
         console.error('Error en el endpoint de contacto:', error);
 
-        return new Response(
-            JSON.stringify({
-                success: false,
-                message: 'Hubo un error al enviar el mensaje. Por favor, inténtalo de nuevo más tarde.',
-                error: process.env.NODE_ENV === 'development' ? (error as Error).message : undefined
-            }),
-            {
-                status: 500,
-                headers: { 'Content-Type': 'application/json' }
-            }
-        );
+        return new Response(JSON.stringify({
+            success: false,
+            message: error instanceof Error ? error.message : 'Error al procesar la solicitud'
+        }), {
+            status: 500,
+            headers: { 'Content-Type': 'application/json' }
+        });
     }
 };
