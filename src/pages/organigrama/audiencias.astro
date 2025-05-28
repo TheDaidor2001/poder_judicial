@@ -1,9 +1,400 @@
 ---
 import MainLayout from "../../layouts/MainLayout.astro";
+import {
+    todasLasAudiencias,
+    ordenCargosAudiencias,
+} from "../../config/constants/consejo";
+
+// Función para ordenar miembros según el orden de cargos definido
+function ordenarMiembros(
+    miembros: {
+        id: string;
+        cargo: string;
+        audiencia: string;
+        nombre: string;
+        foto: string;
+        descripcion: string;
+        funciones: string[];
+        trayectoria: string;
+    }[],
+    orden: string[],
+) {
+    return [...miembros].sort((a, b) => {
+        const indexA = orden.indexOf(a.cargo);
+        const indexB = orden.indexOf(b.cargo);
+
+        // Si el cargo no está en el orden, lo pone al final
+        const posA = indexA === -1 ? orden.length : indexA;
+        const posB = indexB === -1 ? orden.length : indexB;
+
+        return posA - posB;
+    });
+}
+
+const miembrosOrdenados = ordenarMiembros(
+    todasLasAudiencias,
+    ordenCargosAudiencias,
+);
 ---
 
 <MainLayout
-    title="Poder Judicial de Guinea Ecuatorial | Audiencias de Guinea Ecuatorial"
+    title="Poder Judicial de Guinea Ecuatorial | Audiencias Provinciales"
 >
-    <h1>Audiencias</h1>
+    <!-- Hero Section -->
+    <section class="bg-primary text-white py-20">
+        <div class="max-w-7xl mx-auto px-5 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">
+                Audiencias Provinciales
+            </h1>
+            <p class="text-xl md:text-2xl max-w-3xl mx-auto">
+                Órganos judiciales provinciales de Guinea Ecuatorial
+            </p>
+        </div>
+    </section>
+
+    <!-- Audiencias Filter -->
+    <section class="max-w-7xl mx-auto px-5 py-8">
+        <div class="flex flex-wrap gap-4 justify-center">
+            <button
+                class="filter-button px-4 py-2 rounded-full bg-secondary text-white font-medium"
+                data-audiencia="todas"
+            >
+                Todas las Audiencias
+            </button>
+            <button
+                class="filter-button px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 font-medium"
+                data-audiencia="Malabo"
+            >
+                Malabo
+            </button>
+            <button
+                class="filter-button px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 font-medium"
+                data-audiencia="Bata"
+            >
+                Bata
+            </button>
+            <button
+                class="filter-button px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 font-medium"
+                data-audiencia="Centro-Sur"
+            >
+                Centro-Sur
+            </button>
+            <button
+                class="filter-button px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 font-medium"
+                data-audiencia="Kie-Ntem"
+            >
+                Kie-Ntem
+            </button>
+            <button
+                class="filter-button px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 font-medium"
+                data-audiencia="Wele-Nzas"
+            >
+                Wele-Nzas
+            </button>
+        </div>
+    </section>
+
+    <!-- Members Grid -->
+    <section class="max-w-7xl mx-auto px-5 py-8">
+        <div
+            class="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
+            id="membersContainer"
+        >
+            {
+                miembrosOrdenados.map((miembro) => (
+                    <article
+                        class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform hover:shadow-xl hover:-translate-y-1 h-full flex flex-col"
+                        data-audiencia={miembro.audiencia}
+                    >
+                        <div class="h-48 bg-blue-100 flex items-center justify-center">
+                            <img
+                                src={miembro.foto}
+                                alt={miembro.nombre}
+                                class="h-full w-full object-cover"
+                                loading="lazy"
+                            />
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <span class="text-sm font-semibold text-secondary">
+                                        {miembro.cargo}
+                                    </span>
+                                    <h2 class="text-xl font-bold text-gray-800 mt-1">
+                                        {miembro.nombre}
+                                    </h2>
+                                    <p class="text-sm text-gray-500 mt-1">
+                                        Audiencia de {miembro.audiencia}
+                                    </p>
+                                </div>
+                                <button
+                                    class="text-secondary hover:text-secondary-dark member-detail-trigger"
+                                    data-member={miembro.id}
+                                    aria-label={`Ver detalles de ${miembro.nombre}`}
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-6 w-6"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                        />
+                                    </svg>
+                                </button>
+                            </div>
+                            <p class="text-gray-600 mt-3 line-clamp-3 flex-grow">
+                                {miembro.descripcion}
+                            </p>
+                        </div>
+                    </article>
+                ))
+            }
+        </div>
+    </section>
+
+    <!-- Member Detail Modal -->
+    <div
+        id="memberModal"
+        class="hidden fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4"
+    >
+        <div
+            class="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+        >
+            <div class="p-6">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <span
+                            class="text-sm font-semibold text-secondary"
+                            id="memberAudiencia"></span>
+                        <span
+                            id="memberPosition"
+                            class="text-lg font-semibold text-secondary block"
+                        ></span>
+                        <h3
+                            id="memberName"
+                            class="text-2xl font-bold text-gray-800 mt-1"
+                        >
+                        </h3>
+                    </div>
+                    <button
+                        class="text-gray-500 hover:text-gray-700 modal-close"
+                        aria-label="Cerrar modal"
+                    >
+                        <svg
+                            class="w-8 h-8"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="mt-6 grid md:grid-cols-3 gap-6">
+                    <div class="md:col-span-1">
+                        <div
+                            class="h-64 bg-gray-100 rounded-lg overflow-hidden"
+                        >
+                            <img
+                                id="memberImage"
+                                src=""
+                                alt=""
+                                class="h-full w-full object-cover"
+                            />
+                        </div>
+                    </div>
+                    <div class="md:col-span-2">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-3">
+                            Funciones y Responsabilidades
+                        </h4>
+                        <div id="memberFunctions" class="prose text-gray-700">
+                            <!-- Contenido dinámico -->
+                        </div>
+
+                        <h4
+                            class="text-lg font-semibold text-gray-800 mt-6 mb-3"
+                        >
+                            Trayectoria Profesional
+                        </h4>
+                        <div id="memberBio" class="prose text-gray-700">
+                            <!-- Contenido dinámico -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </MainLayout>
+
+<!-- Script para el modal de miembros y filtrado -->
+<script is:inline define:vars={{ todasLasAudiencias }}>
+    // Crear un objeto para acceso rápido por ID
+    const membersData = {};
+    todasLasAudiencias.forEach((member) => {
+        membersData[member.id] = member;
+    });
+
+    // Función para crear lista HTML desde array
+    function createFunctionsList(functions) {
+        return `<ul class="space-y-2">${functions
+            .map(
+                (func) => `
+                <li class="flex items-start">
+                    <svg class="h-5 w-5 text-secondary mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>${func}</span>
+                </li>
+            `,
+            )
+            .join("")}</ul>`;
+    }
+
+    // Manejar clicks en los botones de detalles
+    document.addEventListener("click", function (e) {
+        // Abrir modal
+        if (e.target.closest(".member-detail-trigger")) {
+            const memberId = e.target
+                .closest(".member-detail-trigger")
+                .getAttribute("data-member");
+            const member = membersData[memberId];
+
+            if (member) {
+                document.getElementById("memberName").textContent =
+                    member.nombre;
+                document.getElementById("memberPosition").textContent =
+                    member.cargo;
+                document.getElementById("memberAudiencia").textContent =
+                    `Audiencia de ${member.audiencia}`;
+                document.getElementById("memberImage").src = member.foto;
+                document.getElementById("memberImage").alt = member.nombre;
+                document.getElementById("memberFunctions").innerHTML =
+                    createFunctionsList(member.funciones);
+                document.getElementById("memberBio").innerHTML =
+                    `<p>${member.trayectoria}</p>`;
+
+                document
+                    .getElementById("memberModal")
+                    .classList.remove("hidden");
+                document.body.style.overflow = "hidden";
+            }
+        }
+
+        // Cerrar modal
+        if (e.target.closest(".modal-close")) {
+            document.getElementById("memberModal").classList.add("hidden");
+            document.body.style.overflow = "";
+        }
+
+        // Cerrar al hacer click fuera del modal
+        if (e.target.id === "memberModal") {
+            document.getElementById("memberModal").classList.add("hidden");
+            document.body.style.overflow = "";
+        }
+    });
+
+    // Cerrar modal con tecla Escape
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+            document.getElementById("memberModal").classList.add("hidden");
+            document.body.style.overflow = "";
+        }
+    });
+
+    // Filtrado por audiencia
+    document.addEventListener("click", function (e) {
+        if (e.target.closest(".filter-button")) {
+            const audiencia = e.target
+                .closest(".filter-button")
+                .getAttribute("data-audiencia");
+
+            // Actualizar botones activos
+            document.querySelectorAll(".filter-button").forEach((btn) => {
+                if (btn.getAttribute("data-audiencia") === audiencia) {
+                    btn.classList.remove("bg-gray-200");
+                    btn.classList.add("bg-secondary", "text-white");
+                } else {
+                    btn.classList.add("bg-gray-200");
+                    btn.classList.remove("bg-secondary", "text-white");
+                }
+            });
+
+            // Filtrar miembros
+            const members = document.querySelectorAll(
+                "#membersContainer article",
+            );
+            members.forEach((member) => {
+                if (
+                    audiencia === "todas" ||
+                    member.getAttribute("data-audiencia") === audiencia
+                ) {
+                    member.classList.remove("hidden");
+                } else {
+                    member.classList.add("hidden");
+                }
+            });
+        }
+    });
+</script>
+
+<style>
+    .prose ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+
+    .prose li {
+        margin-bottom: 0.5rem;
+    }
+
+    .line-clamp-3 {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    #memberModal .bg-white {
+        animation: modalSlideIn 0.3s ease-out;
+    }
+
+    @keyframes modalSlideIn {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    article {
+        transition: all 0.3s ease;
+    }
+
+    .member-detail-trigger:focus {
+        outline: 2px solid #3b82f6;
+        outline-offset: 2px;
+    }
+
+    .modal-close:focus {
+        outline: 2px solid #6b7280;
+        outline-offset: 2px;
+    }
+
+    .filter-button {
+        transition: all 0.2s ease;
+    }
+</style>
