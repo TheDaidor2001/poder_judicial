@@ -1,6 +1,7 @@
 ---
 // src/components/Navbar.astro
 import { SITE_MENU } from "../config/constants";
+import Login from "./icons/Login.astro";
 import MobileMenu from "./MobileMenu.astro";
 
 interface Props {
@@ -13,7 +14,7 @@ const { classname, text = false } = Astro.props;
 
 <nav class={`${classname} w-full z-40 bg-primary relative `}>
     <div class="mx-auto flex flex-row xl:flex-col justify-between relative">
-        <div class="flex items-center justify-between py-5">
+        <div class="flex items-center justify-between py-5 px-5">
             <div class="flex gap-x-5 items-center px-5">
                 <img
                     src="/images/logo.png"
@@ -28,6 +29,13 @@ const { classname, text = false } = Astro.props;
                     <p class="text-md">República de Guinea Ecuatorial</p>
                 </div>
             </div>
+            <a
+                href={import.meta.env.DASHBOARD_URL}
+                class="text-white border border-white rounded-md p-2 gap-x-3 hover:bg-white hover:text-primary transition-colors hidden xl:inline-flex"
+            >
+                <Login classname="size-6 " />
+                <span>Acceder</span>
+            </a>
         </div>
 
         <!-- Menú Desktop (oculto en mobile) -->

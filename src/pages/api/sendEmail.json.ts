@@ -1,7 +1,6 @@
 import type { APIRoute } from "astro";
 import { Resend } from 'resend';
 import { createEmailTemplate } from "../../utils/emailTemplate";
-import { Buffer } from 'buffer';
 
 const resend = new Resend(import.meta.env.RESEND_API_KEY);
 
@@ -9,48 +8,49 @@ export const POST: APIRoute = async ({ request }) => {
     try {
         // Verificar API key
         if (!import.meta.env.RESEND_API_KEY) {
-            throw new Error('RESEND_API_KEY no está configurada');
+            console.error('RESEND_API_KEY no configurada');
+            throw new Error('Error de configuración del servidor');
         }
 
-        // Obtener datos del formulario
         const formData = await request.formData();
 
-        // Extraer valores
-        const nombre = formData.get('nombre')?.toString() || '';
-        const dip = formData.get('dip')?.toString() || '';
-        const telefono = formData.get('telefono')?.toString() || '';
-        const email = formData.get('email')?.toString() || '';
-        const asunto = formData.get('asunto')?.toString() || '';
-        const mensaje = formData.get('mensaje')?.toString() || '';
-        const archivo = formData.get('archivo') as File | null;
+        // Validar que todos los campos requeridos están presentes
+        const requiredFields = ['nombre', 'dip', 'telefono', 'email', 'asunto', 'mensaje'];
+        const missingFields = requiredFields.filter(field => !formData.get(field));
 
-        // Validaciones básicas
-        if (!nombre || !dip || !telefono || !email || !asunto || !mensaje) {
-            throw new Error('Todos los campos obligatorios son requeridos');
+        if (missingFields.length > 0) {
+            throw new Error(`Faltan campos requeridos: ${missingFields.join(', ')}`);
         }
 
-        // Validar formato de email
+        // Extraer valores
+        const nombre = formData.get('nombre')!.toString();
+        const dip = formData.get('dip')!.toString();
+        const telefono = formData.get('telefono')!.toString();
+        const email = formData.get('email')!.toString();
+        const asunto = formData.get('asunto')!.toString();
+        const mensaje = formData.get('mensaje')!.toString();
+        const archivo = formData.get('archivo') as File | null;
+
+        // Validar email
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
             throw new Error('El formato del email no es válido');
         }
 
-        // Validar tamaño de archivo (máximo 5MB)
-        if (archivo && archivo.size > 5 * 1024 * 1024) {
-            throw new Error('El archivo adjunto no puede exceder los 5MB');
-        }
-
-        // Procesar archivo adjunto si existe
-        let attachment = null;
+        // Procesar archivo adjunto (si existe y es menor a 5MB)
+        let attachment = undefined;
         if (archivo && archivo.size > 0) {
-            const fileBuffer = Buffer.from(await archivo.arrayBuffer());
-            attachment = {
+            if (archivo.size > 5 * 1024 * 1024) {
+                throw new Error('El archivo adjunto no puede exceder los 5MB');
+            }
+
+            attachment = [{
                 filename: archivo.name,
-                content: fileBuffer,
+                content: Buffer.from(await archivo.arrayBuffer()),
                 contentType: archivo.type
-            };
+            }];
         }
 
-        // Crear contenido del email
+        // Crear y enviar email
         const emailHtml = createEmailTemplate({
             nombre,
             dip,
@@ -61,17 +61,22 @@ export const POST: APIRoute = async ({ request }) => {
             tieneAdjunto: !!attachment
         });
 
-        // Configurar y enviar email
         const { data, error } = await resend.emails.send({
-            from: 'contacto@tudominio.com', // Usa tu dominio verificado
+            from: 'onboarding@resend.dev',
             to: [import.meta.env.EMAIL_DESTINO || 'tu-email@ejemplo.com'],
             replyTo: email,
             subject: `Contacto Poder Judicial: ${asunto}`,
             html: emailHtml,
-            attachments: attachment ? [attachment] : undefined
+            attachments: attachment
         });
 
-        if (error) throw error;
+        if (error) {
+            console.error('Detalles del error de Resend:', {
+                name: error.name,
+                message: error.message,
+            });
+            throw new Error(`Error al enviar el correo: ${error.message}`);
+        }
 
         return new Response(JSON.stringify({
             success: true,
