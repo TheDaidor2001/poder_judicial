@@ -44,14 +44,14 @@ import MainLayout from "../layouts/MainLayout.astro";
                             id="nombre"
                             name="nombre"
                             required
-                            minlength="2"
+                            minlength="3"
                             maxlength="100"
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
                             placeholder="Ingrese su nombre completo"
                         />
                         <span
                             class="error-message text-red-500 text-sm mt-1 hidden"
-                            >Este campo es obligatorio (mínimo 2 caracteres)</span
+                            >Este campo es obligatorio (mínimo 3 caracteres)</span
                         >
                     </div>
 
@@ -175,28 +175,30 @@ import MainLayout from "../layouts/MainLayout.astro";
                         >
                     </div>
 
-                    <!-- Adjuntar PDF -->
+                    <!-- Adjuntar documento -->
                     <div>
                         <label
                             for="archivo"
                             class="block text-gray-700 mb-2 font-medium"
-                            >Adjuntar documento (PDF)</label
+                            >Adjuntar documento (opcional)</label
                         >
                         <div class="relative">
                             <input
                                 type="file"
                                 id="archivo"
                                 name="archivo"
-                                accept=".pdf"
+                                accept=".pdf,.doc,.docx"
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-primary file:text-white hover:file:bg-primary-dark"
                             />
                         </div>
                         <span
                             class="error-message text-red-500 text-sm mt-1 hidden"
-                            >Solo se permiten archivos PDF (máximo 5MB)</span
+                            >Solo se permiten archivos PDF, DOC o DOCX (máximo
+                            10MB)</span
                         >
                         <p class="text-gray-500 text-xs mt-1">
-                            Solo archivos PDF. Tamaño máximo: 5MB
+                            Archivos permitidos: PDF, DOC, DOCX. Tamaño máximo:
+                            10MB
                         </p>
                     </div>
 
@@ -395,6 +397,78 @@ import MainLayout from "../layouts/MainLayout.astro";
                 </div>
             </div>
         </div>
+
+        <!-- Modal de Alerta Personalizada -->
+        <div
+            id="customAlert"
+            class="fixed inset-0 bg-black/30 z-50 flex items-center justify-center p-4 opacity-0 invisible transition-all duration-300"
+        >
+            <div
+                id="alertBox"
+                class="bg-white rounded-xl shadow-2xl max-w-md w-full transform scale-95 transition-transform duration-300"
+            >
+                <!-- Header con ícono -->
+                <div id="alertHeader" class="p-6 pb-4">
+                    <!-- Ícono de éxito -->
+                    <div
+                        id="successIcon"
+                        class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 hidden"
+                    >
+                        <svg
+                            class="h-8 w-8 text-green-600"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <!-- Ícono de error -->
+                    <div
+                        id="errorIcon"
+                        class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-red-100 hidden"
+                    >
+                        <svg
+                            class="h-8 w-8 text-red-600"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Contenido -->
+                <div class="px-6 pb-4 text-center">
+                    <h3
+                        id="alertTitle"
+                        class="text-xl font-semibold text-gray-900 mb-2"
+                    >
+                    </h3>
+                    <p id="alertMessage" class="text-gray-600"></p>
+                </div>
+
+                <!-- Botón -->
+                <div class="px-6 pb-6">
+                    <button
+                        id="alertButton"
+                        class="w-full bg-secondary hover:bg-primary text-white font-medium py-3 px-4 rounded-lg transition duration-300"
+                        onclick="closeCustomAlert()"
+                    >
+                        Aceptar
+                    </button>
+                </div>
+            </div>
+        </div>
     </section>
 </MainLayout>
 
@@ -408,9 +482,73 @@ import MainLayout from "../layouts/MainLayout.astro";
         border-color: #10b981 !important;
         box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1) !important;
     }
+
+    /* Animaciones para la alerta */
+    #customAlert.show {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    #customAlert.show #alertBox {
+        transform: scale(1);
+    }
 </style>
 
 <script is:inline>
+    // Funciones para mostrar/ocultar alerta personalizada
+    function showCustomAlert(type, title, message) {
+        const alertElement = document.getElementById("customAlert");
+        const alertBox = document.getElementById("alertBox");
+        const successIcon = document.getElementById("successIcon");
+        const errorIcon = document.getElementById("errorIcon");
+        const alertTitle = document.getElementById("alertTitle");
+        const alertMessage = document.getElementById("alertMessage");
+        const alertButton = document.getElementById("alertButton");
+
+        // Configurar el tipo de alerta
+        if (type === "success") {
+            successIcon.classList.remove("hidden");
+            errorIcon.classList.add("hidden");
+            alertButton.classList.remove("bg-red-600", "hover:bg-red-700");
+            alertButton.classList.add("bg-secondary", "hover:bg-primary");
+        } else {
+            errorIcon.classList.remove("hidden");
+            successIcon.classList.add("hidden");
+            alertButton.classList.remove("bg-secondary", "hover:bg-primary");
+            alertButton.classList.add("bg-red-600", "hover:bg-red-700");
+        }
+
+        // Configurar el contenido
+        alertTitle.textContent = title;
+        alertMessage.textContent = message;
+
+        // Mostrar la alerta
+        alertElement.classList.add("show");
+        document.body.style.overflow = "hidden";
+    }
+
+    function closeCustomAlert() {
+        const alertElement = document.getElementById("customAlert");
+        alertElement.classList.remove("show");
+        document.body.style.overflow = "";
+    }
+
+    // Cerrar alerta con tecla Escape
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+            closeCustomAlert();
+        }
+    });
+
+    // Cerrar alerta al hacer clic fuera
+    document
+        .getElementById("customAlert")
+        .addEventListener("click", function (e) {
+            if (e.target === this) {
+                closeCustomAlert();
+            }
+        });
+
     document.addEventListener("DOMContentLoaded", function () {
         const form = document.getElementById("contactForm");
         const charCountElement = document.getElementById("charCount");
@@ -484,12 +622,16 @@ import MainLayout from "../layouts/MainLayout.astro";
             return phoneRegex.test(phone.replace(/\s/g, ""));
         }
 
-        // Función para validar archivo PDF
-        function isValidPDF(file) {
+        // Función para validar archivo (actualizada para soportar DOC y DOCX)
+        function isValidFile(file) {
             if (!file) return true; // Opcional
 
-            const validTypes = ["application/pdf"];
-            const maxSize = 5 * 1024 * 1024; // 5MB
+            const validTypes = [
+                "application/pdf",
+                "application/msword", // DOC
+                "application/vnd.openxmlformats-officedocument.wordprocessingml.document", // DOCX
+            ];
+            const maxSize = 10 * 1024 * 1024; // 10MB
 
             return validTypes.includes(file.type) && file.size <= maxSize;
         }
@@ -533,9 +675,9 @@ import MainLayout from "../layouts/MainLayout.astro";
                     if (!field.value.trim()) {
                         isValid = false;
                         message = "Este campo es obligatorio";
-                    } else if (field.value.trim().length < 2) {
+                    } else if (field.value.trim().length < 3) {
                         isValid = false;
-                        message = "El nombre debe tener al menos 2 caracteres";
+                        message = "El nombre debe tener al menos 3 caracteres";
                     }
                     break;
 
@@ -543,6 +685,9 @@ import MainLayout from "../layouts/MainLayout.astro";
                     if (!field.value.trim()) {
                         isValid = false;
                         message = "Este campo es obligatorio";
+                    } else if (field.value.trim().length < 5) {
+                        isValid = false;
+                        message = "El DIP debe tener al menos 5 caracteres";
                     } else if (!isValidDIP(field.value)) {
                         isValid = false;
                         message = "Formato requerido: 000.000.000";
@@ -553,6 +698,10 @@ import MainLayout from "../layouts/MainLayout.astro";
                     if (!field.value.trim()) {
                         isValid = false;
                         message = "Este campo es obligatorio";
+                    } else if (field.value.trim().length < 8) {
+                        isValid = false;
+                        message =
+                            "El teléfono debe tener al menos 8 caracteres";
                     } else if (!isValidPhone(field.value)) {
                         isValid = false;
                         message = "Número de teléfono inválido";
@@ -573,15 +722,18 @@ import MainLayout from "../layouts/MainLayout.astro";
                     if (!field.value) {
                         isValid = false;
                         message = "Seleccione un asunto";
+                    } else if (field.value.length < 5) {
+                        isValid = false;
+                        message = "El asunto debe tener al menos 5 caracteres";
                     }
                     break;
 
                 case "archivo":
                     if (field.files && field.files[0]) {
-                        if (!isValidPDF(field.files[0])) {
+                        if (!isValidFile(field.files[0])) {
                             isValid = false;
                             message =
-                                "Solo se permiten archivos PDF (máximo 5MB)";
+                                "Solo se permiten archivos PDF, DOC o DOCX (máximo 10MB)";
                         }
                     }
                     break;
@@ -627,7 +779,9 @@ import MainLayout from "../layouts/MainLayout.astro";
             );
 
             if (!isValid) {
-                alert(
+                showCustomAlert(
+                    "error",
+                    "Error en el formulario",
                     "Por favor, corrija los errores en el formulario antes de enviarlo.",
                 );
                 return;
@@ -642,19 +796,25 @@ import MainLayout from "../layouts/MainLayout.astro";
                 const formData = new FormData(form);
                 const response = await fetch("/api/sendEmail.json", {
                     method: "POST",
-                    headers: {
-                        Accept: "application/json",
-                    },
                     body: formData,
                 });
 
                 const result = await response.json();
 
-                if (response.ok) {
-                    // Mostrar mensaje de éxito
-                    alert(
-                        "Mensaje enviado con éxito. Nos pondremos en contacto con usted pronto.",
+                if (response.ok && result.success) {
+                    // Usar el mensaje de la respuesta de la API
+                    const successMessage =
+                        result.data && result.data.message
+                            ? result.data.message
+                            : result.message ||
+                              "Mensaje enviado con éxito. Nos pondremos en contacto con usted pronto.";
+
+                    showCustomAlert(
+                        "success",
+                        "Mensaje enviado",
+                        successMessage,
                     );
+
                     form.reset();
 
                     // Reset contador de caracteres
@@ -676,8 +836,11 @@ import MainLayout from "../layouts/MainLayout.astro";
                 }
             } catch (error) {
                 console.error("Error:", error);
-                alert(
-                    "Hubo un error al enviar el formulario. Por favor, inténtelo de nuevo.",
+                showCustomAlert(
+                    "error",
+                    "Error al enviar",
+                    error.message ||
+                        "Hubo un error al enviar el formulario. Por favor, inténtelo de nuevo.",
                 );
             } finally {
                 submitButton.disabled = false;
