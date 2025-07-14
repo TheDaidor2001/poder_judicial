@@ -14,7 +14,7 @@ export const FOOTER_LINKS = [
         url: '/asesoria-juridica'
     },
     {
-        title: 'CSI',
+        title: 'CSJ',
         url: '/organigrama/csj'
     },
     {

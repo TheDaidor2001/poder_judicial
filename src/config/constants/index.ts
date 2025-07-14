@@ -36,7 +36,7 @@ export const SITE_MENU = [
                 description: "Doctrina legal especializada"
             },
             {
-                text: "Códigos Legales",
+                text: "Compendio de Leyes",
                 link: "/biblioteca/codigos_legales",
                 description: "Leyes organizadas por materia"
             }

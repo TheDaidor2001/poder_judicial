@@ -3,11 +3,11 @@ export const miembrosConsejo = [
     {
         id: "presidente",
         cargo: "Presidente del Consejo Superior del Poder Judicial",
-        nombre: "Nombre del Presidente",
+        nombre: "S.E. OBIANG NGUEMA MBASOGO; Presidente de la república, Jefe de Estado y de Gobierno",
         foto: "/images/consejo/presidente.jpg",
         descripcion: "Breve descripción de las funciones principales del Presidente del Consejo Superior del Poder Judicial...",
         funciones: [
-            "Presidir las sesiones del Consejo",
+            "Gobernar",
             "Representar al Poder Judicial",
             "Dirigir la política judicial",
             "Coordinar con otros órganos del Estado"
@@ -17,7 +17,7 @@ export const miembrosConsejo = [
     {
         id: "vicepresidente",
         cargo: "Vicepresidente del Consejo Superior del Poder Judicial",
-        nombre: "Nombre del Vicepresidente",
+        nombre: "Excmo. Sr. Don Francisco Evuy Nguema Mikue",
         foto: "/images/consejo/vicepresidente.jpg",
         descripcion: "Breve descripción de las funciones principales del Vicepresidente del Consejo Superior del Poder Judicial...",
         funciones: [
@@ -124,7 +124,7 @@ export const corteSuprema = [
     {
         id: "presidente-corte-suprema",
         cargo: "Presidente de la Corte Suprema de Justicia",
-        nombre: "Nombre del Presidente",
+        nombre: "Excmo. Sr. Don Francisco EVUY NGUEMA MIKUE",
         foto: "/images/corte-suprema/presidente.jpg",
         descripcion: "Máxima autoridad judicial de la Corte Suprema de Justicia...",
         funciones: [
@@ -138,7 +138,7 @@ export const corteSuprema = [
     {
         id: "magistrado1",
         cargo: "Magistrado Juez de la Corte Suprema",
-        nombre: "Nombre del Magistrado 1",
+        nombre: "Excmo. Sr. Don Eliseo MENGUE NVO",
         foto: "/images/corte-suprema/magistrado1.jpg",
         descripcion: "Magistrado de la Corte Suprema de Justicia...",
         funciones: [
@@ -151,7 +151,7 @@ export const corteSuprema = [
     {
         id: "magistrado2",
         cargo: "Magistrado Juez de la Corte Suprema",
-        nombre: "Nombre del Magistrado 2",
+        nombre: "Excmo. Sr. Don Hilario BALLOVERA CASAÑA",
         foto: "/images/corte-suprema/magistrado2.jpg",
         descripcion: "Magistrado de la Corte Suprema de Justicia...",
         funciones: [
@@ -161,24 +161,50 @@ export const corteSuprema = [
         ],
         trayectoria: "Trayectoria profesional del magistrado..."
     },
-    {
-        id: "secretario-corte-suprema",
-        cargo: "Secretario de la Corte Suprema",
-        nombre: "Nombre del Secretario",
-        foto: "/images/corte-suprema/secretario.jpg",
-        descripcion: "Responsable de la secretaría de la Corte Suprema...",
-        funciones: [
-            "Levantar actas de las sesiones",
-            "Custodiar la documentación judicial",
-            "Coordinar la agenda de la Corte"
-        ],
-        trayectoria: "Trayectoria profesional del secretario..."
-    },
     // Puedes añadir más magistrados según sea necesario
     {
         id: "magistrado3",
         cargo: "Magistrado Juez de la Corte Suprema",
-        nombre: "Nombre del Magistrado 3",
+        nombre: "Excmo. Sr. Don Serafín ONDO MAYE",
+        foto: "/images/corte-suprema/magistrado3.jpg",
+        descripcion: "Magistrado de la Corte Suprema de Justicia...",
+        funciones: [
+            "Conocer y resolver los recursos de casación",
+            "Participar en las deliberaciones de la Corte",
+            "Emitir votos en las decisiones judiciales"
+        ],
+        trayectoria: "Trayectoria profesional del magistrado..."
+    },
+    {
+        id: "magistrado3",
+        cargo: "Magistrado Juez de la Corte Suprema",
+        nombre: "Excmo. Sra. Doña María Clara Felicidad BONCANCA TABARES",
+        foto: "/images/corte-suprema/magistrado3.jpg",
+        descripcion: "Magistrado de la Corte Suprema de Justicia...",
+        funciones: [
+            "Conocer y resolver los recursos de casación",
+            "Participar en las deliberaciones de la Corte",
+            "Emitir votos en las decisiones judiciales"
+        ],
+        trayectoria: "Trayectoria profesional del magistrado..."
+    },
+    {
+        id: "magistrado3",
+        cargo: "Magistrado Juez de la Corte Suprema",
+        nombre: "Excmo. Sra. Doña Rosa Maricarmen OBAMA OBONO",
+        foto: "/images/corte-suprema/magistrado3.jpg",
+        descripcion: "Magistrado de la Corte Suprema de Justicia...",
+        funciones: [
+            "Conocer y resolver los recursos de casación",
+            "Participar en las deliberaciones de la Corte",
+            "Emitir votos en las decisiones judiciales"
+        ],
+        trayectoria: "Trayectoria profesional del magistrado..."
+    },
+    {
+        id: "magistrado3",
+        cargo: "Magistrado Juez de la Corte Suprema",
+        nombre: "Excmo. Sr. Don Victoriano OBIANG ABOGO",
         foto: "/images/corte-suprema/magistrado3.jpg",
         descripcion: "Magistrado de la Corte Suprema de Justicia...",
         funciones: [
@@ -194,9 +220,9 @@ export const corteSuprema = [
 export const ordenCargos = [
     "Presidente del Consejo Superior del Poder Judicial",
     "Vicepresidente del Consejo Superior del Poder Judicial",
+    "Vocal del Consejo Superior del Poder Judicial",
     "Secretario General",
     "Secretario Adjunto",
-    "Vocal del Consejo Superior del Poder Judicial",
     "Directora General de Archivos e Informática",
     "Director General de Asuntos Económicos",
     "Director General de Asuntos Jurídicos"
@@ -212,6 +238,7 @@ export const ordenCargosCorteSuprema = [
 // Orden de cargos para las Audiencias
 export const ordenCargosAudiencias = [
     "Presidente de la Audiencia",
+    "Magistrado",
     "Juez de Instrucción 1",
     "Juez de Instrucción 2",
     "Juez de Instrucción 3",
@@ -229,6 +256,21 @@ export const audienciaMalabo = [
         nombre: "Nombre del Presidente",
         foto: "/images/audiencias/malabo/presidente.jpg",
         descripcion: "Presidente de la Audiencia Provincial de Malabo, responsable de la administración de justicia en la capital...",
+        funciones: [
+            "Presidir la Audiencia Provincial de Malabo",
+            "Coordinar las actividades judiciales de la provincia",
+            "Supervisar el trabajo de los jueces de instrucción y primera instancia",
+            "Representar la audiencia ante otras instituciones"
+        ],
+        trayectoria: "Trayectoria profesional del presidente de la Audiencia de Malabo..."
+    },
+    {
+        id: "magistrado-malabo",
+        cargo: "Magistrado",
+        audiencia: "Malabo",
+        nombre: "Nombre del Magistrado",
+        foto: "/images/audiencias/malabo/presidente.jpg",
+        descripcion: "Magistrado de la Audiencia Provincial de Malabo, responsable de la administración de justicia en la capital...",
         funciones: [
             "Presidir la Audiencia Provincial de Malabo",
             "Coordinar las actividades judiciales de la provincia",
@@ -332,6 +374,21 @@ export const audienciaBata = [
         trayectoria: "Trayectoria profesional del presidente de la Audiencia de Bata..."
     },
     {
+        id: "magistrado-bata",
+        cargo: "Magistrado",
+        audiencia: "Bata",
+        nombre: "Nombre del Magistrado de Bata",
+        foto: "/images/audiencias/malabo/presidente.jpg",
+        descripcion: "Magistrado de la Audiencia Provincial de Malabo, responsable de la administración de justicia en la capital...",
+        funciones: [
+            "Presidir la Audiencia Provincial de Malabo",
+            "Coordinar las actividades judiciales de la provincia",
+            "Supervisar el trabajo de los jueces de instrucción y primera instancia",
+            "Representar la audiencia ante otras instituciones"
+        ],
+        trayectoria: "Trayectoria profesional del presidente de la Audiencia de Malabo..."
+    },
+    {
         id: "juez-instruccion-1-bata",
         cargo: "Juez de Instrucción 1",
         audiencia: "Bata",
@@ -424,6 +481,21 @@ export const audienciaCentroSur = [
             "Representar la audiencia ante otras instituciones"
         ],
         trayectoria: "Trayectoria profesional del presidente de la Audiencia de Centro-Sur..."
+    },
+    {
+        id: "magistrado-centro-sur",
+        cargo: "Magistrado",
+        audiencia: "Centro-Sur",
+        nombre: "Nombre del Magistrado de Centro Sur",
+        foto: "/images/audiencias/malabo/presidente.jpg",
+        descripcion: "Magistrado de la Audiencia Provincial de Malabo, responsable de la administración de justicia en la capital...",
+        funciones: [
+            "Presidir la Audiencia Provincial de Malabo",
+            "Coordinar las actividades judiciales de la provincia",
+            "Supervisar el trabajo de los jueces de instrucción y primera instancia",
+            "Representar la audiencia ante otras instituciones"
+        ],
+        trayectoria: "Trayectoria profesional del presidente de la Audiencia de Malabo..."
     },
     {
         id: "juez-instruccion-1-centro-sur",
@@ -520,6 +592,21 @@ export const audienciaKieNtem = [
         trayectoria: "Trayectoria profesional del presidente de la Audiencia de Kie-Ntem..."
     },
     {
+        id: "magistrado-KieNtem",
+        cargo: "Magistrado",
+        audiencia: "Kie-Ntem",
+        nombre: "Nombre del Magistrado de Kie-Ntem",
+        foto: "/images/audiencias/malabo/presidente.jpg",
+        descripcion: "Magistrado de la Audiencia Provincial de Malabo, responsable de la administración de justicia en la capital...",
+        funciones: [
+            "Presidir la Audiencia Provincial de Malabo",
+            "Coordinar las actividades judiciales de la provincia",
+            "Supervisar el trabajo de los jueces de instrucción y primera instancia",
+            "Representar la audiencia ante otras instituciones"
+        ],
+        trayectoria: "Trayectoria profesional del presidente de la Audiencia de Malabo..."
+    },
+    {
         id: "juez-instruccion-1-kie-ntem",
         cargo: "Juez de Instrucción 1",
         audiencia: "Kie-Ntem",
@@ -612,6 +699,21 @@ export const audienciaWeleNzas = [
             "Representar la audiencia ante otras instituciones"
         ],
         trayectoria: "Trayectoria profesional del presidente de la Audiencia de Wele-Nzas..."
+    },
+    {
+        id: "magistrado-wele-nzas",
+        cargo: "Magistrado",
+        audiencia: "Wele-Nzas",
+        nombre: "Nombre del Magistrado de Wele Nzas",
+        foto: "/images/audiencias/malabo/presidente.jpg",
+        descripcion: "Magistrado de la Audiencia Provincial de Malabo, responsable de la administración de justicia en la capital...",
+        funciones: [
+            "Presidir la Audiencia Provincial de Malabo",
+            "Coordinar las actividades judiciales de la provincia",
+            "Supervisar el trabajo de los jueces de instrucción y primera instancia",
+            "Representar la audiencia ante otras instituciones"
+        ],
+        trayectoria: "Trayectoria profesional del presidente de la Audiencia de Malabo..."
     },
     {
         id: "juez-instruccion-1-wele-nzas",
