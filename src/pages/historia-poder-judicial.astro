@@ -1,0 +1,952 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import TimelineItem from "../components/historia/TimelineItem.astro";
+import HighlightBox from "../components/historia/HighlightBox.astro";
+import Scale from "../components/icons/scale.astro";
+import Book from "../components/icons/Book.astro";
+import Judged from "../components/icons/judged.astro";
+import Gabel from "../components/icons/gabel.astro";
+---
+
+<MainLayout title="Historia del Poder Judicial - Poder Judicial de Guinea Ecuatorial">
+    <!-- Hero Section -->
+    <section class="relative min-h-[75vh] flex items-center justify-center bg-gradient-to-br from-primary via-primary/95 to-primary/85 overflow-hidden">
+        <!-- Patrón de fondo elegante -->
+        <div class="absolute inset-0 opacity-5">
+            <div class="absolute inset-0" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.1) 35px, rgba(255,255,255,.1) 70px);"></div>
+        </div>
+
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-20 left-10 w-96 h-96 bg-secondary rounded-full blur-3xl"></div>
+            <div class="absolute bottom-20 right-20 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="relative z-10 text-center text-white px-5 max-w-6xl mx-auto py-24">
+            <div class="mb-8 flex justify-center">
+                <div class="relative">
+                    <Scale classname="size-24 md:size-28 text-secondary/90" />
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-32 h-32 border-2 border-secondary/30 rounded-full animate-pulse"></div>
+                    </div>
+                </div>
+            </div>
+
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 tracking-tight leading-tight">
+                Historia del Poder Judicial
+            </h1>
+
+            <div class="flex items-center justify-center gap-3 mb-8">
+                <div class="w-16 h-px bg-secondary"></div>
+                <div class="w-3 h-3 bg-secondary rotate-45"></div>
+                <div class="w-16 h-px bg-secondary"></div>
+            </div>
+
+            <p class="text-xl md:text-3xl font-light mb-10 leading-relaxed max-w-4xl mx-auto" style="font-family: 'Roboto', serif;">
+                La Evolución hacia la Consolidación de un Poder del Estado
+            </p>
+
+            <div class="bg-white/10 backdrop-blur-md rounded-xl p-6 inline-block border border-white/20 shadow-2xl">
+                <p class="text-base md:text-lg opacity-95 flex items-center gap-3 justify-center">
+                    <Book classname="size-5" />
+                    <span>Ensayo académico por <strong class="font-semibold">Pablo Obama Mitogo Akele</strong></span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Scroll indicator mejorado -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+            <div class="flex flex-col items-center gap-2 animate-bounce">
+                <span class="text-white/80 text-xs uppercase tracking-wider">Explorar</span>
+                <svg class="w-6 h-6 text-white/90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Breadcrumb -->
+    <div class="bg-gray-100 py-3 px-5">
+        <div class="max-w-7xl mx-auto">
+            <nav class="text-sm text-gray-600">
+                <a href="/" class="hover:text-primary transition-colors">Inicio</a>
+                <span class="mx-2">/</span>
+                <span class="text-primary font-semibold">Historia del Poder Judicial</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Introduction Section -->
+    <section class="py-20 px-5 bg-white">
+        <div class="max-w-5xl mx-auto">
+            <div class="mb-16">
+                <div class="flex items-center justify-center mb-10">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-px bg-primary/30"></div>
+                        <Book classname="size-12 text-secondary" />
+                        <div class="w-12 h-px bg-primary/30"></div>
+                    </div>
+                </div>
+
+                <h2 class="text-3xl md:text-5xl font-bold text-primary mb-12 text-center tracking-wide">
+                    Introducción
+                </h2>
+
+                <div class="space-y-8 text-lg leading-relaxed">
+                    <p class="text-gray-700 first-letter:text-6xl first-letter:font-bold first-letter:text-primary first-letter:mr-3 first-letter:float-left">
+                        La historia del sistema de justicia en Guinea Ecuatorial es un reflejo de las transformaciones políticas y sociales que han moldeado al país desde su independencia en 1968. El Poder Judicial, concebido como el garante de los derechos fundamentales y la administración de la justicia, ha evolucionado a lo largo de los años, influenciado por contextos históricos cambiantes y profundas reformas legales.
+                    </p>
+
+                    <p class="text-gray-700 pl-8 border-l-4 border-secondary/30">
+                        Desde sus primeras configuraciones bajo la Constitución de 1968 hasta los cambios estructurales introducidos en la reforma de Annobón de 2012, el Poder Judicial ha transitado por diferentes modelos de organización y principios de funcionamiento. Este análisis explora esa evolución, destacando los avances que han marcado el desarrollo de un sistema judicial que busca equilibrar la independencia teórica con las realidades políticas y sociales del país.
+                    </p>
+
+                    <div class="bg-gradient-to-r from-primary/5 via-secondary/5 to-primary/5 rounded-xl p-8 border-l-4 border-secondary">
+                        <p class="text-gray-800 font-medium">
+                            El enfoque se centrará en <strong class="text-primary">tres aspectos clave</strong>: los principios que han regido el Poder Judicial en cada etapa constitucional, las implicaciones de los cambios normativos en la práctica judicial y los desafíos actuales que enfrenta el sistema para alinearse con los estándares modernos de justicia.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="py-20 px-5 bg-gradient-to-b from-gray-50 to-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="text-3xl md:text-5xl font-bold text-primary mb-4 uppercase tracking-wide">
+                    Línea de Tiempo
+                </h2>
+                <div class="w-24 h-px bg-gray-400 mx-auto mb-6"></div>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Un recorrido por los momentos clave que han definido la evolución del Poder Judicial en Guinea Ecuatorial
+                </p>
+            </div>
+
+            <!-- Timeline container con línea vertical central -->
+            <div class="timeline-wrapper relative">
+                <!-- Línea vertical central -->
+                <div class="absolute left-1/2 transform -translate-x-1/2 w-px h-full bg-gradient-to-b from-gray-300 via-gray-400 to-gray-200 hidden md:block"></div>
+
+                <TimelineItem
+                    year="1928-1956"
+                    title="Era Colonial: Tribunales de Raza"
+                    description="Sistema dual de justicia basado en el color de piel. Los Tribunales de Raza administraban justicia para indígenas con una combinación de normas consuetudinarias y principios coloniales."
+                    position="left"
+                >
+                    <ul class="mt-6 space-y-3 text-gray-600 text-sm">
+                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                            <span>Estatuto del patronato de indígenas (17 de julio de 1928)</span>
+                        </li>
+                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                            <span>Sistema de tutela que diferenciaba entre blancos y negros</span>
+                        </li>
+                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                            <span>Ausencia de legislación escrita y del principio de legalidad</span>
+                        </li>
+                    </ul>
+                </TimelineItem>
+
+                <TimelineItem
+                    year="1968"
+                    title="Primera Constitución: Nacimiento del Tribunal Supremo"
+                    description="Primera vez que se intenta desvincular a las autoridades gubernamentales de la administración de justicia, instituyendo el Tribunal Supremo como órgano exclusivo."
+                    highlight={true}
+                    position="right"
+                >
+                    <ul class="mt-6 space-y-3 text-gray-600 text-sm">
+                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                            <span>Creación del Tribunal Supremo como máximo órgano de justicia</span>
+                        </li>
+                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                            <span>No se utilizó el término "Poder Judicial"</span>
+                        </li>
+                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                            <span>Modelo jerárquico inspirado en sistemas europeos</span>
+                        </li>
+                    </ul>
+                </TimelineItem>
+
+                <TimelineItem
+                    year="1973"
+                    title="Constitución de 1973: Creación de la Fiscalía"
+                    description="A pesar de la centralización del poder, esta constitución marcó un hito al crear la Fiscalía, diferenciando claramente las funciones de juez y fiscal."
+                    highlight={true}
+                    position="left"
+                >
+                    <ul class="mt-6 space-y-3 text-gray-600 text-sm">
+                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                            <span>Primera constitución en crear la institución de la Fiscalía</span>
+                        </li>
+                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                            <span>Extensión del sistema judicial: juzgados y tribunales civiles y militares</span>
+                        </li>
+                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                            <span>Eliminación del principio de inamovilidad de los jueces</span>
+                        </li>
+                    </ul>
+                </TimelineItem>
+
+                <TimelineItem
+                    year="1982"
+                    title="El Poder Judicial como Poder del Estado"
+                    description="Momento histórico: primera vez que se concibe la administración de justicia como un verdadero Poder del Estado, equiparable a los otros dos poderes."
+                    highlight={true}
+                    position="right"
+                >
+                    <ul class="mt-6 space-y-3 text-gray-600 text-sm">
+                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                            <span>Institucionalización bajo los principios de unidad y exclusividad jurisdiccional</span>
+                        </li>
+                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                            <span>Artículo 142: unidad jurisdiccional como base organizativa</span>
+                        </li>
+                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                            <span>Profesionalización de la administración de justicia</span>
+                        </li>
+                    </ul>
+                </TimelineItem>
+
+                <TimelineItem
+                    year="1995"
+                    title="Consejo Superior del Poder Judicial"
+                    description="Punto de inflexión: la Ley Constitucional Nº 1/1995 introduce el Consejo Superior del Poder Judicial, consolidando la independencia del sistema judicial."
+                    highlight={true}
+                    position="left"
+                >
+                    <ul class="mt-6 space-y-3 text-gray-600 text-sm">
+                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                            <span>Separación de funciones: gobierno vs. jurisdicción</span>
+                        </li>
+                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                            <span>Órgano de gobierno para supervisar el funcionamiento judicial</span>
+                        </li>
+                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                            <span>Protección de la independencia e integridad de los jueces</span>
+                        </li>
+                    </ul>
+                </TimelineItem>
+
+                <TimelineItem
+                    year="2009"
+                    title="Ley Orgánica y Carrera Judicial"
+                    description="Profesionalización completa del sistema judicial con la creación de la carrera judicial y el Instituto de Práctica Judicial."
+                    position="right"
+                >
+                    <ul class="mt-6 space-y-3 text-gray-600 text-sm">
+                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                            <span>Creación de la carrera judicial</span>
+                        </li>
+                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                            <span>Instituto de Práctica Judicial para formación especializada</span>
+                        </li>
+                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                            <span>Profesionalización de jueces y secretarios judiciales</span>
+                        </li>
+                    </ul>
+                </TimelineItem>
+
+                <TimelineItem
+                    year="2012"
+                    title="Reforma de Annobón"
+                    description="Consolidación final del sistema judicial moderno, representando el compromiso del país con un sistema de justicia profesional y efectivo."
+                    position="left"
+                >
+                    <ul class="mt-6 space-y-3 text-gray-600 text-sm">
+                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                            <span>Cambios estructurales en la organización judicial</span>
+                        </li>
+                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                            <span>Consolidación del Consejo Superior del Poder Judicial</span>
+                        </li>
+                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                            <span>Institucionalización visible del Poder Judicial</span>
+                        </li>
+                    </ul>
+                </TimelineItem>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Sections -->
+    <section class="py-20 px-5 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold text-primary mb-4 uppercase tracking-wide">
+                    Análisis Detallado por Periodo
+                </h2>
+                <div class="w-24 h-px bg-gray-400 mx-auto"></div>
+            </div>
+
+            <!-- Sistema Colonial -->
+            <div class="mb-16">
+                <div class="bg-gradient-to-r from-primary to-primary/80 text-white p-8 rounded-t-lg">
+                    <div class="flex items-center gap-4">
+                        <Gabel classname="size-12 text-secondary" />
+                        <div>
+                            <h3 class="text-2xl md:text-3xl font-bold">1. Breve Historia del Poder Judicial</h3>
+                            <p class="text-lg opacity-90">En el Contexto Histórico de la Independencia</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-b-lg shadow-lg">
+                    <h4 class="text-xl font-bold text-primary mb-4">1.1. El sistema de justicia entre 1928-1956</h4>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        Para comprender y apreciar el sistema judicial con el que cuenta hoy el país, resulta obligatorio hacer un repaso muy breve sobre sus propios orígenes. Esos orígenes estuvieron marcados por acontecimientos de grandes reformas legales que analizadas conjuntamente, nos ayudarían a comprender la evolución que ha tenido nuestro poder judicial.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        La primera de ellas es incluso desde antes del nacimiento de Guinea Ecuatorial como Estado, pero cuyas implicaciones e impacto que tuvo en la sociedad perdura hasta nuestros tiempos condicionando la cultura jurídica de gran parte de la población. Esta etapa es de <strong>1928 a 1956</strong>, época que va desde la promulgación del <strong>Estatuto del patronato de indígenas</strong> el día 17 de julio de 1928 que ya venía previsto en el Estatuto orgánico de la administración local del 11 de julio de 1904, hasta que se declara la provincialización de los territorios de Santa Isabel y Rio Muni.
+                    </p>
+
+                    <HighlightBox title="Característica Fundamental" type="warning" icon="lightbulb">
+                        <p>En esta etapa, el patronato de indígenas funcionaba como un <strong>sistema de tutela</strong>; diferenciando al indígena (hombre negro local) del hombre blanco. Los negros eran tenidos por menores de edad, por lo que debían ser tutelados por el patronato de indígenas.</p>
+                        <p class="mt-3">Aquello significa que en un mismo territorio, se aplicaban <strong>dos sistemas de justicia</strong> que no estaban basados en los principios de igualdad de medios de defensa, el debido proceso y otras garantías propias del derecho a la tutela judicial efectiva; sino llanamente basados en el color de la piel.</p>
+                    </HighlightBox>
+
+                    <h4 class="text-xl font-bold text-primary mb-4 mt-8">1.2. La Organización del Sistema Judicial Colonial</h4>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        El sistema de justicia para menores durante la colonia estaba compuesto por los <strong>tribunales de raza</strong>, creados mediante Decreto núm. 10/1938 de fecha 10 de octubre. La planta de estos tribunales estaba formada por:
+                    </p>
+
+                    <div class="grid md:grid-cols-3 gap-4 my-6">
+                        <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-primary">
+                            <h5 class="font-bold text-lg mb-2 text-primary">Tribunales de demarcación</h5>
+                            <p class="text-sm text-gray-600">Nivel básico del sistema</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-primary">
+                            <h5 class="font-bold text-lg mb-2 text-primary">Tribunales de distrito</h5>
+                            <p class="text-sm text-gray-600">Nivel intermedio</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-secondary">
+                            <h5 class="font-bold text-lg mb-2 text-primary">Tribunal Superior Indígena</h5>
+                            <p class="text-sm text-gray-600">Máxima instancia</p>
+                        </div>
+                    </div>
+
+                    <HighlightBox title="Características del Sistema Colonial" type="warning" icon="book">
+                        <ul class="space-y-2">
+                            <li class="flex items-start gap-2">
+                                <span class="text-yellow-600 font-bold">•</span>
+                                <span>Durante las vistas <strong>no se aplicaba ninguna ley escrita</strong></span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-yellow-600 font-bold">•</span>
+                                <span>Los jefes de poblado aplicaban la costumbre que creían conveniente</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-yellow-600 font-bold">•</span>
+                                <span><strong>Ausencia de legislación</strong> y del principio de legalidad</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-yellow-600 font-bold">•</span>
+                                <span>La aplicación última de la costumbre era determinada por el colono</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-yellow-600 font-bold">•</span>
+                                <span>Sistema caracterizado por la <strong>arbitrariedad</strong> y falta de garantías</span>
+                            </li>
+                        </ul>
+                    </HighlightBox>
+
+                    <p class="text-gray-700 leading-relaxed mt-6">
+                        Esta situación de falta de legislación persiste en el ordenamiento jurídico de la colonia hasta <strong>1948</strong> cuando se publica en la metrópoli la primera ley de tribunales de menores que por cierto no entraría en vigor en la colonia hasta <strong>1956</strong> cuando se declara como provincias españolas los territorios de Fernando Poo y Rio Muni mediante la Ley núm. 4/1959 de fecha 4 de julio.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Constitución 1968 -->
+            <div class="mb-16">
+                <div class="bg-gradient-to-r from-primary to-primary/80 text-white p-8 rounded-t-lg">
+                    <div class="flex items-center gap-4">
+                        <Judged classname="size-12 text-secondary" />
+                        <div>
+                            <h3 class="text-2xl md:text-3xl font-bold">2. El Sistema Judicial bajo la Constitución de 1968</h3>
+                            <p class="text-lg opacity-90">Primera Institucionalización Post-Independencia</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-b-lg shadow-lg">
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        La Constitución de 1968 definió los principios rectores de la administración de justicia en Guinea Ecuatorial. En el <strong>Título VIII</strong>, se establecía que la justicia sería administrada por el Tribunal Supremo y otros órganos judiciales determinados por una ley. Este diseño buscaba un modelo jerárquico y centralizado, inspirado en sistemas europeos, particularmente el español, pero adaptado al contexto local.
+                    </p>
+
+                    <HighlightBox title="Principales Características" type="info" icon="check">
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-2">
+                                <span class="text-blue-600 font-bold">✓</span>
+                                <span>El <strong>Tribunal Supremo</strong> fue configurado como el órgano máximo de justicia</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-blue-600 font-bold">✓</span>
+                                <span>Competencias jurisdiccionales, electorales y de control presupuestario</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-blue-600 font-bold">✓</span>
+                                <span>La constitución de 1968 <strong>NO utilizó el término "poder judicial"</strong></span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-blue-600 font-bold">✓</span>
+                                <span>Estableció un Órgano "Tribunal Supremo" como máximo administrador de Justicia</span>
+                            </li>
+                        </ul>
+                    </HighlightBox>
+
+                    <HighlightBox title="Principal Avance" type="success" icon="star">
+                        <p>Por primera vez, se intenta <strong>desvincular a las autoridades gubernamentales de la administración de justicia</strong>, instituyendo un órgano del Estado cuya competencia exclusiva era administrar justicia.</p>
+                    </HighlightBox>
+                </div>
+            </div>
+
+            <!-- Constitución 1973 -->
+            <div class="mb-16">
+                <div class="bg-gradient-to-r from-primary to-primary/80 text-white p-8 rounded-t-lg">
+                    <div class="flex items-center gap-4">
+                        <Scale classname="size-12 text-secondary" />
+                        <div>
+                            <h3 class="text-2xl md:text-3xl font-bold">3. El Poder Judicial bajo la Constitución de 1973</h3>
+                            <p class="text-lg opacity-90">Creación de la Fiscalía</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-b-lg shadow-lg">
+                    <h4 class="text-xl font-bold text-primary mb-4">3.1. Contexto político tras la independencia</h4>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        A pocos años de la independencia, Guinea Ecuatorial atravesó un periodo de inestabilidad política y económica que culminó en el establecimiento de un régimen autoritario, el cual tuvo graves consecuencias en la concepción y aplicación en la práctica de un sistema judicial que pudiera llamarse Poder del Estado.
+                    </p>
+
+                    <h4 class="text-xl font-bold text-primary mb-4 mt-8">3.2. Cambios introducidos por la Constitución de 1973</h4>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        Aunque la Constitución de 1973 es famosa porque consolidó la centralización del poder, también incluyó avances significativos:
+                    </p>
+
+                    <HighlightBox title="Avances Importantes" type="success" icon="check">
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-600 font-bold">1.</span>
+                                <span><strong>Primera constitución en crear la Fiscalía</strong>, diferenciando claramente la función de juez y fiscal</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-600 font-bold">2.</span>
+                                <span>Estableció la extensión de un sistema judicial que incluía <strong>juzgados y Tribunales Civiles y Militares</strong></span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-600 font-bold">3.</span>
+                                <span>A diferencia de la constitución de 1968, hizo <strong>menciones explícitas al sistema judicial</strong></span>
+                            </li>
+                        </ul>
+                    </HighlightBox>
+
+                    <HighlightBox title="Retroceso" type="warning" icon="lightbulb">
+                        <ul class="space-y-2">
+                            <li class="flex items-start gap-2">
+                                <span class="text-yellow-600">•</span>
+                                <span>Eliminó el principio de la <strong>inamovilidad de los jueces</strong> (artículo 68)</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-yellow-600">•</span>
+                                <span>Tampoco utilizó el término "Poder Judicial"</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-yellow-600">•</span>
+                                <span>Concentración del poder en manos del Presidente Vitalicio</span>
+                            </li>
+                        </ul>
+                    </HighlightBox>
+                </div>
+            </div>
+
+            <!-- Constitución 1982 -->
+            <div class="mb-16">
+                <div class="bg-gradient-to-r from-secondary to-secondary/80 text-white p-8 rounded-t-lg">
+                    <div class="flex items-center gap-4">
+                        <Gabel classname="size-12 text-white" />
+                        <div>
+                            <h3 class="text-2xl md:text-3xl font-bold">4. La Constitución de 1982</h3>
+                            <p class="text-lg opacity-90">De una Administración de Justicia a un Poder del Estado</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-b-lg shadow-lg border-4 border-secondary/30">
+                    <h4 class="text-xl font-bold text-primary mb-4">4.1. Contexto político y social</h4>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        En 1982, Guinea Ecuatorial se encontraba en un proceso de reconstrucción institucional tras la caída en agosto de 1979 del llamado régimen de triste memoria. El nuevo gobierno, liderado por S.E Teodoro Obiang NGUEMA MBASOGO, enfrentaba varios desafíos, siendo el debate sobre el modelo de Estado que mejor se adaptaba a realidad del país uno de ellos.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        La Constitución de 1982 fue diseñada para institucionalizar el poder, definir funciones y ofrecer un marco legal que prometiera un equilibrio entre los poderes del Estado.
+                    </p>
+
+                    <h4 class="text-xl font-bold text-primary mb-4 mt-8">4.2. Cambios clave introducidos por la Constitución de 1982</h4>
+
+                    <HighlightBox title="Institucionalización del Poder Judicial" type="highlight" icon="star">
+                        <p class="font-semibold mb-3">Bajo los Principios de <strong>Unidad y Exclusividad Jurisdiccional</strong>:</p>
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-2">
+                                <span class="text-secondary font-bold">1.</span>
+                                <span><strong>Artículo 142</strong>: Estableció la unidad jurisdiccional como base de la organización y funcionamiento de los tribunales</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-secondary font-bold">2.</span>
+                                <span>Buscaba evitar la duplicidad de competencias</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-secondary font-bold">3.</span>
+                                <span>Garantizar un sistema judicial más cohesionado</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-secondary font-bold">4.</span>
+                                <span>Luchar contra el intrusismo de otras autoridades en la administración de justicia</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-secondary font-bold">5.</span>
+                                <span>La jurisdicción militar fue regulada como una excepción</span>
+                            </li>
+                        </ul>
+                    </HighlightBox>
+
+                    <div class="bg-gradient-to-r from-secondary/10 to-secondary/5 p-6 rounded-lg my-6 border-l-4 border-secondary">
+                        <h5 class="text-2xl font-bold text-primary mb-3">Hito Fundamental</h5>
+                        <p class="text-lg text-gray-800 leading-relaxed">
+                            La constitución de 1982 fue la <strong>primera en concebir a la administración de justicia como un PODER DEL ESTADO</strong>; delimitando sus funciones exclusivas y evitando que otros poderes del Estado intervengan en la administración de justicia.
+                        </p>
+                    </div>
+
+                    <HighlightBox title="Contribución Principal" type="success" icon="check">
+                        <p>La <strong>profesionalización de la administración de justicia</strong> y su equiparación a los otros dos poderes del Estado.</p>
+                    </HighlightBox>
+                </div>
+            </div>
+
+            <!-- Década de los 90 -->
+            <div class="mb-16">
+                <div class="bg-gradient-to-r from-secondary to-secondary/80 text-white p-8 rounded-t-lg">
+                    <div class="flex items-center gap-4">
+                        <Judged classname="size-12 text-white" />
+                        <div>
+                            <h3 class="text-2xl md:text-3xl font-bold">4.3. La Década de los 90</h3>
+                            <p class="text-lg opacity-90">El Nacimiento del Consejo Superior del Poder Judicial</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-b-lg shadow-lg border-4 border-secondary/30">
+                    <p class="text-gray-700 leading-relaxed mb-6">
+                        Uno de los momentos más significativos en la evolución del Poder Judicial ocurrió en <strong>1995</strong>, con la promulgación de la <strong>Ley Constitucional Nº 1/1995</strong>, que marcó un punto de inflexión al introducir el <strong>Consejo Superior del Poder Judicial</strong> en la Ley Fundamental.
+                    </p>
+
+                    <div class="bg-gradient-to-br from-primary to-primary/90 text-white p-8 rounded-lg my-8 shadow-xl">
+                        <h4 class="text-2xl font-bold mb-4 flex items-center gap-3">
+                            <Scale classname="size-8" />
+                            Importancia del Consejo Superior
+                        </h4>
+                        <p class="text-lg leading-relaxed">
+                            La consolidación definitiva de la administración de justicia como un <strong>Poder Independiente del Estado</strong> y con competencias exclusivas y excluyentes, no se puede entender sin el Consejo Superior del Poder Judicial.
+                        </p>
+                    </div>
+
+                    <HighlightBox title="Contexto de Creación" type="info" icon="lightbulb">
+                        <p>El sistema judicial siempre se había caracterizado por una <strong>falta de profesionales del derecho</strong> y otros recursos humanos que pudieran hacerlo funcionar.</p>
+                    </HighlightBox>
+
+                    <h4 class="text-xl font-bold text-primary mb-4 mt-8">Función Principal del Consejo</h4>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        El Consejo Superior del Poder Judicial fue concebido como un <strong>órgano de Gobierno</strong>, lo que permitía separar a la Corte Suprema de Justicia la función de Supervisar el funcionamiento del sistema judicial.
+                    </p>
+
+                    <h4 class="text-xl font-bold text-primary mb-4 mt-8">El Principio de Independencia Judicial</h4>
+                    <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-secondary mb-6">
+                        <p class="text-gray-700 leading-relaxed mb-3">Según este principio:</p>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-start gap-2">
+                                <span class="text-secondary font-bold">•</span>
+                                <span>Los jueces <strong>solo están sujetos a la ley</strong></span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-secondary font-bold">•</span>
+                                <span>Ningún juez o Tribunal le debe obediencia a otro en el marco de sus competencias</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-secondary font-bold">•</span>
+                                <span>Los jueces tampoco le deben obediencia a ninguna otra autoridad</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-secondary font-bold">•</span>
+                                <span>Sin un órgano de gobierno, los jueces carecerían del respaldo institucional necesario para proteger su independencia e integridad</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <h4 class="text-xl font-bold text-primary mb-4 mt-8">Reformas posteriores y profesionalización</h4>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        La introducción del Consejo Superior del Poder Judicial en 1995 y su consolidación en 2012 (reforma de Annobón) representaron avances importantes hacia un sistema judicial más estructurado y profesionalizado, lo cual facilitó:
+                    </p>
+
+                    <div class="grid md:grid-cols-3 gap-6 my-6">
+                        <div class="bg-white p-6 rounded-lg shadow-lg border-t-4 border-secondary hover:shadow-xl transition-shadow">
+                            <div class="text-center mb-4">
+                                <Book classname="size-12 text-secondary mx-auto" />
+                            </div>
+                            <h5 class="font-bold text-lg mb-2 text-center text-primary">Carrera Judicial</h5>
+                            <p class="text-sm text-gray-600 text-center">Creación en la Ley Orgánica del Poder Judicial de 2009</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-lg border-t-4 border-secondary hover:shadow-xl transition-shadow">
+                            <div class="text-center mb-4">
+                                <Judged classname="size-12 text-secondary mx-auto" />
+                            </div>
+                            <h5 class="font-bold text-lg mb-2 text-center text-primary">Instituto de Práctica</h5>
+                            <p class="text-sm text-gray-600 text-center">Formación especializada para jueces y secretarios</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-lg border-t-4 border-secondary hover:shadow-xl transition-shadow">
+                            <div class="text-center mb-4">
+                                <Scale classname="size-12 text-secondary mx-auto" />
+                            </div>
+                            <h5 class="font-bold text-lg mb-2 text-center text-primary">Profesionalización</h5>
+                            <p class="text-sm text-gray-600 text-center">Completa de jueces y secretarios judiciales</p>
+                        </div>
+                    </div>
+
+                    <HighlightBox title="Evolución Institucional Visible" type="success" icon="star">
+                        <ul class="space-y-2">
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-600">✓</span>
+                                <span>Figura del Presidente de la Corte Suprema de Justicia asistiendo a los actos de Estado</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-600">✓</span>
+                                <span>Representa un <strong>Poder del Estado</strong></span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-600">✓</span>
+                                <span>Total institucionalización de la administración de justicia como Poder del Estado</span>
+                            </li>
+                        </ul>
+                    </HighlightBox>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Concepts Section -->
+    <section class="py-20 px-5 bg-gradient-to-b from-primary/5 to-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold text-primary mb-4 uppercase tracking-wide">
+                    Conceptos Clave
+                </h2>
+                <div class="w-24 h-1 bg-secondary mx-auto mb-6"></div>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Principios fundamentales que sustentan el sistema judicial moderno
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="group relative bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border-l-4 border-primary overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
+                    <div class="relative">
+                        <div class="flex items-start gap-4 mb-4">
+                            <div class="p-3 bg-primary/10 rounded-lg group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                                <Scale classname="size-10 text-primary group-hover:text-white transition-colors" />
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-primary mb-2">Independencia Judicial</h3>
+                                <div class="w-16 h-1 bg-secondary"></div>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 leading-relaxed">
+                            Los jueces están sujetos únicamente a la ley. No deben obediencia a otros jueces ni a autoridades externas en el ejercicio de sus funciones jurisdiccionales, garantizando imparcialidad en las decisiones judiciales.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="group relative bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border-l-4 border-secondary overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-secondary/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
+                    <div class="relative">
+                        <div class="flex items-start gap-4 mb-4">
+                            <div class="p-3 bg-secondary/10 rounded-lg group-hover:bg-secondary group-hover:scale-110 transition-all duration-300">
+                                <Judged classname="size-10 text-secondary group-hover:text-white transition-colors" />
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-primary mb-2">Unidad Jurisdiccional</h3>
+                                <div class="w-16 h-1 bg-secondary"></div>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 leading-relaxed">
+                            Principio que establece que la jurisdicción es única y que todos los tribunales forman parte de un sistema judicial cohesionado, evitando duplicidad de competencias y conflictos jurisdiccionales.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="group relative bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border-l-4 border-primary overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
+                    <div class="relative">
+                        <div class="flex items-start gap-4 mb-4">
+                            <div class="p-3 bg-primary/10 rounded-lg group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                                <Gabel classname="size-10 text-primary group-hover:text-white transition-colors" />
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-primary mb-2">Separación de Poderes</h3>
+                                <div class="w-16 h-1 bg-secondary"></div>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 leading-relaxed">
+                            El Poder Judicial como un poder independiente del Estado, equiparable al Ejecutivo y Legislativo, con funciones exclusivas en la administración de justicia que no pueden ser usurpadas por otros poderes.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="group relative bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border-l-4 border-secondary overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-secondary/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
+                    <div class="relative">
+                        <div class="flex items-start gap-4 mb-4">
+                            <div class="p-3 bg-secondary/10 rounded-lg group-hover:bg-secondary group-hover:scale-110 transition-all duration-300">
+                                <Book classname="size-10 text-secondary group-hover:text-white transition-colors" />
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-primary mb-2">Profesionalización</h3>
+                                <div class="w-16 h-1 bg-secondary"></div>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 leading-relaxed">
+                            Proceso de formación especializada y carrera judicial que garantiza que jueces y secretarios cuenten con las competencias técnicas necesarias para administrar justicia de manera efectiva y profesional.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conclusion Section -->
+    <section class="py-20 px-5 bg-gradient-to-b from-white to-gray-50">
+        <div class="max-w-5xl mx-auto">
+            <div class="relative">
+                <!-- Decorative elements -->
+                <div class="absolute -top-10 -left-10 w-40 h-40 bg-secondary/10 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-primary/10 rounded-full blur-3xl"></div>
+
+                <div class="relative bg-gradient-to-br from-primary via-primary/95 to-primary/90 text-white p-10 md:p-16 rounded-2xl shadow-2xl border border-secondary/20">
+                    <div class="flex items-center gap-4 mb-10">
+                        <Scale classname="size-16 text-secondary" />
+                        <div>
+                            <h2 class="text-3xl md:text-5xl font-bold tracking-wide">
+                                Conclusión
+                            </h2>
+                            <div class="w-32 h-1 bg-secondary mt-3"></div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-8 text-base md:text-lg leading-relaxed">
+                        <p class="text-white/95">
+                            Construir un Poder Judicial moderno y efectivo no solo es una necesidad legal, sino también un <strong class="text-secondary">compromiso ético y político</strong> con el desarrollo del país. A medida que Guinea Ecuatorial continúe su camino hacia la modernización, el fortalecimiento del sistema judicial será un pilar fundamental para lograr un progreso sostenible y equitativo.
+                        </p>
+
+                        <p class="text-white/95 pl-6 border-l-4 border-secondary/50">
+                            Como hemos visto, la historia del sistema judicial de Guinea Ecuatorial no es solo un relato sobre leyes e instituciones, sino también sobre las <strong class="text-secondary">aspiraciones de un pueblo</strong> por construir un país más justo y democrático.
+                        </p>
+
+                        <div class="bg-white/15 backdrop-blur-md rounded-xl p-8 mt-8 border border-white/20">
+                            <p class="text-xl font-semibold text-white">
+                                En este desafío, el Poder Judicial tiene un papel central, y su fortalecimiento es una <strong class="text-secondary">responsabilidad compartida</strong> entre las autoridades, las instituciones y la sociedad en su conjunto.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-5 bg-gradient-to-b from-gray-50 to-white">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl md:text-4xl font-bold text-primary mb-6 tracking-wide">
+                    Conozca más sobre el Poder Judicial
+                </h3>
+                <div class="w-24 h-px bg-gray-400 mx-auto mb-6"></div>
+                <p class="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">
+                    Explore las diferentes instituciones que conforman el sistema judicial de Guinea Ecuatorial
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <a
+                    href="/organigrama/cspj"
+                    class="group relative bg-white p-8 rounded-lg shadow-sm hover:shadow-xl transition-all duration-500 border border-gray-200 hover:border-gray-400 overflow-hidden"
+                >
+                    <!-- Línea superior que se expande al hover -->
+                    <div class="absolute top-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-500"></div>
+
+                    <div class="flex flex-col items-center text-center">
+                        <div class="relative mb-6">
+                            <!-- Círculo de fondo que aparece al hover -->
+                            <div class="absolute inset-0 bg-gray-100 rounded-full scale-0 group-hover:scale-100 transition-transform duration-500"></div>
+                            <div class="relative p-5 rounded-full border-2 border-gray-200 group-hover:border-primary transition-colors duration-500">
+                                <Judged classname="size-10 text-gray-700 group-hover:text-primary transition-colors duration-500" />
+                            </div>
+                        </div>
+
+                        <h4 class="font-bold text-xl mb-2 text-gray-800 group-hover:text-primary transition-colors duration-300">
+                            Consejo Superior
+                        </h4>
+                        <p class="text-sm text-gray-500 mb-4">
+                            del Poder Judicial
+                        </p>
+
+                        <!-- Flecha que aparece al hover -->
+                        <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+
+                <a
+                    href="/organigrama/csj"
+                    class="group relative bg-white p-8 rounded-lg shadow-sm hover:shadow-xl transition-all duration-500 border border-gray-200 hover:border-gray-400 overflow-hidden"
+                >
+                    <!-- Línea superior que se expande al hover -->
+                    <div class="absolute top-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-500"></div>
+
+                    <div class="flex flex-col items-center text-center">
+                        <div class="relative mb-6">
+                            <!-- Círculo de fondo que aparece al hover -->
+                            <div class="absolute inset-0 bg-gray-100 rounded-full scale-0 group-hover:scale-100 transition-transform duration-500"></div>
+                            <div class="relative p-5 rounded-full border-2 border-gray-200 group-hover:border-primary transition-colors duration-500">
+                                <Scale classname="size-10 text-gray-700 group-hover:text-primary transition-colors duration-500" />
+                            </div>
+                        </div>
+
+                        <h4 class="font-bold text-xl mb-2 text-gray-800 group-hover:text-primary transition-colors duration-300">
+                            Corte Suprema
+                        </h4>
+                        <p class="text-sm text-gray-500 mb-4">
+                            de Justicia
+                        </p>
+
+                        <!-- Flecha que aparece al hover -->
+                        <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+
+                <a
+                    href="/organigrama/audiencias"
+                    class="group relative bg-white p-8 rounded-lg shadow-sm hover:shadow-xl transition-all duration-500 border border-gray-200 hover:border-gray-400 overflow-hidden"
+                >
+                    <!-- Línea superior que se expande al hover -->
+                    <div class="absolute top-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-500"></div>
+
+                    <div class="flex flex-col items-center text-center">
+                        <div class="relative mb-6">
+                            <!-- Círculo de fondo que aparece al hover -->
+                            <div class="absolute inset-0 bg-gray-100 rounded-full scale-0 group-hover:scale-100 transition-transform duration-500"></div>
+                            <div class="relative p-5 rounded-full border-2 border-gray-200 group-hover:border-primary transition-colors duration-500">
+                                <Gabel classname="size-10 text-gray-700 group-hover:text-primary transition-colors duration-500" />
+                            </div>
+                        </div>
+
+                        <h4 class="font-bold text-xl mb-2 text-gray-800 group-hover:text-primary transition-colors duration-300">
+                            Audiencias
+                        </h4>
+                        <p class="text-sm text-gray-500 mb-4">
+                            de los distritos
+                        </p>
+
+                        <!-- Flecha que aparece al hover -->
+                        <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Back to top button -->
+    <button
+        id="backToTop"
+        class="fixed bottom-8 right-8 bg-secondary text-white p-4 rounded-full shadow-lg hover:bg-secondary/90 transition-all opacity-0 invisible"
+        aria-label="Volver arriba"
+    >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+    </button>
+</MainLayout>
+
+<script>
+    // Smooth scroll for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Back to top button
+    const backToTopButton = document.getElementById('backToTop');
+
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            backToTopButton?.classList.remove('opacity-0', 'invisible');
+            backToTopButton?.classList.add('opacity-100', 'visible');
+        } else {
+            backToTopButton?.classList.add('opacity-0', 'invisible');
+            backToTopButton?.classList.remove('opacity-100', 'visible');
+        }
+    });
+
+    backToTopButton?.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+</script>
+
+<style>
+    /* Smooth transitions */
+    * {
+        scroll-behavior: smooth;
+    }
+
+    /* Animation for timeline items on scroll */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .timeline-item {
+        animation: fadeInUp 0.6s ease-out;
+    }
+
+    /* Pulse animation for icons */
+    @keyframes pulse {
+        0%, 100% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.7;
+        }
+    }
+
+    /* Hover effects */
+    .group:hover .timeline-year {
+        transform: scale(1.05);
+    }
+</style>

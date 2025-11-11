@@ -1,0 +1,108 @@
+---
+interface Props {
+    year: string;
+    title: string;
+    description: string;
+    highlight?: boolean;
+    position?: 'left' | 'right';
+}
+
+const { year, title, description, highlight = false, position = 'left' } = Astro.props;
+---
+
+<div class={`timeline-item relative mb-20 ${position === 'right' ? 'timeline-right' : 'timeline-left'}`}>
+    <!-- Timeline marker (círculo en el centro) -->
+    <div class="timeline-marker absolute left-1/2 transform -translate-x-1/2 z-10">
+        <div class={`
+            w-5 h-5 rounded-full border-[3px] transition-all duration-500
+            ${highlight
+                ? 'bg-primary border-primary shadow-md scale-125'
+                : 'bg-white border-gray-400 hover:border-primary hover:scale-110'
+            }
+        `}>
+        </div>
+        {highlight && (
+            <div class="absolute inset-0 rounded-full border-2 border-primary/30 scale-150"></div>
+        )}
+    </div>
+
+    <!-- Year badge -->
+    <div class={`
+        timeline-year absolute left-1/2 transform -translate-x-1/2 -top-10
+        px-5 py-2 font-bold text-sm tracking-wider
+        ${highlight
+            ? 'bg-primary text-white shadow-sm'
+            : 'bg-gray-700 text-white'
+        }
+    `}>
+        {year}
+    </div>
+
+    <!-- Content container -->
+    <div class={`
+        timeline-content
+        ${position === 'left' ? 'md:pr-[calc(50%+3rem)] md:text-right' : 'md:pl-[calc(50%+3rem)] md:text-left'}
+    `}>
+        <div class="timeline-box bg-white p-8 md:p-10 shadow-md hover:shadow-lg transition-all duration-500 group border border-gray-100">
+            <h3 class={`text-xl md:text-2xl font-bold mb-4 transition-colors duration-300 ${highlight ? 'text-primary' : 'text-gray-800 group-hover:text-primary'}`}>
+                {title}
+            </h3>
+            <div class={`w-16 h-0.5 mb-4 transition-all duration-300 ${position === 'left' ? 'md:ml-auto' : ''} ${highlight ? 'bg-primary' : 'bg-gray-300 group-hover:bg-primary'}`}></div>
+            <p class="text-gray-600 leading-relaxed text-base mb-4">
+                {description}
+            </p>
+            <slot />
+        </div>
+    </div>
+</div>
+
+<style>
+    @media (max-width: 768px) {
+        .timeline-item {
+            padding-left: 2rem;
+        }
+
+        .timeline-marker {
+            left: 0;
+            transform: translateX(0);
+        }
+
+        .timeline-year {
+            left: 0;
+            transform: translateX(0);
+        }
+
+        .timeline-content {
+            padding-left: 2rem !important;
+            padding-right: 0 !important;
+            text-align: left !important;
+        }
+    }
+
+    .timeline-box {
+        position: relative;
+    }
+
+    /* Línea que conecta el contenido con la línea central */
+    @media (min-width: 768px) {
+        .timeline-left .timeline-box::after {
+            content: '';
+            position: absolute;
+            right: -2.5rem;
+            top: 2rem;
+            width: 2rem;
+            height: 2px;
+            background: linear-gradient(to right, #d1d5db, transparent);
+        }
+
+        .timeline-right .timeline-box::after {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 2rem;
+            width: 2rem;
+            height: 2px;
+            background: linear-gradient(to left, #d1d5db, transparent);
+        }
+    }
+</style>

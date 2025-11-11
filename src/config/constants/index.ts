@@ -8,7 +8,7 @@ export const SITE_MENU = [
     },
     {
         text: "HISTORIA",
-        link: "/historia"
+        link: "/historia-poder-judicial"
     },
     {
         text: "ASESORIA JURIDICA",
