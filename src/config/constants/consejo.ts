@@ -4,7 +4,7 @@ export const miembrosConsejo = [
         id: "presidente",
         cargo: "Presidente del Consejo Superior del Poder Judicial",
         nombre: "S.E. OBIANG NGUEMA MBASOGO; Presidente de la república, Jefe de Estado y de Gobierno",
-        foto: "/images/consejo/presidente.jpg",
+        foto: "/images/cspj/obiang.webp",
         descripcion: "Breve descripción de las funciones principales del Presidente del Consejo Superior del Poder Judicial...",
         funciones: [
             "Gobernar",
@@ -18,7 +18,7 @@ export const miembrosConsejo = [
         id: "vicepresidente",
         cargo: "Vicepresidente del Consejo Superior del Poder Judicial",
         nombre: "Excmo. Sr. Don Francisco Evuy Nguema Mikue",
-        foto: "/images/consejo/vicepresidente.jpg",
+        foto: "/images/cspj/francisco.webp",
         descripcion: "Breve descripción de las funciones principales del Vicepresidente del Consejo Superior del Poder Judicial...",
         funciones: [
             "Suplir al Presidente en sus ausencias",
@@ -28,10 +28,49 @@ export const miembrosConsejo = [
         trayectoria: "Trayectoria profesional del vicepresidente..."
     },
     {
-        id: "vocal1",
-        cargo: "Vocal del Consejo Superior del Poder Judicial",
-        nombre: "Nombre del Vocal 1",
-        foto: "/images/consejo/vocal1.jpg",
+        id: "presidente-tribunal-constitucional",
+        cargo: "Presidente del Tribunal Constitucional",
+        nombre: "Excmo. Sr. Don Antonio Nzambi Nlonga",
+        foto: "/images/cspj/antonio.webp",
+        descripcion: "Breve descripción de las funciones principales de los Vocales del Consejo Superior del Poder Judicial...",
+        funciones: [
+            "Participar en las deliberaciones del Consejo",
+            "Integrar comisiones específicas",
+            "Votar en las decisiones del órgano"
+        ],
+        trayectoria: "Trayectoria profesional del vocal..."
+    },
+    {
+        id: "ministro-justicia-derechos-humanos",
+        cargo: "Ministro de Justicial y Derechos Humanos",
+        nombre: "Excmo. Sr. Don Reginaldo Biyogo Mba Ndong Anguesomo",
+        foto: "/images/cspj/reginaldo.webp",
+        descripcion: "Responsable de la secretaría del Consejo Superior...",
+        funciones: [
+            "Levantar actas de las sesiones",
+            "Custodiar la documentación",
+            "Coordinar la agenda del Consejo"
+        ],
+        trayectoria: "Trayectoria profesional del secretario general..."
+    },
+    {
+        id: "fiscal-general",
+        cargo: "Fiscal General de la República",
+        nombre: "Excmo. Sr. Don Anatolio Nzang Nguema",
+        foto: "/images/cspj/anatolio.webp",
+        descripcion: "Asiste al Secretario General en sus funciones...",
+        funciones: [
+            "Apoyar al Secretario General",
+            "Gestionar documentación administrativa",
+            "Coordinar con las diferentes áreas"
+        ],
+        trayectoria: "Trayectoria profesional del secretario adjunto..."
+    },
+    {
+        id: "decano-abogados",
+        cargo: "Decano del Ilustre Colegio de Abogados",
+        nombre: "Excmo. Sr. Don Juan Olo Mba Nzeng",
+        foto: "/images/cspj/juan.webp",
         descripcion: "Breve descripción de las funciones principales de los Vocales del Consejo Superior del Poder Judicial...",
         funciones: [
             "Participar en las deliberaciones del Consejo",
@@ -42,48 +81,9 @@ export const miembrosConsejo = [
     },
     {
         id: "secretario-general",
-        cargo: "Secretario General",
-        nombre: "Nombre del Secretario General",
-        foto: "/images/consejo/secretario-general.jpg",
-        descripcion: "Responsable de la secretaría del Consejo Superior...",
-        funciones: [
-            "Levantar actas de las sesiones",
-            "Custodiar la documentación",
-            "Coordinar la agenda del Consejo"
-        ],
-        trayectoria: "Trayectoria profesional del secretario general..."
-    },
-    {
-        id: "secretario-adjunto",
-        cargo: "Secretario Adjunto",
-        nombre: "Nombre del Secretario Adjunto",
-        foto: "/images/consejo/secretario-adjunto.jpg",
-        descripcion: "Asiste al Secretario General en sus funciones...",
-        funciones: [
-            "Apoyar al Secretario General",
-            "Gestionar documentación administrativa",
-            "Coordinar con las diferentes áreas"
-        ],
-        trayectoria: "Trayectoria profesional del secretario adjunto..."
-    },
-    {
-        id: "vocal2",
-        cargo: "Vocal del Consejo Superior del Poder Judicial",
-        nombre: "Nombre del Vocal 2",
-        foto: "/images/consejo/vocal2.jpg",
-        descripcion: "Breve descripción de las funciones principales de los Vocales del Consejo Superior del Poder Judicial...",
-        funciones: [
-            "Participar en las deliberaciones del Consejo",
-            "Integrar comisiones específicas",
-            "Votar en las decisiones del órgano"
-        ],
-        trayectoria: "Trayectoria profesional del vocal..."
-    },
-    {
-        id: "directora-archivos",
-        cargo: "Directora General de Archivos e Informática",
-        nombre: "Nombre de la Directora General",
-        foto: "/images/consejo/directora-archivos.jpg",
+        cargo: "Secretario General del Consejo Superior del Poder Judicial",
+        nombre: "Ilmo. Sr. Don Andres Ondo Nze Nzang",
+        foto: "/images/cspj/andres.webp",
         descripcion: "Responsable de la gestión de archivos y sistemas informáticos...",
         funciones: [
             "Gestionar el archivo general del Poder Judicial",
@@ -93,15 +93,28 @@ export const miembrosConsejo = [
         trayectoria: "Trayectoria profesional de la directora..."
     },
     {
-        id: "director-economicos",
-        cargo: "Director General de Asuntos Económicos",
-        nombre: "Nombre del Director General",
-        foto: "/images/consejo/director-economicos.jpg",
+        id: "secretarios-general-adjunto",
+        cargo: "Secretario General Adjunto del Consejo Superior del Poder Judicial",
+        nombre: "Ilmo. Sr. Don Pascual Ekoro Ekoro Avomo",
+        foto: "/images/cspj/pascual.webp",
         descripcion: "Responsable de la gestión económica y financiera...",
         funciones: [
             "Gestionar el presupuesto del Poder Judicial",
             "Supervisar gastos e inversiones",
             "Coordinar con el Ministerio de Hacienda"
+        ],
+        trayectoria: "Trayectoria profesional del director..."
+    },
+    {
+        id: "director-juridicos",
+        cargo: "Director General de Asuntos Economicos y Financieros del Consejo Superior del Poder Judicial",
+        nombre: "Nombre del Director General",
+        foto: "/images/cspj/agustin.webp",
+        descripcion: "Responsable de los asuntos jurídicos del Consejo...",
+        funciones: [
+            "Asesorar en materia jurídica",
+            "Elaborar propuestas normativas",
+            "Coordinar aspectos legales"
         ],
         trayectoria: "Trayectoria profesional del director..."
     },
@@ -125,7 +138,7 @@ export const corteSuprema = [
         id: "presidente-corte-suprema",
         cargo: "Presidente de la Corte Suprema de Justicia",
         nombre: "Excmo. Sr. Don Francisco EVUY NGUEMA MIKUE",
-        foto: "/images/corte-suprema/presidente.jpg",
+        foto: "/images/cspj/francisco.webp",
         descripcion: "Máxima autoridad judicial de la Corte Suprema de Justicia...",
         funciones: [
             "Presidir las sesiones de la Corte Suprema",
@@ -137,9 +150,9 @@ export const corteSuprema = [
     },
     {
         id: "magistrado1",
-        cargo: "Magistrado Juez de la Corte Suprema",
-        nombre: "Excmo. Sr. Don Eliseo MENGUE NVO",
-        foto: "/images/corte-suprema/magistrado1.jpg",
+        cargo: "Magistrado de la Corte Suprema de Justicia",
+        nombre: " Excmo. Sr. Don Serafin Ondo Maye",
+        foto: "/images/csj/serafin.webp",
         descripcion: "Magistrado de la Corte Suprema de Justicia...",
         funciones: [
             "Conocer y resolver los recursos de casación",
@@ -150,9 +163,9 @@ export const corteSuprema = [
     },
     {
         id: "magistrado2",
-        cargo: "Magistrado Juez de la Corte Suprema",
-        nombre: "Excmo. Sr. Don Hilario BALLOVERA CASAÑA",
-        foto: "/images/corte-suprema/magistrado2.jpg",
+        cargo: "Magistrado de la Corte Suprema de Justicia",
+        nombre: "Excmo. Sr. Don. Eliseo Mangue Nvo Oyana",
+        foto: "/images/csj/eliseo.webp",
         descripcion: "Magistrado de la Corte Suprema de Justicia...",
         funciones: [
             "Conocer y resolver los recursos de casación",
@@ -164,9 +177,9 @@ export const corteSuprema = [
     // Puedes añadir más magistrados según sea necesario
     {
         id: "magistrado3",
-        cargo: "Magistrado Juez de la Corte Suprema",
-        nombre: "Excmo. Sr. Don Serafín ONDO MAYE",
-        foto: "/images/corte-suprema/magistrado3.jpg",
+        cargo: "Magistrado de la Corte Suprema de Justicia",
+        nombre: "Excmo. Sr. Don Hilario Ballovera Casaña",
+        foto: "/images/csj/hilario.webp",
         descripcion: "Magistrado de la Corte Suprema de Justicia...",
         funciones: [
             "Conocer y resolver los recursos de casación",
@@ -177,9 +190,48 @@ export const corteSuprema = [
     },
     {
         id: "magistrado3",
-        cargo: "Magistrado Juez de la Corte Suprema",
-        nombre: "Excmo. Sra. Doña María Clara Felicidad BONCANCA TABARES",
-        foto: "/images/corte-suprema/magistrado3.jpg",
+        cargo: "Magistrada de la Corte Suprema de Justicia",
+        nombre: "Excma. Sra. Doña Rosa Maricarmen Obama Obono",
+        foto: "/images/csj/rosa.webp",
+        descripcion: "Magistrado de la Corte Suprema de Justicia...",
+        funciones: [
+            "Conocer y resolver los recursos de casación",
+            "Participar en las deliberaciones de la Corte",
+            "Emitir votos en las decisiones judiciales"
+        ],
+        trayectoria: "Trayectoria profesional del magistrado..."
+    },
+    {
+        id: "magistrado3",
+        cargo: "Magistrada de la Corte Suprema de Justicia",
+        nombre: "Excma. Sra. Doña Clara Feliciddad Bonkanka Tabares",
+        foto: "/images/csj/clara.webp",
+        descripcion: "Magistrado de la Corte Suprema de Justicia...",
+        funciones: [
+            "Conocer y resolver los recursos de casación",
+            "Participar en las deliberaciones de la Corte",
+            "Emitir votos en las decisiones judiciales"
+        ],
+        trayectoria: "Trayectoria profesional del magistrado..."
+    },
+    {
+        id: "magistrado3",
+        cargo: "Magistrado de la Corte Suprema de Justicia",
+        nombre: "Excmo. Sr. Don Victoriano Obiang Abogo",
+        foto: "/images/csj/victoriano.webp",
+        descripcion: "Magistrado de la Corte Suprema de Justicia...",
+        funciones: [
+            "Conocer y resolver los recursos de casación",
+            "Participar en las deliberaciones de la Corte",
+            "Emitir votos en las decisiones judiciales"
+        ],
+        trayectoria: "Trayectoria profesional del magistrado..."
+    },
+    {
+        id: "magistrado3",
+        cargo: "Magistrado de la Corte Suprema de Justicia",
+        nombre: "Excmo. Sr. Don Candido Nkua Nkogo",
+        foto: "/images/csj/candido.webp",
         descripcion: "Magistrado de la Corte Suprema de Justicia...",
         funciones: [
             "Conocer y resolver los recursos de casación",
@@ -203,8 +255,47 @@ export const corteSuprema = [
     },
     {
         id: "magistrado3",
+        cargo: "Secretario de lo Civil de la Corte Suprema de Justicia",
+        nombre: "Ilmo. Sr. Don Carlos Sorizo Buesahe",
+        foto: "/images/csj/carlos.webp",
+        descripcion: "Magistrado de la Corte Suprema de Justicia...",
+        funciones: [
+            "Conocer y resolver los recursos de casación",
+            "Participar en las deliberaciones de la Corte",
+            "Emitir votos en las decisiones judiciales"
+        ],
+        trayectoria: "Trayectoria profesional del magistrado..."
+    },
+    {
+        id: "magistrado3",
+        cargo: "Secretario de la sala de lo social y contenciosos administrativos",
+        nombre: "Ilmo. sr. don Jose Abeso Ondo,",
+        foto: "/images/csj/jose.webp",
+        descripcion: "Magistrado de la Corte Suprema de Justicia...",
+        funciones: [
+            "Conocer y resolver los recursos de casación",
+            "Participar en las deliberaciones de la Corte",
+            "Emitir votos en las decisiones judiciales"
+        ],
+        trayectoria: "Trayectoria profesional del magistrado..."
+    },
+    {
+        id: "magistrado3",
+        cargo: "Secretaria de lo penal de la corte suprema de justicia",
+        nombre: "Ilma. sra. doña Maria Carmen Mbeze Nguema Mofuman ",
+        foto: "/images/csj/maria.jpg",
+        descripcion: "Magistrado de la Corte Suprema de Justicia...",
+        funciones: [
+            "Conocer y resolver los recursos de casación",
+            "Participar en las deliberaciones de la Corte",
+            "Emitir votos en las decisiones judiciales"
+        ],
+        trayectoria: "Trayectoria profesional del magistrado..."
+    },
+    {
+        id: "magistrado3",
         cargo: "Magistrado Juez de la Corte Suprema",
-        nombre: "Excmo. Sr. Don Victoriano OBIANG ABOGO",
+        nombre: "Excmo. Sra. Doña Rosa Maricarmen OBAMA OBONO",
         foto: "/images/corte-suprema/magistrado3.jpg",
         descripcion: "Magistrado de la Corte Suprema de Justicia...",
         funciones: [
@@ -213,7 +304,59 @@ export const corteSuprema = [
             "Emitir votos en las decisiones judiciales"
         ],
         trayectoria: "Trayectoria profesional del magistrado..."
-    }
+    },
+    {
+        id: "magistrado3",
+        cargo: "Director General de Prensa de la Corte Suprema de Justicia",
+        nombre: " Ilmo. Sr. Don Hilario Mitogo Miko Mikue,",
+        foto: "/images/csj/mitogo.webp",
+        descripcion: "Magistrado de la Corte Suprema de Justicia...",
+        funciones: [
+            "Conocer y resolver los recursos de casación",
+            "Participar en las deliberaciones de la Corte",
+            "Emitir votos en las decisiones judiciales"
+        ],
+        trayectoria: "Trayectoria profesional del magistrado..."
+    },
+    {
+        id: "magistrado3",
+        cargo: "Director General de Protocolo y Ceremonias de la Corte Suprema de Justicia",
+        nombre: "Ilmo. Sr. Don Martin Mba Angue Bilogo",
+        foto: "/images/csj/martin.webp",
+        descripcion: "Magistrado de la Corte Suprema de Justicia...",
+        funciones: [
+            "Conocer y resolver los recursos de casación",
+            "Participar en las deliberaciones de la Corte",
+            "Emitir votos en las decisiones judiciales"
+        ],
+        trayectoria: "Trayectoria profesional del magistrado..."
+    },
+    {
+        id: "magistrado3",
+        cargo: "Directora General de Archivo, Documentación e Informatica",
+        nombre: "Ilma. Sra. Doña Liliosa Ada Biko Bengobesam",
+        foto: "/images/csj/liliosa.webp",
+        descripcion: "Magistrado de la Corte Suprema de Justicia...",
+        funciones: [
+            "Conocer y resolver los recursos de casación",
+            "Participar en las deliberaciones de la Corte",
+            "Emitir votos en las decisiones judiciales"
+        ],
+        trayectoria: "Trayectoria profesional del magistrado..."
+    },
+    {
+        id: "magistrado3",
+        cargo: "Magistrados Jueces de la Corte Suprema",
+        nombre: "El Pleno de Magistrados de la Corte Suprema de Justicia",
+        foto: "/images/csj/todos.webp",
+        descripcion: "Magistrado de la Corte Suprema de Justicia...",
+        funciones: [
+            "Conocer y resolver los recursos de casación",
+            "Participar en las deliberaciones de la Corte",
+            "Emitir votos en las decisiones judiciales"
+        ],
+        trayectoria: "Trayectoria profesional del magistrado..."
+    },
 ];
 
 // Orden personalizado de los cargos

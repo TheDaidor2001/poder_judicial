@@ -57,33 +57,57 @@ const { year, title, description, highlight = false, position = 'left' } = Astro
 </div>
 
 <style>
-    @media (max-width: 768px) {
+    .timeline-box {
+        position: relative;
+    }
+
+    /* Mobile styles */
+    @media (max-width: 767px) {
         .timeline-item {
-            padding-left: 2rem;
+            padding-left: 3.5rem;
+            margin-bottom: 3rem;
         }
 
         .timeline-marker {
-            left: 0;
+            left: 0.75rem;
             transform: translateX(0);
         }
 
         .timeline-year {
             left: 0;
             transform: translateX(0);
+            top: -2.5rem;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
         }
 
         .timeline-content {
-            padding-left: 2rem !important;
+            padding-left: 0 !important;
             padding-right: 0 !important;
             text-align: left !important;
         }
+
+        .timeline-box {
+            padding: 1.5rem !important;
+        }
+
+        /* Línea vertical en móvil */
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0.875rem;
+            top: 2rem;
+            bottom: -3rem;
+            width: 2px;
+            background: linear-gradient(to bottom, #d1d5db, transparent);
+        }
+
+        .timeline-item:last-child::before {
+            display: none;
+        }
     }
 
-    .timeline-box {
-        position: relative;
-    }
-
-    /* Línea que conecta el contenido con la línea central */
+    /* Desktop styles - Línea que conecta el contenido con la línea central */
     @media (min-width: 768px) {
         .timeline-left .timeline-box::after {
             content: '';

@@ -5,35 +5,7 @@ import {
     ordenCargosCorteSuprema,
 } from "../../config/constants/consejo";
 
-// Función para ordenar miembros según el orden de cargos definido
-function ordenarMiembros(
-    miembros: {
-        id: string;
-        cargo: string;
-        nombre: string;
-        foto: string;
-        descripcion: string;
-        funciones: string[];
-        trayectoria: string;
-    }[],
-    orden: string[],
-) {
-    return [...miembros].sort((a, b) => {
-        const indexA = orden.indexOf(a.cargo);
-        const indexB = orden.indexOf(b.cargo);
-
-        // Si el cargo no está en el orden, lo pone al final
-        const posA = indexA === -1 ? orden.length : indexA;
-        const posB = indexB === -1 ? orden.length : indexB;
-
-        return posA - posB;
-    });
-}
-
-const miembrosOrdenados = ordenarMiembros(
-    corteSuprema,
-    ordenCargosCorteSuprema,
-);
+const miembrosOrdenados = corteSuprema;
 ---
 
 <MainLayout
@@ -52,58 +24,174 @@ const miembrosOrdenados = ordenarMiembros(
     </section>
 
     <!-- Members Grid -->
-    <section class="max-w-7xl mx-auto px-5 py-16">
-        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+    <section class="max-w-7xl mx-auto px-3 md:px-5 py-16">
+        <!-- Fila 1: Presidente (1 card) -->
+        <div class="grid grid-cols-1 gap-8 mb-8 max-w-sm md:max-w-md mx-auto">
             {
-                miembrosOrdenados.map((miembro) => (
-                    <article class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform hover:shadow-xl hover:-translate-y-1 h-full flex flex-col">
-                        <div class="h-48 bg-blue-100 flex items-center justify-center">
+                miembrosOrdenados.slice(0, 1).map((miembro) => (
+                    <article class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform hover:shadow-xl hover:-translate-y-1">
+                        <div class="h-96 md:h-[28rem] bg-blue-100 flex items-center justify-center overflow-hidden">
                             <img
                                 src={miembro.foto}
                                 alt={miembro.nombre}
-                                class="h-full w-full object-cover"
+                                class="h-full w-full object-cover object-top"
                                 loading="lazy"
                             />
                         </div>
-                        <div class="p-6 flex-grow flex flex-col">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <span class="text-sm font-semibold text-secondary">
-                                        {miembro.cargo
-                                            .replace(
-                                                "de la Corte Suprema de Justicia",
-                                                "",
-                                            )
-                                            .trim()}
-                                    </span>
-                                    <h2 class="text-xl font-bold text-gray-800 mt-1">
-                                        {miembro.nombre}
-                                    </h2>
-                                </div>
-                                <button
-                                    class="text-secondary hover:text-secondary-dark member-detail-trigger"
-                                    data-member={miembro.id}
-                                    aria-label={`Ver detalles de ${miembro.nombre}`}
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        class="h-6 w-6"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                                        />
-                                    </svg>
-                                </button>
+                        <div class="p-4 md:p-6">
+                            <div>
+                                <span class="text-sm font-semibold text-secondary">
+                                    {miembro.cargo
+                                        .replace(
+                                            "de la Corte Suprema de Justicia",
+                                            "",
+                                        )
+                                        .trim()}
+                                </span>
+                                <h2 class="text-xl font-bold text-gray-800 mt-1">
+                                    {miembro.nombre}
+                                </h2>
                             </div>
-                            <p class="text-gray-600 mt-3 line-clamp-3 flex-grow">
-                                {miembro.descripcion}
-                            </p>
+                        </div>
+                    </article>
+                ))
+            }
+        </div>
+
+        <!-- Fila 2: Magistrados (4 cards) -->
+        <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-8"
+        >
+            {
+                miembrosOrdenados.slice(1, 5).map((miembro) => (
+                    <article class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform hover:shadow-xl hover:-translate-y-1 mx-auto w-full max-w-sm md:max-w-none">
+                        <div class="h-80 md:h-72 lg:h-64 bg-blue-100 flex items-center justify-center overflow-hidden">
+                            <img
+                                src={miembro.foto}
+                                alt={miembro.nombre}
+                                class="h-full w-full object-cover object-top"
+                                loading="lazy"
+                            />
+                        </div>
+                        <div class="p-4 md:p-6">
+                            <div>
+                                <span class="text-sm font-semibold text-secondary">
+                                    {miembro.cargo
+                                        .replace(
+                                            "de la Corte Suprema de Justicia",
+                                            "",
+                                        )
+                                        .trim()}
+                                </span>
+                                <h2 class="text-xl font-bold text-gray-800 mt-1">
+                                    {miembro.nombre}
+                                </h2>
+                            </div>
+                        </div>
+                    </article>
+                ))
+            }
+        </div>
+
+        <!-- Fila 3: Magistrados (4 cards) -->
+        <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-8"
+        >
+            {
+                miembrosOrdenados.slice(5, 9).map((miembro) => (
+                    <article class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform hover:shadow-xl hover:-translate-y-1 mx-auto w-full max-w-sm md:max-w-none">
+                        <div class="h-80 md:h-72 lg:h-64 bg-blue-100 flex items-center justify-center overflow-hidden">
+                            <img
+                                src={miembro.foto}
+                                alt={miembro.nombre}
+                                class="h-full w-full object-cover object-top"
+                                loading="lazy"
+                            />
+                        </div>
+                        <div class="p-4 md:p-6">
+                            <div>
+                                <span class="text-sm font-semibold text-secondary">
+                                    {miembro.cargo
+                                        .replace(
+                                            "de la Corte Suprema de Justicia",
+                                            "",
+                                        )
+                                        .trim()}
+                                </span>
+                                <h2 class="text-xl font-bold text-gray-800 mt-1">
+                                    {miembro.nombre}
+                                </h2>
+                            </div>
+                        </div>
+                    </article>
+                ))
+            }
+        </div>
+
+        <!-- Fila 4: Magistrados (3 cards) -->
+        <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-8"
+        >
+            {
+                miembrosOrdenados.slice(9, 12).map((miembro) => (
+                    <article class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform hover:shadow-xl hover:-translate-y-1 mx-auto w-full max-w-sm md:max-w-none">
+                        <div class="h-80 md:h-72 lg:h-64 bg-blue-100 flex items-center justify-center overflow-hidden">
+                            <img
+                                src={miembro.foto}
+                                alt={miembro.nombre}
+                                class="h-full w-full object-cover object-top"
+                                loading="lazy"
+                            />
+                        </div>
+                        <div class="p-4 md:p-6">
+                            <div>
+                                <span class="text-sm font-semibold text-secondary">
+                                    {miembro.cargo
+                                        .replace(
+                                            "de la Corte Suprema de Justicia",
+                                            "",
+                                        )
+                                        .trim()}
+                                </span>
+                                <h2 class="text-xl font-bold text-gray-800 mt-1">
+                                    {miembro.nombre}
+                                </h2>
+                            </div>
+                        </div>
+                    </article>
+                ))
+            }
+        </div>
+
+        <!-- Fila 5: Magistrados (4 cards) -->
+        <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"
+        >
+            {
+                miembrosOrdenados.slice(12, 16).map((miembro) => (
+                    <article class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform hover:shadow-xl hover:-translate-y-1 mx-auto w-full max-w-sm md:max-w-none">
+                        <div class="h-80 md:h-72 lg:h-64 bg-blue-100 flex items-center justify-center overflow-hidden">
+                            <img
+                                src={miembro.foto}
+                                alt={miembro.nombre}
+                                class="h-full w-full object-cover object-top"
+                                loading="lazy"
+                            />
+                        </div>
+                        <div class="p-4 md:p-6">
+                            <div>
+                                <span class="text-sm font-semibold text-secondary">
+                                    {miembro.cargo
+                                        .replace(
+                                            "de la Corte Suprema de Justicia",
+                                            "",
+                                        )
+                                        .trim()}
+                                </span>
+                                <h2 class="text-xl font-bold text-gray-800 mt-1">
+                                    {miembro.nombre}
+                                </h2>
+                            </div>
                         </div>
                     </article>
                 ))
@@ -111,198 +199,9 @@ const miembrosOrdenados = ordenarMiembros(
         </div>
     </section>
 
-    <!-- Member Detail Modal -->
-    <div
-        id="memberModal"
-        class="hidden fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4"
-    >
-        <div
-            class="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto"
-        >
-            <div class="p-6">
-                <div class="flex justify-between items-start">
-                    <div>
-                        <span
-                            id="memberPosition"
-                            class="text-lg font-semibold text-secondary"></span>
-                        <h3
-                            id="memberName"
-                            class="text-2xl font-bold text-gray-800 mt-1"
-                        >
-                        </h3>
-                    </div>
-                    <button
-                        class="text-gray-500 hover:text-gray-700 modal-close"
-                        aria-label="Cerrar modal"
-                    >
-                        <svg
-                            class="w-8 h-8"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M6 18L18 6M6 6l12 12"></path>
-                        </svg>
-                    </button>
-                </div>
-
-                <div class="mt-6 grid md:grid-cols-3 gap-6">
-                    <div class="md:col-span-1">
-                        <div
-                            class="h-64 bg-gray-100 rounded-lg overflow-hidden"
-                        >
-                            <img
-                                id="memberImage"
-                                src=""
-                                alt=""
-                                class="h-full w-full object-cover"
-                            />
-                        </div>
-                    </div>
-                    <div class="md:col-span-2">
-                        <h4 class="text-lg font-semibold text-gray-800 mb-3">
-                            Funciones y Responsabilidades
-                        </h4>
-                        <div id="memberFunctions" class="prose text-gray-700">
-                            <!-- Contenido dinámico -->
-                        </div>
-
-                        <h4
-                            class="text-lg font-semibold text-gray-800 mt-6 mb-3"
-                        >
-                            Trayectoria Profesional
-                        </h4>
-                        <div id="memberBio" class="prose text-gray-700">
-                            <!-- Contenido dinámico -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <style>
+        article {
+            transition: all 0.3s ease;
+        }
+    </style>
 </MainLayout>
-
-<!-- Script para el modal de miembros -->
-<script is:inline define:vars={{ corteSuprema }}>
-    // Crear un objeto para acceso rápido por ID
-    const membersData = {};
-    corteSuprema.forEach((member) => {
-        membersData[member.id] = member;
-    });
-
-    // Función para crear lista HTML desde array
-    function createFunctionsList(functions) {
-        return `<ul class="space-y-2">${functions
-            .map(
-                (func) => `
-                <li class="flex items-start">
-                    <svg class="h-5 w-5 text-secondary mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>${func}</span>
-                </li>
-            `,
-            )
-            .join("")}</ul>`;
-    }
-
-    // Manejar clicks en los botones de detalles
-    document.addEventListener("click", function (e) {
-        // Abrir modal
-        if (e.target.closest(".member-detail-trigger")) {
-            const memberId = e.target
-                .closest(".member-detail-trigger")
-                .getAttribute("data-member");
-            const member = membersData[memberId];
-
-            if (member) {
-                document.getElementById("memberName").textContent =
-                    member.nombre;
-                document.getElementById("memberPosition").textContent =
-                    member.cargo;
-                document.getElementById("memberImage").src = member.foto;
-                document.getElementById("memberImage").alt = member.nombre;
-                document.getElementById("memberFunctions").innerHTML =
-                    createFunctionsList(member.funciones);
-                document.getElementById("memberBio").innerHTML =
-                    `<p>${member.trayectoria}</p>`;
-
-                document
-                    .getElementById("memberModal")
-                    .classList.remove("hidden");
-                document.body.style.overflow = "hidden";
-            }
-        }
-
-        // Cerrar modal
-        if (e.target.closest(".modal-close")) {
-            document.getElementById("memberModal").classList.add("hidden");
-            document.body.style.overflow = "";
-        }
-
-        // Cerrar al hacer click fuera del modal
-        if (e.target.id === "memberModal") {
-            document.getElementById("memberModal").classList.add("hidden");
-            document.body.style.overflow = "";
-        }
-    });
-
-    // Cerrar modal con tecla Escape
-    document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape") {
-            document.getElementById("memberModal").classList.add("hidden");
-            document.body.style.overflow = "";
-        }
-    });
-</script>
-
-<style>
-    .prose ul {
-        list-style-type: none;
-        padding-left: 0;
-    }
-
-    .prose li {
-        margin-bottom: 0.5rem;
-    }
-
-    .line-clamp-3 {
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-    }
-
-    #memberModal .bg-white {
-        animation: modalSlideIn 0.3s ease-out;
-    }
-
-    @keyframes modalSlideIn {
-        from {
-            opacity: 0;
-            transform: translateY(-20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    article {
-        transition: all 0.3s ease;
-    }
-
-    .member-detail-trigger:focus {
-        outline: 2px solid #3b82f6;
-        outline-offset: 2px;
-    }
-
-    .modal-close:focus {
-        outline: 2px solid #6b7280;
-        outline-offset: 2px;
-    }
-</style>

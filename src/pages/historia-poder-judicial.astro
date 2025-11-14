@@ -16,12 +16,12 @@ import Gabel from "../components/icons/gabel.astro";
             <div class="absolute inset-0" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.1) 35px, rgba(255,255,255,.1) 70px);"></div>
         </div>
 
-        <div class="absolute inset-0 opacity-10">
-            <div class="absolute top-20 left-10 w-96 h-96 bg-secondary rounded-full blur-3xl"></div>
-            <div class="absolute bottom-20 right-20 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+        <div class="absolute inset-0 opacity-10 overflow-hidden">
+            <div class="absolute top-20 -left-20 md:left-10 w-64 h-64 md:w-96 md:h-96 bg-secondary rounded-full blur-3xl"></div>
+            <div class="absolute bottom-20 -right-20 md:right-20 w-64 h-64 md:w-96 md:h-96 bg-white rounded-full blur-3xl"></div>
         </div>
 
-        <div class="relative z-10 text-center text-white px-5 max-w-6xl mx-auto py-24">
+        <div class="relative z-10 text-center text-white px-3 md:px-5 max-w-6xl mx-auto py-12 md:py-24">
             <div class="mb-8 flex justify-center">
                 <div class="relative">
                     <Scale classname="size-24 md:size-28 text-secondary/90" />
@@ -65,7 +65,7 @@ import Gabel from "../components/icons/gabel.astro";
     </section>
 
     <!-- Breadcrumb -->
-    <div class="bg-gray-100 py-3 px-5">
+    <div class="bg-gray-100 py-3 px-3 md:px-5">
         <div class="max-w-7xl mx-auto">
             <nav class="text-sm text-gray-600">
                 <a href="/" class="hover:text-primary transition-colors">Inicio</a>
@@ -76,9 +76,9 @@ import Gabel from "../components/icons/gabel.astro";
     </div>
 
     <!-- Introduction Section -->
-    <section class="py-20 px-5 bg-white">
+    <section class="py-10 md:py-20 px-3 md:px-5 bg-white">
         <div class="max-w-5xl mx-auto">
-            <div class="mb-16">
+            <div class="mb-8 md:mb-16">
                 <div class="flex items-center justify-center mb-10">
                     <div class="flex items-center gap-4">
                         <div class="w-12 h-px bg-primary/30"></div>
@@ -96,11 +96,11 @@ import Gabel from "../components/icons/gabel.astro";
                         La historia del sistema de justicia en Guinea Ecuatorial es un reflejo de las transformaciones políticas y sociales que han moldeado al país desde su independencia en 1968. El Poder Judicial, concebido como el garante de los derechos fundamentales y la administración de la justicia, ha evolucionado a lo largo de los años, influenciado por contextos históricos cambiantes y profundas reformas legales.
                     </p>
 
-                    <p class="text-gray-700 pl-8 border-l-4 border-secondary/30">
+                    <p class="text-gray-700 pl-4 md:pl-8 border-l-4 border-secondary/30">
                         Desde sus primeras configuraciones bajo la Constitución de 1968 hasta los cambios estructurales introducidos en la reforma de Annobón de 2012, el Poder Judicial ha transitado por diferentes modelos de organización y principios de funcionamiento. Este análisis explora esa evolución, destacando los avances que han marcado el desarrollo de un sistema judicial que busca equilibrar la independencia teórica con las realidades políticas y sociales del país.
                     </p>
 
-                    <div class="bg-gradient-to-r from-primary/5 via-secondary/5 to-primary/5 rounded-xl p-8 border-l-4 border-secondary">
+                    <div class="bg-gradient-to-r from-primary/5 via-secondary/5 to-primary/5 rounded-xl p-4 md:p-8 border-l-4 border-secondary">
                         <p class="text-gray-800 font-medium">
                             El enfoque se centrará en <strong class="text-primary">tres aspectos clave</strong>: los principios que han regido el Poder Judicial en cada etapa constitucional, las implicaciones de los cambios normativos en la práctica judicial y los desafíos actuales que enfrenta el sistema para alinearse con los estándares modernos de justicia.
                         </p>
@@ -111,9 +111,9 @@ import Gabel from "../components/icons/gabel.astro";
     </section>
 
     <!-- Timeline Section -->
-    <section class="py-20 px-5 bg-gradient-to-b from-gray-50 to-white">
+    <section class="py-10 md:py-20 px-3 md:px-5 bg-gradient-to-b from-gray-50 to-white">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-20">
+            <div class="text-center mb-12 md:mb-20">
                 <h2 class="text-3xl md:text-5xl font-bold text-primary mb-4 uppercase tracking-wide">
                     Línea de Tiempo
                 </h2>
@@ -124,7 +124,7 @@ import Gabel from "../components/icons/gabel.astro";
             </div>
 
             <!-- Timeline container con línea vertical central -->
-            <div class="timeline-wrapper relative">
+            <div class="timeline-wrapper relative px-2 md:px-0">
                 <!-- Línea vertical central -->
                 <div class="absolute left-1/2 transform -translate-x-1/2 w-px h-full bg-gradient-to-b from-gray-300 via-gray-400 to-gray-200 hidden md:block"></div>
 
@@ -135,13 +135,13 @@ import Gabel from "../components/icons/gabel.astro";
                     position="left"
                 >
                     <ul class="mt-6 space-y-3 text-gray-600 text-sm">
-                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                        <li class="flex items-start gap-2 md:gap-3 pl-3 md:pl-4 border-l-2 border-gray-200">
                             <span>Estatuto del patronato de indígenas (17 de julio de 1928)</span>
                         </li>
-                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                        <li class="flex items-start gap-2 md:gap-3 pl-3 md:pl-4 border-l-2 border-gray-200">
                             <span>Sistema de tutela que diferenciaba entre blancos y negros</span>
                         </li>
-                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                        <li class="flex items-start gap-2 md:gap-3 pl-3 md:pl-4 border-l-2 border-gray-200">
                             <span>Ausencia de legislación escrita y del principio de legalidad</span>
                         </li>
                     </ul>
@@ -155,13 +155,13 @@ import Gabel from "../components/icons/gabel.astro";
                     position="right"
                 >
                     <ul class="mt-6 space-y-3 text-gray-600 text-sm">
-                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                        <li class="flex items-start gap-2 md:gap-3 pl-3 md:pl-4 border-l-2 border-gray-200">
                             <span>Creación del Tribunal Supremo como máximo órgano de justicia</span>
                         </li>
-                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                        <li class="flex items-start gap-2 md:gap-3 pl-3 md:pl-4 border-l-2 border-gray-200">
                             <span>No se utilizó el término "Poder Judicial"</span>
                         </li>
-                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                        <li class="flex items-start gap-2 md:gap-3 pl-3 md:pl-4 border-l-2 border-gray-200">
                             <span>Modelo jerárquico inspirado en sistemas europeos</span>
                         </li>
                     </ul>
@@ -175,13 +175,13 @@ import Gabel from "../components/icons/gabel.astro";
                     position="left"
                 >
                     <ul class="mt-6 space-y-3 text-gray-600 text-sm">
-                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                        <li class="flex items-start gap-2 md:gap-3 pl-3 md:pl-4 border-l-2 border-gray-200">
                             <span>Primera constitución en crear la institución de la Fiscalía</span>
                         </li>
-                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                        <li class="flex items-start gap-2 md:gap-3 pl-3 md:pl-4 border-l-2 border-gray-200">
                             <span>Extensión del sistema judicial: juzgados y tribunales civiles y militares</span>
                         </li>
-                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                        <li class="flex items-start gap-2 md:gap-3 pl-3 md:pl-4 border-l-2 border-gray-200">
                             <span>Eliminación del principio de inamovilidad de los jueces</span>
                         </li>
                     </ul>
@@ -195,13 +195,13 @@ import Gabel from "../components/icons/gabel.astro";
                     position="right"
                 >
                     <ul class="mt-6 space-y-3 text-gray-600 text-sm">
-                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                        <li class="flex items-start gap-2 md:gap-3 pl-3 md:pl-4 border-l-2 border-gray-200">
                             <span>Institucionalización bajo los principios de unidad y exclusividad jurisdiccional</span>
                         </li>
-                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                        <li class="flex items-start gap-2 md:gap-3 pl-3 md:pl-4 border-l-2 border-gray-200">
                             <span>Artículo 142: unidad jurisdiccional como base organizativa</span>
                         </li>
-                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                        <li class="flex items-start gap-2 md:gap-3 pl-3 md:pl-4 border-l-2 border-gray-200">
                             <span>Profesionalización de la administración de justicia</span>
                         </li>
                     </ul>
@@ -215,13 +215,13 @@ import Gabel from "../components/icons/gabel.astro";
                     position="left"
                 >
                     <ul class="mt-6 space-y-3 text-gray-600 text-sm">
-                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                        <li class="flex items-start gap-2 md:gap-3 pl-3 md:pl-4 border-l-2 border-gray-200">
                             <span>Separación de funciones: gobierno vs. jurisdicción</span>
                         </li>
-                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                        <li class="flex items-start gap-2 md:gap-3 pl-3 md:pl-4 border-l-2 border-gray-200">
                             <span>Órgano de gobierno para supervisar el funcionamiento judicial</span>
                         </li>
-                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                        <li class="flex items-start gap-2 md:gap-3 pl-3 md:pl-4 border-l-2 border-gray-200">
                             <span>Protección de la independencia e integridad de los jueces</span>
                         </li>
                     </ul>
@@ -234,13 +234,13 @@ import Gabel from "../components/icons/gabel.astro";
                     position="right"
                 >
                     <ul class="mt-6 space-y-3 text-gray-600 text-sm">
-                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                        <li class="flex items-start gap-2 md:gap-3 pl-3 md:pl-4 border-l-2 border-gray-200">
                             <span>Creación de la carrera judicial</span>
                         </li>
-                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                        <li class="flex items-start gap-2 md:gap-3 pl-3 md:pl-4 border-l-2 border-gray-200">
                             <span>Instituto de Práctica Judicial para formación especializada</span>
                         </li>
-                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                        <li class="flex items-start gap-2 md:gap-3 pl-3 md:pl-4 border-l-2 border-gray-200">
                             <span>Profesionalización de jueces y secretarios judiciales</span>
                         </li>
                     </ul>
@@ -253,13 +253,13 @@ import Gabel from "../components/icons/gabel.astro";
                     position="left"
                 >
                     <ul class="mt-6 space-y-3 text-gray-600 text-sm">
-                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                        <li class="flex items-start gap-2 md:gap-3 pl-3 md:pl-4 border-l-2 border-gray-200">
                             <span>Cambios estructurales en la organización judicial</span>
                         </li>
-                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                        <li class="flex items-start gap-2 md:gap-3 pl-3 md:pl-4 border-l-2 border-gray-200">
                             <span>Consolidación del Consejo Superior del Poder Judicial</span>
                         </li>
-                        <li class="flex items-start gap-3 pl-4 border-l-2 border-gray-200">
+                        <li class="flex items-start gap-2 md:gap-3 pl-3 md:pl-4 border-l-2 border-gray-200">
                             <span>Institucionalización visible del Poder Judicial</span>
                         </li>
                     </ul>
@@ -269,9 +269,9 @@ import Gabel from "../components/icons/gabel.astro";
     </section>
 
     <!-- Detailed Sections -->
-    <section class="py-20 px-5 bg-white">
+    <section class="py-10 md:py-20 px-3 md:px-5 bg-white">
         <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-16">
+            <div class="text-center mb-8 md:mb-16">
                 <h2 class="text-3xl md:text-5xl font-bold text-primary mb-4 uppercase tracking-wide">
                     Análisis Detallado por Periodo
                 </h2>
@@ -279,8 +279,8 @@ import Gabel from "../components/icons/gabel.astro";
             </div>
 
             <!-- Sistema Colonial -->
-            <div class="mb-16">
-                <div class="bg-gradient-to-r from-primary to-primary/80 text-white p-8 rounded-t-lg">
+            <div class="mb-8 md:mb-16">
+                <div class="bg-gradient-to-r from-primary to-primary/80 text-white p-4 md:p-8 rounded-t-lg">
                     <div class="flex items-center gap-4">
                         <Gabel classname="size-12 text-secondary" />
                         <div>
@@ -289,7 +289,7 @@ import Gabel from "../components/icons/gabel.astro";
                         </div>
                     </div>
                 </div>
-                <div class="bg-gray-50 p-8 rounded-b-lg shadow-lg">
+                <div class="bg-gray-50 p-4 md:p-8 rounded-b-lg shadow-lg">
                     <h4 class="text-xl font-bold text-primary mb-4">1.1. El sistema de justicia entre 1928-1956</h4>
                     <p class="text-gray-700 leading-relaxed mb-4">
                         Para comprender y apreciar el sistema judicial con el que cuenta hoy el país, resulta obligatorio hacer un repaso muy breve sobre sus propios orígenes. Esos orígenes estuvieron marcados por acontecimientos de grandes reformas legales que analizadas conjuntamente, nos ayudarían a comprender la evolución que ha tenido nuestro poder judicial.
@@ -308,12 +308,12 @@ import Gabel from "../components/icons/gabel.astro";
                         El sistema de justicia para menores durante la colonia estaba compuesto por los <strong>tribunales de raza</strong>, creados mediante Decreto núm. 10/1938 de fecha 10 de octubre. La planta de estos tribunales estaba formada por:
                     </p>
 
-                    <div class="grid md:grid-cols-3 gap-4 my-6">
-                        <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-primary">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
+                        <div class="bg-white p-4 md:p-6 rounded-lg shadow-md border-t-4 border-primary">
                             <h5 class="font-bold text-lg mb-2 text-primary">Tribunales de demarcación</h5>
                             <p class="text-sm text-gray-600">Nivel básico del sistema</p>
                         </div>
-                        <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-primary">
+                        <div class="bg-white p-4 md:p-6 rounded-lg shadow-md border-t-4 border-primary">
                             <h5 class="font-bold text-lg mb-2 text-primary">Tribunales de distrito</h5>
                             <p class="text-sm text-gray-600">Nivel intermedio</p>
                         </div>
@@ -355,8 +355,8 @@ import Gabel from "../components/icons/gabel.astro";
             </div>
 
             <!-- Constitución 1968 -->
-            <div class="mb-16">
-                <div class="bg-gradient-to-r from-primary to-primary/80 text-white p-8 rounded-t-lg">
+            <div class="mb-8 md:mb-16">
+                <div class="bg-gradient-to-r from-primary to-primary/80 text-white p-4 md:p-8 rounded-t-lg">
                     <div class="flex items-center gap-4">
                         <Judged classname="size-12 text-secondary" />
                         <div>
@@ -365,7 +365,7 @@ import Gabel from "../components/icons/gabel.astro";
                         </div>
                     </div>
                 </div>
-                <div class="bg-gray-50 p-8 rounded-b-lg shadow-lg">
+                <div class="bg-gray-50 p-4 md:p-8 rounded-b-lg shadow-lg">
                     <p class="text-gray-700 leading-relaxed mb-4">
                         La Constitución de 1968 definió los principios rectores de la administración de justicia en Guinea Ecuatorial. En el <strong>Título VIII</strong>, se establecía que la justicia sería administrada por el Tribunal Supremo y otros órganos judiciales determinados por una ley. Este diseño buscaba un modelo jerárquico y centralizado, inspirado en sistemas europeos, particularmente el español, pero adaptado al contexto local.
                     </p>
@@ -398,8 +398,8 @@ import Gabel from "../components/icons/gabel.astro";
             </div>
 
             <!-- Constitución 1973 -->
-            <div class="mb-16">
-                <div class="bg-gradient-to-r from-primary to-primary/80 text-white p-8 rounded-t-lg">
+            <div class="mb-8 md:mb-16">
+                <div class="bg-gradient-to-r from-primary to-primary/80 text-white p-4 md:p-8 rounded-t-lg">
                     <div class="flex items-center gap-4">
                         <Scale classname="size-12 text-secondary" />
                         <div>
@@ -408,7 +408,7 @@ import Gabel from "../components/icons/gabel.astro";
                         </div>
                     </div>
                 </div>
-                <div class="bg-gray-50 p-8 rounded-b-lg shadow-lg">
+                <div class="bg-gray-50 p-4 md:p-8 rounded-b-lg shadow-lg">
                     <h4 class="text-xl font-bold text-primary mb-4">3.1. Contexto político tras la independencia</h4>
                     <p class="text-gray-700 leading-relaxed mb-4">
                         A pocos años de la independencia, Guinea Ecuatorial atravesó un periodo de inestabilidad política y económica que culminó en el establecimiento de un régimen autoritario, el cual tuvo graves consecuencias en la concepción y aplicación en la práctica de un sistema judicial que pudiera llamarse Poder del Estado.
@@ -456,8 +456,8 @@ import Gabel from "../components/icons/gabel.astro";
             </div>
 
             <!-- Constitución 1982 -->
-            <div class="mb-16">
-                <div class="bg-gradient-to-r from-secondary to-secondary/80 text-white p-8 rounded-t-lg">
+            <div class="mb-8 md:mb-16">
+                <div class="bg-gradient-to-r from-secondary to-secondary/80 text-white p-4 md:p-8 rounded-t-lg">
                     <div class="flex items-center gap-4">
                         <Gabel classname="size-12 text-white" />
                         <div>
@@ -466,7 +466,7 @@ import Gabel from "../components/icons/gabel.astro";
                         </div>
                     </div>
                 </div>
-                <div class="bg-gray-50 p-8 rounded-b-lg shadow-lg border-4 border-secondary/30">
+                <div class="bg-gray-50 p-4 md:p-8 rounded-b-lg shadow-lg border-4 border-secondary/30">
                     <h4 class="text-xl font-bold text-primary mb-4">4.1. Contexto político y social</h4>
                     <p class="text-gray-700 leading-relaxed mb-4">
                         En 1982, Guinea Ecuatorial se encontraba en un proceso de reconstrucción institucional tras la caída en agosto de 1979 del llamado régimen de triste memoria. El nuevo gobierno, liderado por S.E Teodoro Obiang NGUEMA MBASOGO, enfrentaba varios desafíos, siendo el debate sobre el modelo de Estado que mejor se adaptaba a realidad del país uno de ellos.
@@ -503,7 +503,7 @@ import Gabel from "../components/icons/gabel.astro";
                         </ul>
                     </HighlightBox>
 
-                    <div class="bg-gradient-to-r from-secondary/10 to-secondary/5 p-6 rounded-lg my-6 border-l-4 border-secondary">
+                    <div class="bg-gradient-to-r from-secondary/10 to-secondary/5 p-4 md:p-6 rounded-lg my-6 border-l-4 border-secondary">
                         <h5 class="text-2xl font-bold text-primary mb-3">Hito Fundamental</h5>
                         <p class="text-lg text-gray-800 leading-relaxed">
                             La constitución de 1982 fue la <strong>primera en concebir a la administración de justicia como un PODER DEL ESTADO</strong>; delimitando sus funciones exclusivas y evitando que otros poderes del Estado intervengan en la administración de justicia.
@@ -517,8 +517,8 @@ import Gabel from "../components/icons/gabel.astro";
             </div>
 
             <!-- Década de los 90 -->
-            <div class="mb-16">
-                <div class="bg-gradient-to-r from-secondary to-secondary/80 text-white p-8 rounded-t-lg">
+            <div class="mb-8 md:mb-16">
+                <div class="bg-gradient-to-r from-secondary to-secondary/80 text-white p-4 md:p-8 rounded-t-lg">
                     <div class="flex items-center gap-4">
                         <Judged classname="size-12 text-white" />
                         <div>
@@ -527,12 +527,12 @@ import Gabel from "../components/icons/gabel.astro";
                         </div>
                     </div>
                 </div>
-                <div class="bg-gray-50 p-8 rounded-b-lg shadow-lg border-4 border-secondary/30">
+                <div class="bg-gray-50 p-4 md:p-8 rounded-b-lg shadow-lg border-4 border-secondary/30">
                     <p class="text-gray-700 leading-relaxed mb-6">
                         Uno de los momentos más significativos en la evolución del Poder Judicial ocurrió en <strong>1995</strong>, con la promulgación de la <strong>Ley Constitucional Nº 1/1995</strong>, que marcó un punto de inflexión al introducir el <strong>Consejo Superior del Poder Judicial</strong> en la Ley Fundamental.
                     </p>
 
-                    <div class="bg-gradient-to-br from-primary to-primary/90 text-white p-8 rounded-lg my-8 shadow-xl">
+                    <div class="bg-gradient-to-br from-primary to-primary/90 text-white p-4 md:p-8 rounded-lg my-8 shadow-xl">
                         <h4 class="text-2xl font-bold mb-4 flex items-center gap-3">
                             <Scale classname="size-8" />
                             Importancia del Consejo Superior
@@ -552,7 +552,7 @@ import Gabel from "../components/icons/gabel.astro";
                     </p>
 
                     <h4 class="text-xl font-bold text-primary mb-4 mt-8">El Principio de Independencia Judicial</h4>
-                    <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-secondary mb-6">
+                    <div class="bg-white p-4 md:p-6 rounded-lg shadow-md border-l-4 border-secondary mb-6">
                         <p class="text-gray-700 leading-relaxed mb-3">Según este principio:</p>
                         <ul class="space-y-3 text-gray-700">
                             <li class="flex items-start gap-2">
@@ -579,22 +579,22 @@ import Gabel from "../components/icons/gabel.astro";
                         La introducción del Consejo Superior del Poder Judicial en 1995 y su consolidación en 2012 (reforma de Annobón) representaron avances importantes hacia un sistema judicial más estructurado y profesionalizado, lo cual facilitó:
                     </p>
 
-                    <div class="grid md:grid-cols-3 gap-6 my-6">
-                        <div class="bg-white p-6 rounded-lg shadow-lg border-t-4 border-secondary hover:shadow-xl transition-shadow">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 my-6">
+                        <div class="bg-white p-4 md:p-6 rounded-lg shadow-lg border-t-4 border-secondary hover:shadow-xl transition-shadow">
                             <div class="text-center mb-4">
                                 <Book classname="size-12 text-secondary mx-auto" />
                             </div>
                             <h5 class="font-bold text-lg mb-2 text-center text-primary">Carrera Judicial</h5>
                             <p class="text-sm text-gray-600 text-center">Creación en la Ley Orgánica del Poder Judicial de 2009</p>
                         </div>
-                        <div class="bg-white p-6 rounded-lg shadow-lg border-t-4 border-secondary hover:shadow-xl transition-shadow">
+                        <div class="bg-white p-4 md:p-6 rounded-lg shadow-lg border-t-4 border-secondary hover:shadow-xl transition-shadow">
                             <div class="text-center mb-4">
                                 <Judged classname="size-12 text-secondary mx-auto" />
                             </div>
                             <h5 class="font-bold text-lg mb-2 text-center text-primary">Instituto de Práctica</h5>
                             <p class="text-sm text-gray-600 text-center">Formación especializada para jueces y secretarios</p>
                         </div>
-                        <div class="bg-white p-6 rounded-lg shadow-lg border-t-4 border-secondary hover:shadow-xl transition-shadow">
+                        <div class="bg-white p-4 md:p-6 rounded-lg shadow-lg border-t-4 border-secondary hover:shadow-xl transition-shadow">
                             <div class="text-center mb-4">
                                 <Scale classname="size-12 text-secondary mx-auto" />
                             </div>
@@ -625,9 +625,9 @@ import Gabel from "../components/icons/gabel.astro";
     </section>
 
     <!-- Key Concepts Section -->
-    <section class="py-20 px-5 bg-gradient-to-b from-primary/5 to-white">
+    <section class="py-10 md:py-20 px-3 md:px-5 bg-gradient-to-b from-primary/5 to-white">
         <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-16">
+            <div class="text-center mb-8 md:mb-16">
                 <h2 class="text-3xl md:text-5xl font-bold text-primary mb-4 uppercase tracking-wide">
                     Conceptos Clave
                 </h2>
@@ -637,9 +637,9 @@ import Gabel from "../components/icons/gabel.astro";
                 </p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="group relative bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border-l-4 border-primary overflow-hidden">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+                <div class="group relative bg-white p-4 md:p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border-l-4 border-primary overflow-hidden">
+                    <div class="absolute top-0 right-0 w-24 h-24 md:w-32 md:h-32 bg-primary/5 rounded-full -mr-12 md:-mr-16 -mt-12 md:-mt-16 group-hover:scale-150 transition-transform duration-500"></div>
                     <div class="relative">
                         <div class="flex items-start gap-4 mb-4">
                             <div class="p-3 bg-primary/10 rounded-lg group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
@@ -656,8 +656,8 @@ import Gabel from "../components/icons/gabel.astro";
                     </div>
                 </div>
 
-                <div class="group relative bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border-l-4 border-gray-300 overflow-hidden">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-gray-50 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
+                <div class="group relative bg-white p-4 md:p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border-l-4 border-gray-300 overflow-hidden">
+                    <div class="absolute top-0 right-0 w-24 h-24 md:w-32 md:h-32 bg-gray-50 rounded-full -mr-12 md:-mr-16 -mt-12 md:-mt-16 group-hover:scale-150 transition-transform duration-500"></div>
                     <div class="relative">
                         <div class="flex items-start gap-4 mb-4">
                             <div class="p-3 bg-gray-100 rounded-lg group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
@@ -674,8 +674,8 @@ import Gabel from "../components/icons/gabel.astro";
                     </div>
                 </div>
 
-                <div class="group relative bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border-l-4 border-primary overflow-hidden">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
+                <div class="group relative bg-white p-4 md:p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border-l-4 border-primary overflow-hidden">
+                    <div class="absolute top-0 right-0 w-24 h-24 md:w-32 md:h-32 bg-primary/5 rounded-full -mr-12 md:-mr-16 -mt-12 md:-mt-16 group-hover:scale-150 transition-transform duration-500"></div>
                     <div class="relative">
                         <div class="flex items-start gap-4 mb-4">
                             <div class="p-3 bg-primary/10 rounded-lg group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
@@ -692,8 +692,8 @@ import Gabel from "../components/icons/gabel.astro";
                     </div>
                 </div>
 
-                <div class="group relative bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border-l-4 border-gray-300 overflow-hidden">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-gray-50 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
+                <div class="group relative bg-white p-4 md:p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border-l-4 border-gray-300 overflow-hidden">
+                    <div class="absolute top-0 right-0 w-24 h-24 md:w-32 md:h-32 bg-gray-50 rounded-full -mr-12 md:-mr-16 -mt-12 md:-mt-16 group-hover:scale-150 transition-transform duration-500"></div>
                     <div class="relative">
                         <div class="flex items-start gap-4 mb-4">
                             <div class="p-3 bg-gray-100 rounded-lg group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
@@ -714,14 +714,14 @@ import Gabel from "../components/icons/gabel.astro";
     </section>
 
     <!-- Conclusion Section -->
-    <section class="py-20 px-5 bg-gradient-to-b from-white to-gray-50">
+    <section class="py-10 md:py-20 px-3 md:px-5 bg-gradient-to-b from-white to-gray-50">
         <div class="max-w-5xl mx-auto">
             <div class="relative">
                 <!-- Decorative elements -->
-                <div class="absolute -top-10 -left-10 w-40 h-40 bg-secondary/10 rounded-full blur-3xl"></div>
-                <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-primary/10 rounded-full blur-3xl"></div>
+                <div class="absolute -top-10 -left-10 w-32 h-32 md:w-40 md:h-40 bg-secondary/10 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-10 -right-10 w-32 h-32 md:w-40 md:h-40 bg-primary/10 rounded-full blur-3xl"></div>
 
-                <div class="relative bg-gradient-to-br from-primary via-primary/95 to-primary/90 text-white p-10 md:p-16 rounded-2xl shadow-2xl border border-secondary/20">
+                <div class="relative bg-gradient-to-br from-primary via-primary/95 to-primary/90 text-white p-6 md:p-10 lg:p-16 rounded-2xl shadow-2xl border border-secondary/20">
                     <div class="flex items-center gap-4 mb-10">
                         <Scale classname="size-16 text-white/90" />
                         <div>
@@ -737,11 +737,11 @@ import Gabel from "../components/icons/gabel.astro";
                             Construir un Poder Judicial moderno y efectivo no solo es una necesidad legal, sino también un <strong class="text-secondary">compromiso ético y político</strong> con el desarrollo del país. A medida que Guinea Ecuatorial continúe su camino hacia la modernización, el fortalecimiento del sistema judicial será un pilar fundamental para lograr un progreso sostenible y equitativo.
                         </p>
 
-                        <p class="text-white/95 pl-6 border-l-4 border-secondary/50">
+                        <p class="text-white/95 pl-4 md:pl-6 border-l-4 border-secondary/50">
                             Como hemos visto, la historia del sistema judicial de Guinea Ecuatorial no es solo un relato sobre leyes e instituciones, sino también sobre las <strong class="text-secondary">aspiraciones de un pueblo</strong> por construir un país más justo y democrático.
                         </p>
 
-                        <div class="bg-white/15 backdrop-blur-md rounded-xl p-8 mt-8 border border-white/20">
+                        <div class="bg-white/15 backdrop-blur-md rounded-xl p-4 md:p-8 mt-8 border border-white/20">
                             <p class="text-xl font-semibold text-white">
                                 En este desafío, el Poder Judicial tiene un papel central, y su fortalecimiento es una <strong class="text-secondary">responsabilidad compartida</strong> entre las autoridades, las instituciones y la sociedad en su conjunto.
                             </p>
@@ -753,7 +753,7 @@ import Gabel from "../components/icons/gabel.astro";
     </section>
 
     <!-- CTA Section -->
-    <section class="py-20 px-5 bg-gradient-to-b from-gray-50 to-white">
+    <section class="py-10 md:py-20 px-3 md:px-5 bg-gradient-to-b from-gray-50 to-white">
         <div class="max-w-5xl mx-auto">
             <div class="text-center mb-12">
                 <h3 class="text-3xl md:text-4xl font-bold text-primary mb-6 tracking-wide">
@@ -765,10 +765,10 @@ import Gabel from "../components/icons/gabel.astro";
                 </p>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
                 <a
                     href="/organigrama/cspj"
-                    class="group relative bg-white p-8 rounded-lg shadow-sm hover:shadow-xl transition-all duration-500 border border-gray-200 hover:border-gray-400 overflow-hidden"
+                    class="group relative bg-white p-4 md:p-8 rounded-lg shadow-sm hover:shadow-xl transition-all duration-500 border border-gray-200 hover:border-gray-400 overflow-hidden"
                 >
                     <!-- Línea superior que se expande al hover -->
                     <div class="absolute top-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-500"></div>
@@ -800,7 +800,7 @@ import Gabel from "../components/icons/gabel.astro";
 
                 <a
                     href="/organigrama/csj"
-                    class="group relative bg-white p-8 rounded-lg shadow-sm hover:shadow-xl transition-all duration-500 border border-gray-200 hover:border-gray-400 overflow-hidden"
+                    class="group relative bg-white p-4 md:p-8 rounded-lg shadow-sm hover:shadow-xl transition-all duration-500 border border-gray-200 hover:border-gray-400 overflow-hidden"
                 >
                     <!-- Línea superior que se expande al hover -->
                     <div class="absolute top-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-500"></div>
@@ -832,7 +832,7 @@ import Gabel from "../components/icons/gabel.astro";
 
                 <a
                     href="/organigrama/audiencias"
-                    class="group relative bg-white p-8 rounded-lg shadow-sm hover:shadow-xl transition-all duration-500 border border-gray-200 hover:border-gray-400 overflow-hidden"
+                    class="group relative bg-white p-4 md:p-8 rounded-lg shadow-sm hover:shadow-xl transition-all duration-500 border border-gray-200 hover:border-gray-400 overflow-hidden"
                 >
                     <!-- Línea superior que se expande al hover -->
                     <div class="absolute top-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-500"></div>
@@ -914,6 +914,11 @@ import Gabel from "../components/icons/gabel.astro";
 </script>
 
 <style>
+    /* Prevent horizontal overflow */
+    body {
+        overflow-x: hidden;
+    }
+
     /* Smooth transitions */
     * {
         scroll-behavior: smooth;
@@ -948,5 +953,12 @@ import Gabel from "../components/icons/gabel.astro";
     /* Hover effects */
     .group:hover .timeline-year {
         transform: scale(1.05);
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 767px) {
+        section {
+            overflow-x: hidden;
+        }
     }
 </style>
