@@ -91,14 +91,14 @@ console.log("JSON completo de la noticia:", JSON.stringify(noticia, null, 2));
                 noticia.content && (
                     <div
                         id="contenido"
-                        class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl mt-8"
+                        class="w-full max-w-full prose prose-md mt-8 overflow-hidden"
                         set:html={noticia.content}
                     />
                 )
             }
 
             <!-- Botón de volver -->
-            <div class="mt-12 pt-8 border-t border-gray-200">
+            <div class="mt-12 pt-8 border-t border-gray-200 mb-10">
                 <a
                     href="/noticias_judiciales"
                     class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary/90 hover:shadow-lg transition-all duration-200"

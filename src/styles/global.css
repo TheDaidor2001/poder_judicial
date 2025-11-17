@@ -24,28 +24,13 @@
         font-weight: 700;
         /* Peso para títulos */
     }
+
+    /* Prevenir corte incorrecto de palabras en todo el sitio */
+    body {
+        word-break: keep-all;
+        overflow-wrap: break-word;
+        hyphens: none;
+    }
 }
 
 /* Estilos para contenido HTML inyectado en noticias */
-@layer components {
-    #contenido img {
-        max-width: 100%;
-        height: auto;
-        display: block;
-    }
-
-    #contenido * {
-        max-width: 100%;
-        word-break: normal;
-    }
-
-    #contenido p,
-    #contenido div,
-    #contenido span,
-    #contenido li,
-    #contenido td,
-    #contenido th {
-        overflow-wrap: break-word;
-        hyphens: auto;
-    }
-}
