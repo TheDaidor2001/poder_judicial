@@ -4,20 +4,95 @@ import Footer from "../components/Footer.astro";
 import Navbar from "../components/Navbar.astro";
 import "../styles/global.css";
 
-interface props {
+interface Props {
     title: string;
+    description?: string;
+    image?: string;
+    date?: string;
+    author?: string;
 }
 
-const { title = "Poder Judicial de Guinea Ecuatorial | Noticias Judiciales" } =
-    Astro.props;
+const {
+    title = "Poder Judicial de Guinea Ecuatorial | Noticias Judiciales",
+    description = "Últimas noticias y actualizaciones del Poder Judicial de Guinea Ecuatorial. Información actualizada sobre el sistema judicial, sentencias, nombramientos y eventos importantes.",
+    image = "/images/og-image.jpg",
+    date,
+    author = "Poder Judicial de Guinea Ecuatorial"
+} = Astro.props;
+
+const { pathname } = Astro.url;
+const currentUrl = new URL(pathname, Astro.site || "https://poderjudicial-gq.com");
+const canonicalUrl = currentUrl.href;
+
+// Imagen OG con URL completa
+const ogImage = image.startsWith('http') ? image : new URL(image, Astro.site || "https://poderjudicial-gq.com").href;
 ---
 
 <html lang="es">
     <head>
         <meta charset="utf-8" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta name="viewport" content="width=device-width" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="generator" content={Astro.generator} />
+
+        <!-- SEO Básico -->
         <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta name="author" content={author} />
+        <link rel="canonical" href={canonicalUrl} />
+        {date && <meta name="article:published_time" content={date} />}
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:locale" content="es_GQ" />
+        <meta property="og:site_name" content="Poder Judicial de Guinea Ecuatorial" />
+        {date && <meta property="article:published_time" content={date} />}
+        <meta property="article:author" content={author} />
+        <meta property="article:section" content="Noticias Judiciales" />
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content={canonicalUrl} />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={ogImage} />
+
+        <!-- Información adicional -->
+        <meta name="robots" content="index, follow" />
+        <meta name="language" content="Spanish" />
+        <meta name="theme-color" content="#1e3a8a" />
+
+        <!-- JSON-LD Schema para Artículos -->
+        <script type="application/ld+json" set:html={JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "NewsArticle",
+            "headline": title,
+            "description": description,
+            "image": ogImage,
+            "datePublished": date || new Date().toISOString(),
+            "author": {
+                "@type": "Organization",
+                "name": author
+            },
+            "publisher": {
+                "@type": "GovernmentOrganization",
+                "name": "Poder Judicial de Guinea Ecuatorial",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": new URL("/images/logo.png", Astro.site || "https://poderjudicial-gq.com").href
+                }
+            },
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": canonicalUrl
+            }
+        })} />
     </head>
     <body class="min-h-screen flex flex-col">
         <Navbar />

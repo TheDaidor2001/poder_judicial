@@ -283,7 +283,7 @@ export const corteSuprema = [
         id: "magistrado3",
         cargo: "Secretaria de lo penal de la corte suprema de justicia",
         nombre: "Ilma. sra. doña Maria Carmen Mbeze Nguema Mofuman ",
-        foto: "/images/csj/maria.jpg",
+        foto: "/images/csj/maria.webp",
         descripcion: "Magistrado de la Corte Suprema de Justicia...",
         funciones: [
             "Conocer y resolver los recursos de casación",

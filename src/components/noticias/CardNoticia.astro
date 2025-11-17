@@ -8,20 +8,36 @@ interface Props {
     url?: string;
 }
 
-const { date, description, title } = Astro.props;
+const { date, description, title, url } = Astro.props;
+const newsUrl = url || `/noticias/esto_es_una_noticia`;
 ---
 
-<article class="py-5 border-b border-gray-300 last:border-0 flex flex-col">
-    <span class="text-sm text-gray-600">{date}</span>
-    <a
-        href={`/noticias/esto_es_una_noticia`}
-        class="hover:text-secondary transition-colors inline-flex items-center gap-x-1"
-    >
-        <h3 class="mt-2 text-md font-semibold">
+<article class="group py-6 px-6 hover:bg-gray-50 transition-all duration-200 first:rounded-t-lg last:rounded-b-lg">
+    <a href={newsUrl} class="block group/link">
+        <!-- Título -->
+        <h3 class="text-2xl md:text-3xl font-bold text-gray-900 group-hover/link:text-primary transition-colors duration-200 mb-3 leading-tight">
             {title}
         </h3>
+
+        <!-- Subtítulo/Descripción -->
+        <p class="text-gray-600 text-base leading-relaxed mb-3">
+            {description}
+        </p>
+
+        <!-- Fecha -->
+        <div class="flex items-center gap-2 text-sm text-gray-500 mb-4">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <time class="font-medium capitalize">{date}</time>
+        </div>
+
+        <!-- CTA -->
+        <span class="inline-flex items-center gap-1 text-sm font-medium text-primary group-hover/link:gap-2 transition-all duration-200">
+            Leer más
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+        </span>
     </a>
-    <p class="text-gray-700 text-sm mt-2">
-        {description}
-    </p>
 </article>

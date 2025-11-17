@@ -2,6 +2,7 @@
 
 @import '@fontsource-variable/roboto';
 @import '@fontsource-variable/roboto-condensed';
+@plugin '@tailwindcss/typography';
 
 
 
@@ -22,5 +23,29 @@
         /* Fuente para títulos */
         font-weight: 700;
         /* Peso para títulos */
+    }
+}
+
+/* Estilos para contenido HTML inyectado en noticias */
+@layer components {
+    #contenido img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    #contenido * {
+        max-width: 100%;
+        word-break: normal;
+    }
+
+    #contenido p,
+    #contenido div,
+    #contenido span,
+    #contenido li,
+    #contenido td,
+    #contenido th {
+        overflow-wrap: break-word;
+        hyphens: auto;
     }
 }

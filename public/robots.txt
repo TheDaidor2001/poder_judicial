@@ -1,0 +1,21 @@
+# robots.txt para Poder Judicial de Guinea Ecuatorial
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://poderjudicial-gq.com/sitemap-index.xml
+
+# Directorios permitidos
+Allow: /images/
+Allow: /noticias/
+Allow: /organigrama/
+Allow: /biblioteca/
+Allow: /servicios/
+
+# Crawl delay
+Crawl-delay: 1
+
+# Bloquear acceso a archivos específicos
+Disallow: /api/
+Disallow: /*.json$

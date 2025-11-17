@@ -1,87 +1,122 @@
 ---
 import NewsLayout from "../../layouts/NewsLayout.astro";
+import { fetchNewsBySlug, formatPublishedDate } from "../../utils/newsAPI";
 
 const { slug } = Astro.params;
+
+// Verificar que el slug existe
+if (!slug) {
+    return Astro.redirect("/noticias_judiciales");
+}
+
+// Obtener la noticia del API
+let noticia = null;
+let error: string | null = null;
+
+try {
+    noticia = await fetchNewsBySlug(slug);
+
+    if (!noticia) {
+        return Astro.redirect("/noticias_judiciales");
+    }
+} catch (e) {
+    error =
+        e instanceof Error
+            ? e.message
+            : "Error desconocido al cargar la noticia";
+    console.error("Error fetching news:", e);
+}
+
+// Si hay error o no hay noticia, redirigir
+if (error || !noticia) {
+    return Astro.redirect("/noticias_judiciales");
+}
+
+// Debug: log completo del JSON de la noticia
+console.log("JSON completo de la noticia:", JSON.stringify(noticia, null, 2));
 ---
 
-<NewsLayout title={`Poder Judicial de Guinea Ecuatorial | ${slug}`}>
-    <section class="xl:col-span-3">
-        <article>
+<NewsLayout
+    title={`${noticia.title} | Poder Judicial de Guinea Ecuatorial`}
+    description={noticia.subtitle}
+    image={noticia.imageUrl}
+    date={noticia.publishedAt}
+>
+    <section class="xl:col-span-3 w-full overflow-hidden">
+        <article class="w-full max-w-full overflow-hidden">
+            <!-- Fecha -->
             <p class="text-gray-700 text-sm sm:text-base">
-                jueves, 22 de mayo de 2025
+                <time class="capitalize"
+                    >{formatPublishedDate(noticia.publishedAt)}</time
+                >
             </p>
+
+            <!-- Título -->
             <h1 class="text-xl md:text-2xl lg:text-4xl font-semibold mt-3">
-                El Tribunal Supremo establece que la Administración debe probar
-                la culpa del administrador para imputarle la responsabilidad
-                subsidiaria de las deudas tributarias y sanciones
+                {noticia.title}
             </h1>
+
+            <!-- Subtítulo -->
             <p class="text-sm sm:text-lg text-gray-700 mt-5">
-                La Sala Tercera anula una sentencia de la Audiencia Nacional que
-                confirmó el acto de derivación de responsabilidad subsidiaria al
-                administrador de una empresa que tenía deudas derivadas tanto en
-                concepto de liquidación como de sanción por IVA de los
-                ejercicios 2006 a 2008.
+                {noticia.subtitle}
             </p>
+
+            <!-- Separador -->
             <div data-separator class="w-40 h-2 bg-secondary mt-3"></div>
-            <img
-                src="https://placehold.co/600x400"
-                alt=""
-                class="w-full h-[400px] object-cover mt-5 rounded"
-            />
-            <div class="mt-5 text-gray-700 text-sm">
-                <span class="w-5 h-5 rounded-full bg-secondary"></span>
-                <p>
-                    Autor: <span class="font-semibold">Palacio de Justicia</span
-                    >
-                </p>
+
+            <!-- Imagen destacada -->
+
+            <div class="w-full mt-5 rounded">
+                <img
+                    src={noticia.imageUrl}
+                    alt={noticia.title}
+                    class="w-full h-auto rounded"
+                    onerror="this.style.display='none'"
+                />
             </div>
 
-            <div id="contenido" class="space-y-5 xl:mb-20">
-                <p class="text-gray-950 mt-5 text-base">
-                    La Sala Tercera del Tribunal Supremo, Sección Segunda, ha
-                    declarado en la sentencia de 20 de mayo de 2025 que la
-                    responsabilidad subsidiaria establecida en el artículo
-                    43.1.a) de la Ley General Tributaria tiene naturaleza
-                    sancionadora, declaración que comporta, por esa razón, el
-                    reconocimiento en favor del responsable de determinadas
-                    garantías derivadas de esa naturaleza.
-                </p>
-                <p class="text-gray-950 mt-5 text-base">
-                    Aunque la doctrina que considera que estamos en presencia de
-                    materia sancionadora -para esta específica modalidad de la
-                    responsabilidad subsidiaria- no es ciertamente nueva, la que
-                    el Tribunal Supremo había declarado anteriormente se refería
-                    a la antigua versión de esta institución, regulada en el
-                    artículo 38.1 de la derogada LGT de 1963, que por lo demás
-                    no difiere, en su formulación legal, de la redacción vigente
-                    y aplicable al caso.
-                </p>
-                <p class="text-gray-950 mt-5 text-base">
-                    Además de contar esta jurisprudencia de la Sala Tercera con
-                    diversos precedentes, la condición de ilícito sancionador de
-                    esta particular forma de responsabilidad subsidiaria -que
-                    recae aquí sobre el administrador de una sociedad mercantil
-                    que hubiera cometido infracciones tributarias- ha sido
-                    reconocida también por el Tribunal Constitucional, atendido
-                    el hecho de que por virtud de esta derivación el responsable
-                    se hace cargo de las deudas de otro, que debe afrontar, en
-                    este caso de la entidad de la que se era administrador.
-                </p>
-                <p class="text-gray-950 mt-5 text-base">
-                    El Tribunal Supremo, en la sentencia comentada, analiza las
-                    consecuencias que la naturaleza sancionadora de la
-                    derivación de responsabilidad subsidiaria del artículo
-                    43.1.a) LGT conlleva en el régimen de derechos y garantías
-                    del declarado responsable subsidiario.
-                </p>
-                <p class="text-gray-950 mt-5 text-base">
-                    1. La primera conclusión, vista la jurisprudencia de esta
-                    Sala y la doctrina constitucional, es que se prohíbe la
-                    responsabilidad objetiva del administrador, lo que sucedería
-                    si ésta se exigiera atendiendo solo a la condición de
-                    administrador social, con vulneración del principio de
-                    presunción de inocencia.
-                </p>
+            <!-- Tipo de noticia -->
+            {
+                noticia.type && (
+                    <div class="mt-5">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary">
+                            {noticia.type}
+                        </span>
+                    </div>
+                )
+            }
+
+            <!-- Contenido de la noticia -->
+            {
+                noticia.content && (
+                    <div
+                        id="contenido"
+                        class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl mt-8"
+                        set:html={noticia.content}
+                    />
+                )
+            }
+
+            <!-- Botón de volver -->
+            <div class="mt-12 pt-8 border-t border-gray-200">
+                <a
+                    href="/noticias_judiciales"
+                    class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary/90 hover:shadow-lg transition-all duration-200"
+                >
+                    <svg
+                        class="w-5 h-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    Volver a Noticias
+                </a>
             </div>
         </article>
     </section>

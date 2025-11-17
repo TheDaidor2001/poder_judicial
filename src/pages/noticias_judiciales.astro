@@ -1,65 +1,142 @@
 ---
 import Navbar from "../components/Navbar.astro";
 import CardNoticia from "../components/noticias/CardNoticia.astro";
-
 import NewsLayout from "../layouts/NewsLayout.astro";
+import { fetchNewsPaginated, formatPublishedDate } from "../utils/newsAPI";
+
+// Obtener página actual de los query params
+const currentPage = Number(Astro.url.searchParams.get('page')) || 1;
+
+// Fetch noticias de la página actual
+let news: any[] = [];
+let hasMore = false;
+let error: string | null = null;
+
+try {
+  const result = await fetchNewsPaginated(currentPage);
+  news = result.news;
+  hasMore = result.hasMore;
+} catch (e) {
+  error = e instanceof Error ? e.message : 'Error desconocido al cargar noticias';
+  console.error('Error fetching news:', e);
+}
 ---
 
 <NewsLayout title="Palacio de Justicia de Guinea Ecuatorial | Historia">
-    <section class="max-w-7xl mx-auto xl:mb-20 xl:col-span-3">
-        <h1 class="text-4xl font-semibold text-primary">Noticias Judiciales</h1>
-        <p class="mt-2 text-gray-600 text-lg">
-            Las últimas noticias relacionadas con el palacio de justicia
-        </p>
-
-        <div class="xl:col-span-3 mt-10">
-            <div class="border border-gray-300 px-6 rounded">
-                <CardNoticia
-                    date="martes, 20 de mayo de 2025"
-                    title="El Tribunal Supremo da la razón a la Empresa Municipal de la Vivienda de Madrid y los gastos de la comunidad deben ser asumidos por los arrendatarios"
-                    description="En los dos casos ahora resueltos, demandaron a la EMVS un total de 27 particulares, que reclamaban la devolución de un total de 66.000 euros."
-                />
-                <CardNoticia
-                    date="viernes, 25 de abril de 2025"
-                    title="La juez decreta el ingreso en prisión del detenido en Francia por el asesinato de un agricultor en Ribaforada (Navarra) en diciembre de 2023"
-                    description="De los tres asesinatos que se le imputan, uno en Tudela el 22 de noviembre de 2023 y otro en la provincia de Lleida el 5 de enero de 2024, el perpetrado el 21 de diciembre de 2023 en Ribaforada es por el cual la magistrada dictó la orden europea de detención, que propició el arresto del investigado a finales del pasado marzo en la localidad francesa de Béziers. La titular del Juzgado de Instrucción nº 3 de Tudela considera que existe riesgo de fuga y de reiteración delictiva"
-                />
-                <CardNoticia
-                    date="viernes, 25 de abril de 2025"
-                    title="El TSXG confirma la condena de siete años de cárcel impuesta a un acusado de provocar un incendio en el edificio en el que residía"
-                    description="La Sala de lo Civil y Penal avala la sentencia de la Audiencia Provincial de Ourense que lo consideró autor de un delito de incendio con peligro para la vida e integridad física de las personas"
-                />
-                <CardNoticia
-                    date="viernes, 25 de abril de 2025"
-                    title="La Audiencia de Madrid acuerda el sobreseimiento provisional de la causa del ‘caso Malinche’"
-                    description="Los magistrados entienden que los investigados, a los que se les estima parcialmente el recurso, “no han tratado de introducir a los ciudadanos mexicanos de forma clandestina”"
-                />
-                <CardNoticia
-                    date="viernes, 25 de abril de 2025"
-                    title="La Audiencia de Pontevedra condena a tres años y medio de cárcel e inhabilita 13 años y medio al alcalde de Agolada por precintar la depuradora de una empresa"
-                    description="El tribunal lo considera autor de un delito de falsedad en documento oficial y otro de prevaricación"
-                />
-            </div>
-
-            <footer
-                class="mt-10 bg-primary/10 flex justify-center items-center gap-x-5 md:gap-x-10 py-3 rounded px-5 md:px-0"
-            >
-                <button
-                    class="bg-primary px-3 py-1 rounded cursor-pointer text-sm md:text-md text-white hover:scale-105 transition-transform"
-                    >Previo</button
-                >
-                <div class="text-sm md:text-md">
-                    <span>Página</span>
-                    <span class="bg-primary px-2 py-1 rounded mx-2 text-white"
-                        >1</span
-                    >
-                    <span>de 10</span>
-                </div>
-                <button
-                    class="bg-primary px-3 py-1 rounded cursor-pointer text-sm md:text-md text-white hover:scale-105 transition-transform"
-                    >Siguiente</button
-                >
-            </footer>
+    <section class="w-full xl:col-span-3 flex flex-col min-h-[70vh]">
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-primary mb-3">
+                Noticias Judiciales
+            </h1>
+            <p class="text-gray-600 text-lg">
+                Las últimas noticias relacionadas con el palacio de justicia
+            </p>
+            <div class="w-20 h-1 bg-secondary mt-4"></div>
         </div>
+
+        <!-- Error State -->
+        {error && (
+            <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg shadow-sm">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                        <svg class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <h3 class="text-lg font-semibold text-red-800">Error al cargar noticias</h3>
+                        <p class="text-red-700 mt-1">{error}</p>
+                    </div>
+                </div>
+            </div>
+        )}
+
+        <!-- Empty State -->
+        {!error && news.length === 0 && (
+            <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-lg shadow-sm">
+                <div class="flex items-center">
+                    <svg class="h-6 w-6 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <p class="ml-3 text-yellow-800 font-medium">No hay noticias disponibles en esta página.</p>
+                </div>
+            </div>
+        )}
+
+        <!-- News Grid - Ocupa el espacio restante -->
+        {!error && news.length > 0 && (
+            <div class="flex-1 flex flex-col">
+                <div class="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden flex-1">
+                    <div class="divide-y divide-gray-200">
+                        {news.map((noticia) => (
+                            <CardNoticia
+                                date={formatPublishedDate(noticia.publishedAt)}
+                                title={noticia.title}
+                                description={noticia.subtitle}
+                                url={`/noticias/${noticia.slug}`}
+                            />
+                        ))}
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <nav class="mt-8 flex items-center justify-between bg-white px-6 py-4 rounded-lg shadow-md border border-gray-200">
+                    <!-- Previous Button -->
+                    {currentPage > 1 ? (
+                        <a
+                            href={`?page=${currentPage - 1}`}
+                            class="inline-flex items-center gap-2 px-4 py-2.5 bg-primary text-white font-medium rounded-lg hover:bg-primary/90 hover:shadow-lg transition-all duration-200"
+                        >
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                            </svg>
+                            <span class="hidden sm:inline">Anterior</span>
+                        </a>
+                    ) : (
+                        <button
+                            disabled
+                            class="inline-flex items-center gap-2 px-4 py-2.5 bg-gray-300 text-gray-500 font-medium rounded-lg cursor-not-allowed"
+                        >
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                            </svg>
+                            <span class="hidden sm:inline">Anterior</span>
+                        </button>
+                    )}
+
+                    <!-- Page Indicator -->
+                    <div class="flex items-center gap-2">
+                        <span class="text-gray-700 font-medium">Página</span>
+                        <span class="bg-primary text-white px-4 py-2 rounded-lg font-bold min-w-[3rem] text-center">
+                            {currentPage}
+                        </span>
+                    </div>
+
+                    <!-- Next Button -->
+                    {hasMore ? (
+                        <a
+                            href={`?page=${currentPage + 1}`}
+                            class="inline-flex items-center gap-2 px-4 py-2.5 bg-primary text-white font-medium rounded-lg hover:bg-primary/90 hover:shadow-lg transition-all duration-200"
+                        >
+                            <span class="hidden sm:inline">Siguiente</span>
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    ) : (
+                        <button
+                            disabled
+                            class="inline-flex items-center gap-2 px-4 py-2.5 bg-gray-300 text-gray-500 font-medium rounded-lg cursor-not-allowed"
+                        >
+                            <span class="hidden sm:inline">Siguiente</span>
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    )}
+                </nav>
+            </div>
+        )}
     </section>
 </NewsLayout>

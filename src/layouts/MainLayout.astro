@@ -4,20 +4,114 @@ import Footer from "../components/Footer.astro";
 import Navbar from "../components/Navbar.astro";
 import "../styles/global.css";
 
-interface props {
+interface Props {
     title: string;
+    description?: string;
+    image?: string;
+    keywords?: string;
+    author?: string;
+    ogType?: string;
 }
 
-const { title = "Poder Judicial de Guinea Ecuatorial" } = Astro.props;
+const {
+    title = "Poder Judicial de Guinea Ecuatorial",
+    description = "Sitio web oficial del Poder Judicial de Guinea Ecuatorial. Información sobre el Consejo Superior del Poder Judicial, Corte Suprema de Justicia, Audiencias Provinciales, servicios judiciales, biblioteca jurídica y noticias del sistema judicial.",
+    image = "/images/og-image.jpg",
+    keywords = "Poder Judicial Guinea Ecuatorial, Corte Suprema, justicia, tribunales, magistrados, audiencias provinciales, servicios judiciales, biblioteca jurídica, noticias judiciales, legislación, derecho",
+    author = "Poder Judicial de Guinea Ecuatorial",
+    ogType = "website",
+} = Astro.props;
+
 const { pathname } = Astro.url;
+const currentUrl = new URL(
+    pathname,
+    Astro.site || "https://poderjudicial-gq.com",
+);
+const canonicalUrl = currentUrl.href;
+
+// Imagen OG con URL completa
+const ogImage = image.startsWith("http")
+    ? image
+    : new URL(image, Astro.site || "https://poderjudicial-gq.com").href;
 ---
 
 <html lang="es">
     <head>
         <meta charset="utf-8" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta name="viewport" content="width=device-width" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="generator" content={Astro.generator} />
+
+        <!-- SEO Básico -->
         <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta name="keywords" content={keywords} />
+        <meta name="author" content={author} />
+        <link rel="canonical" href={canonicalUrl} />
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content={ogType} />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:locale" content="es_GQ" />
+        <meta
+            property="og:site_name"
+            content="Poder Judicial de Guinea Ecuatorial"
+        />
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content={canonicalUrl} />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={ogImage} />
+
+        <!-- Información adicional -->
+        <meta name="robots" content="index, follow" />
+        <meta name="language" content="Spanish" />
+        <meta name="revisit-after" content="7 days" />
+        <meta name="theme-color" content="#1e3a8a" />
+
+        <!-- Geo tags -->
+        <meta name="geo.region" content="GQ" />
+        <meta name="geo.placename" content="Malabo" />
+        <meta name="geo.position" content="3.7504;8.7371" />
+        <meta name="ICBM" content="3.7504, 8.7371" />
+
+        <!-- JSON-LD Schema -->
+        <script
+            type="application/ld+json"
+            set:html={JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "GovernmentOrganization",
+                name: "Poder Judicial de Guinea Ecuatorial",
+                alternateName: "Corte Suprema de Justicia de Guinea Ecuatorial",
+                url: canonicalUrl,
+                logo: new URL(
+                    "/images/logo.png",
+                    Astro.site || "https://poderjudicial-gq.com",
+                ).href,
+                description: description,
+                address: {
+                    "@type": "PostalAddress",
+                    streetAddress: "Malabo",
+                    addressLocality: "Malabo",
+                    addressCountry: "GQ",
+                },
+                areaServed: {
+                    "@type": "Country",
+                    name: "Guinea Ecuatorial",
+                },
+                sameAs: [
+                    "https://www.facebook.com/poderjudicialGQ",
+                    "https://twitter.com/poderjudicialGQ",
+                ],
+            })}
+        />
     </head>
     <body class="min-h-screen flex flex-col">
         <Navbar classname={pathname === "/" ? "absolute top-0 left-0" : ""} />
