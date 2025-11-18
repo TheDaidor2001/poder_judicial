@@ -29,18 +29,18 @@ export const FOOTER_LINKS = [
         title: 'Diccionarios Juridicos',
         url: '/biblioteca/diccionario_juridico'
     },
-    {
-        title: 'Tratados y Manuales',
-        url: '/biblioteca/tratados_manuales'
-    },
+    // {
+    //     title: 'Tratados y Manuales',
+    //     url: '/biblioteca/tratados_manuales'
+    // },
     {
         title: 'Servicios',
         url: '/servicios'
     },
-    {
-        title: 'Códigos Legales',
-        url: '/biblioteca/codigos_legales'
-    },
+    // {
+    //     title: 'Códigos Legales',
+    //     url: '/biblioteca/codigos_legales'
+    // },
     {
         title: 'Noticias Judiciales',
         url: '/noticias_judiciales'
