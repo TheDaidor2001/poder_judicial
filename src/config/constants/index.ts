@@ -10,10 +10,10 @@ export const SITE_MENU = [
         text: "HISTORIA",
         link: "/historia"
     },
-    {
-        text: "ASESORIA JURIDICA",
-        link: "/asesoria-juridica",
-    },
+    // {
+    //     text: "ASESORIA JURIDICA",
+    //     link: "/asesoria-juridica",
+    // },
     {
         text: "ORGANIGRAMA",
         submenu: [

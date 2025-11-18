@@ -118,19 +118,19 @@ export const miembrosConsejo = [
         ],
         trayectoria: "Trayectoria profesional del director..."
     },
-    {
-        id: "director-juridicos",
-        cargo: "Director General de Asuntos Jurídicos",
-        nombre: "Nombre del Director General",
-        foto: "/images/consejo/director-juridicos.jpg",
-        descripcion: "Responsable de los asuntos jurídicos del Consejo...",
-        funciones: [
-            "Asesorar en materia jurídica",
-            "Elaborar propuestas normativas",
-            "Coordinar aspectos legales"
-        ],
-        trayectoria: "Trayectoria profesional del director..."
-    }
+    // {
+    //     id: "director-juridicos",
+    //     cargo: "Director General de Asuntos Jurídicos",
+    //     nombre: "Nombre del Director General",
+    //     foto: "/images/consejo/director-juridicos.jpg",
+    //     descripcion: "Responsable de los asuntos jurídicos del Consejo...",
+    //     funciones: [
+    //         "Asesorar en materia jurídica",
+    //         "Elaborar propuestas normativas",
+    //         "Coordinar aspectos legales"
+    //     ],
+    //     trayectoria: "Trayectoria profesional del director..."
+    // }
 ];
 
 export const corteSuprema = [
@@ -202,7 +202,7 @@ export const corteSuprema = [
         trayectoria: "Trayectoria profesional del magistrado..."
     },
     {
-        id: "magistrado3",
+        id: "magistrado4",
         cargo: "Magistrada de la Corte Suprema de Justicia",
         nombre: "Excma. Sra. Doña Clara Feliciddad Bonkanka Tabares",
         foto: "/images/csj/clara.webp",
@@ -215,7 +215,7 @@ export const corteSuprema = [
         trayectoria: "Trayectoria profesional del magistrado..."
     },
     {
-        id: "magistrado3",
+        id: "magistrado5",
         cargo: "Magistrado de la Corte Suprema de Justicia",
         nombre: "Excmo. Sr. Don Victoriano Obiang Abogo",
         foto: "/images/csj/victoriano.webp",
@@ -228,7 +228,7 @@ export const corteSuprema = [
         trayectoria: "Trayectoria profesional del magistrado..."
     },
     {
-        id: "magistrado3",
+        id: "magistrado6",
         cargo: "Magistrado de la Corte Suprema de Justicia",
         nombre: "Excmo. Sr. Don Candido Nkua Nkogo",
         foto: "/images/csj/candido.webp",
@@ -240,19 +240,19 @@ export const corteSuprema = [
         ],
         trayectoria: "Trayectoria profesional del magistrado..."
     },
-    {
-        id: "magistrado3",
-        cargo: "Magistrado Juez de la Corte Suprema",
-        nombre: "Excmo. Sra. Doña Rosa Maricarmen OBAMA OBONO",
-        foto: "/images/corte-suprema/magistrado3.jpg",
-        descripcion: "Magistrado de la Corte Suprema de Justicia...",
-        funciones: [
-            "Conocer y resolver los recursos de casación",
-            "Participar en las deliberaciones de la Corte",
-            "Emitir votos en las decisiones judiciales"
-        ],
-        trayectoria: "Trayectoria profesional del magistrado..."
-    },
+    // {
+    //     id: "magistrado7",
+    //     cargo: "Magistrado Juez de la Corte Suprema",
+    //     nombre: "Excmo. Sra. Doña Rosa Maricarmen OBAMA OBONO",
+    //     foto: "/images/corte-suprema/magistrado3.jpg",
+    //     descripcion: "Magistrado de la Corte Suprema de Justicia...",
+    //     funciones: [
+    //         "Conocer y resolver los recursos de casación",
+    //         "Participar en las deliberaciones de la Corte",
+    //         "Emitir votos en las decisiones judiciales"
+    //     ],
+    //     trayectoria: "Trayectoria profesional del magistrado..."
+    // },
     {
         id: "magistrado3",
         cargo: "Secretario de lo Civil de la Corte Suprema de Justicia",
@@ -292,19 +292,19 @@ export const corteSuprema = [
         ],
         trayectoria: "Trayectoria profesional del magistrado..."
     },
-    {
-        id: "magistrado3",
-        cargo: "Magistrado Juez de la Corte Suprema",
-        nombre: "Excmo. Sra. Doña Rosa Maricarmen OBAMA OBONO",
-        foto: "/images/corte-suprema/magistrado3.jpg",
-        descripcion: "Magistrado de la Corte Suprema de Justicia...",
-        funciones: [
-            "Conocer y resolver los recursos de casación",
-            "Participar en las deliberaciones de la Corte",
-            "Emitir votos en las decisiones judiciales"
-        ],
-        trayectoria: "Trayectoria profesional del magistrado..."
-    },
+    // {
+    //     id: "magistrado3",
+    //     cargo: "Magistrado Juez de la Corte Suprema",
+    //     nombre: "Excmo. Sra. Doña Rosa Maricarmen OBAMA OBONO",
+    //     foto: "/images/corte-suprema/magistrado3.jpg",
+    //     descripcion: "Magistrado de la Corte Suprema de Justicia...",
+    //     funciones: [
+    //         "Conocer y resolver los recursos de casación",
+    //         "Participar en las deliberaciones de la Corte",
+    //         "Emitir votos en las decisiones judiciales"
+    //     ],
+    //     trayectoria: "Trayectoria profesional del magistrado..."
+    // },
     {
         id: "magistrado3",
         cargo: "Director General de Prensa de la Corte Suprema de Justicia",

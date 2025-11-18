@@ -9,10 +9,10 @@ export const FOOTER_LINKS = [
         title: 'Historia',
         url: '/historia'
     },
-    {
-        title: 'Asesoría Jurídica',
-        url: '/asesoria-juridica'
-    },
+    // {
+    //     title: 'Asesoría Jurídica',
+    //     url: '/asesoria-juridica'
+    // },
     {
         title: 'CSJ',
         url: '/organigrama/csj'
