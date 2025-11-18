@@ -343,20 +343,7 @@ export const corteSuprema = [
             "Emitir votos en las decisiones judiciales"
         ],
         trayectoria: "Trayectoria profesional del magistrado..."
-    },
-    {
-        id: "magistrado3",
-        cargo: "Magistrados Jueces de la Corte Suprema",
-        nombre: "El Pleno de Magistrados de la Corte Suprema de Justicia",
-        foto: "/images/csj/todos.webp",
-        descripcion: "Magistrado de la Corte Suprema de Justicia...",
-        funciones: [
-            "Conocer y resolver los recursos de casación",
-            "Participar en las deliberaciones de la Corte",
-            "Emitir votos en las decisiones judiciales"
-        ],
-        trayectoria: "Trayectoria profesional del magistrado..."
-    },
+    }
 ];
 
 // Orden personalizado de los cargos
