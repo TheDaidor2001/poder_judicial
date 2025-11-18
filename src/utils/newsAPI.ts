@@ -41,7 +41,7 @@ async function fetchNewsPage(
   page: number,
   baseUrl: string,
   retries: number = 3
-): Promise<NewsItem[]> {
+): Promise<NewsAPIResponse> {
   const url = `${baseUrl}?page=${page}`;
 
   for (let attempt = 1; attempt <= retries; attempt++) {
@@ -51,7 +51,7 @@ async function fetchNewsPage(
       if (!response.ok) {
         if (response.status === 404) {
           // No hay más páginas
-          return [];
+          return { data: [] };
         }
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -60,22 +60,26 @@ async function fetchNewsPage(
 
       // Si la respuesta es un array vacío, no hay más páginas
       if (!data || (Array.isArray(data) && data.length === 0)) {
-        return [];
+        return { data: [] };
       }
 
       // Si la respuesta tiene una propiedad data (estructura con metadata)
       if (data.data && Array.isArray(data.data)) {
-        return data.data;
+        return {
+          data: data.data,
+          page: data.page || page,
+          totalPages: data.totalPages
+        };
       }
 
       // Si la respuesta es directamente un array
       if (Array.isArray(data)) {
-        return data;
+        return { data };
       }
 
       // Formato desconocido
       console.warn('Formato de respuesta desconocido:', data);
-      return [];
+      return { data: [] };
 
     } catch (error) {
       if (attempt === retries) {
@@ -87,7 +91,7 @@ async function fetchNewsPage(
     }
   }
 
-  return [];
+  return { data: [] };
 }
 
 /**
@@ -124,7 +128,8 @@ export async function fetchAllNews(
     try {
       console.log(`Fetching página ${currentPage}...`);
 
-      const pageNews = await fetchNewsPage(currentPage, baseUrl, maxRetries);
+      const pageResponse = await fetchNewsPage(currentPage, baseUrl, maxRetries);
+      const pageNews = pageResponse.data;
 
       if (pageNews.length === 0) {
         console.log(`No hay más noticias en página ${currentPage}`);
@@ -159,20 +164,54 @@ export async function fetchAllNews(
 export async function fetchNewsPaginated(
   page: number = 1,
   options: FetchNewsOptions = {}
-): Promise<{ news: NewsItem[], hasMore: boolean }> {
+): Promise<{ news: NewsItem[], hasMore: boolean, totalPages?: number, currentPage?: number }> {
   const {
     baseUrl = `${getApiBaseUrl()}/news/public`,
     maxRetries = 3
   } = options;
 
   try {
-    const news = await fetchNewsPage(page, baseUrl, maxRetries);
+    const response = await fetchNewsPage(page, baseUrl, maxRetries);
+    const news = response.data;
+    const totalPages = response.totalPages;
+    const currentPage = response.page;
 
-    // Intentar obtener la siguiente página para saber si hay más
-    const nextPageNews = await fetchNewsPage(page + 1, baseUrl, maxRetries);
-    const hasMore = nextPageNews.length > 0;
+    // Si el API proporciona totalPages, úsalo
+    if (totalPages !== undefined) {
+      return {
+        news,
+        hasMore: page < totalPages,
+        totalPages,
+        currentPage
+      };
+    }
 
-    return { news, hasMore };
+    // Si no, explorar varias páginas hacia adelante para calcular total
+    let calculatedTotal: number | undefined = undefined;
+    let hasMore = false;
+
+    // Explorar hasta 5 páginas hacia adelante para encontrar el final
+    for (let i = 1; i <= 5; i++) {
+      const nextPageResponse = await fetchNewsPage(page + i, baseUrl, maxRetries);
+
+      if (nextPageResponse.data.length === 0) {
+        // Encontramos el final
+        calculatedTotal = page + i - 1;
+        hasMore = false;
+        break;
+      } else if (i === 5) {
+        // Aún hay más páginas después de 5
+        hasMore = true;
+        break;
+      }
+    }
+
+    return {
+      news,
+      hasMore,
+      totalPages: calculatedTotal,
+      currentPage: page
+    };
   } catch (error) {
     console.error(`Error al obtener noticias de página ${page}:`, error);
     throw error;
