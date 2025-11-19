@@ -118,6 +118,19 @@ export const miembrosConsejo = [
         ],
         trayectoria: "Trayectoria profesional del director..."
     },
+        {
+        id: "magistrado3",
+        cargo: "Directora General de Archivo, Documentación e Informatica",
+        nombre: "Ilma. Sra. Doña Liliosa Ada Biko Bengobesam",
+        foto: "/images/csj/liliosa.webp",
+        descripcion: "Magistrado de la Corte Suprema de Justicia...",
+        funciones: [
+            "Conocer y resolver los recursos de casación",
+            "Participar en las deliberaciones de la Corte",
+            "Emitir votos en las decisiones judiciales"
+        ],
+        trayectoria: "Trayectoria profesional del magistrado..."
+    }
     // {
     //     id: "director-juridicos",
     //     cargo: "Director General de Asuntos Jurídicos",
@@ -331,19 +344,6 @@ export const corteSuprema = [
         ],
         trayectoria: "Trayectoria profesional del magistrado..."
     },
-    {
-        id: "magistrado3",
-        cargo: "Directora General de Archivo, Documentación e Informatica",
-        nombre: "Ilma. Sra. Doña Liliosa Ada Biko Bengobesam",
-        foto: "/images/csj/liliosa.webp",
-        descripcion: "Magistrado de la Corte Suprema de Justicia...",
-        funciones: [
-            "Conocer y resolver los recursos de casación",
-            "Participar en las deliberaciones de la Corte",
-            "Emitir votos en las decisiones judiciales"
-        ],
-        trayectoria: "Trayectoria profesional del magistrado..."
-    }
 ];
 
 // Orden personalizado de los cargos

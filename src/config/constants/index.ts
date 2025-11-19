@@ -19,7 +19,7 @@ export const SITE_MENU = [
         submenu: [
             { text: "CSPJ", link: "/organigrama/cspj", description: "Consejo Superior del Poder Judicial" },
             { text: "CSJ", link: "/organigrama/csj", description: "Corte Suprema de Justicia" },
-            { text: "AUDIENCIAS", link: "/organigrama/audiencias", description: "Audiencias de los distritos" }
+          //  { text: "AUDIENCIAS", link: "/organigrama/audiencias", description: "Audiencias de los distritos" }
         ]
     },
     {

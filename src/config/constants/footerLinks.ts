@@ -21,10 +21,10 @@ export const FOOTER_LINKS = [
         title: 'CSPJ',
         url: '/organigrama/cspj'
     },
-    {
-        title: 'Audiencias',
-        url: '/organigrama/audiencias'
-    },
+   // {
+     //   title: 'Audiencias',
+       // url: '/organigrama/audiencias'
+    //},
     {
         title: 'Diccionarios Juridicos',
         url: '/biblioteca/diccionario_juridico'
