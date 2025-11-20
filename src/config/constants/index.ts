@@ -30,11 +30,11 @@ export const SITE_MENU = [
                 link: "/biblioteca/diccionario_juridico",
                 description: "Definiciones legales clave"
             },
-            // {
-            //     text: "Tratados y Manuales",
-            //     link: "/biblioteca/tratados_manuales",
-            //     description: "Doctrina legal especializada"
-            // },
+            {
+                text: "Publicaciones",
+                link: "/biblioteca/publicaciones",
+                description: "Documentos y artículos legales"
+            },
             // {
             //     text: "Compendio de Leyes",
             //     link: "/biblioteca/codigos_legales",

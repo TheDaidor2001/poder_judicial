@@ -29,10 +29,10 @@ export const FOOTER_LINKS = [
         title: 'Diccionarios Juridicos',
         url: '/biblioteca/diccionario_juridico'
     },
-    // {
-    //     title: 'Tratados y Manuales',
-    //     url: '/biblioteca/tratados_manuales'
-    // },
+    {
+        title: 'Publicaciones',
+        url: '/biblioteca/publicaciones'
+    },
     {
         title: 'Servicios',
         url: '/servicios'
